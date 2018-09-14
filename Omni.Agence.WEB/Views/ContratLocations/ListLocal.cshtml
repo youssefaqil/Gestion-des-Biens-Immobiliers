@@ -1,0 +1,128 @@
+﻿@*@model IEnumerable<Omni.Agence.DAL.ContratLocation>*@
+@using System.Linq;
+@using System.Data.Entity;
+
+
+@{Layout = "";}
+
+@{
+    Omni.Agence.DAL.AgenceEntities db = new Omni.Agence.DAL.AgenceEntities();
+
+    var locList = db.Locals.Include(l => l.Adresse).Include(l => l.Immeuble).Include(l => l.Personne).Include(l => l.Syndic).Include(l => l.TypeLocal);
+    List<Omni.Agence.DAL.Local> locals = locList.ToList();
+}
+
+<div class="col-md-12">
+    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+    <div class="portlet box grey-cascade">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-edit"></i>Table des Locaux
+            </div>
+            <div class="tools">
+                <a href="javascript:;" class="collapse">
+                </a>
+
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="table-toolbar">
+                <div class="row">
+                    <div class="col-md-6">
+
+
+                    </div>
+
+                </div>
+            </div>
+            <table class="table table-striped table-hover table-bordered " id="sample_editable_2">
+                <thead>
+                    <tr>
+                        <th>
+                            Superficie
+                        </th>
+                        <th>
+                            Nbr de pièces
+                        </th>
+
+                        <th>
+                            Titre
+                        </th>
+
+
+                        <th>
+                            Prix
+                        </th>
+
+                        <th>
+                            Quartier
+                        </th>
+                        <th>
+                            Ville
+                        </th>
+                        <th>
+                            Immeuble
+                        </th>
+                        <th>
+                            Propriétaire
+                        </th>
+                        <th>
+                            Type
+                        </th>
+
+                        <th></th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var item in locals)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SuperficieLocal)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NbrPieceLocal)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TitreLocal)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PrixRefLocationLocal)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Adresse.quartier)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Adresse.Ville)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Immeuble.NomImmeuble)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Personne.nom) @Html.DisplayFor(modelItem => item.Personne.prenom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TypeLocal.Description)
+                            </td>
+
+                            <td>
+                                
+                                @Html.ActionLink("Sélectionner", "Index", new { id = item.CodeLocal })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+
+            </table>
+
+        </div>
+    </div>
+    <!-- END EXAMPLE TABLE PORTLET-->
+</div>
+
+

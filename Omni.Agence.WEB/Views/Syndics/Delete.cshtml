@@ -1,0 +1,48 @@
+﻿@model Omni.Agence.DAL.Syndic
+
+@{
+    ViewBag.Title = "Delete";
+    ViewBag.PD = "start active open";
+    ViewBag.PDS = "active";
+    ViewBag.PDCS = "selected";
+}
+
+<h3 class="page-title">
+    Syndic <small>Confirmation de suppression</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i>
+            <a href="@Url.Action("Index")">Syndics</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+
+    </ul>
+
+</div>
+
+<h3>Voulez vous vraiment supprimer @Html.DisplayFor(model => model.NomSynd) @Html.DisplayFor(model => model.PrenomSynd) ?!</h3>
+<div>
+    <h4>@Html.DisplayFor(model => model.CinSynd)</h4>
+    <hr />
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-lg red" />
+
+            <a href="@Url.Action("Index")" class="btn btn-lg default">
+                Retour
+            </a>
+        </div>
+    }
+</div>

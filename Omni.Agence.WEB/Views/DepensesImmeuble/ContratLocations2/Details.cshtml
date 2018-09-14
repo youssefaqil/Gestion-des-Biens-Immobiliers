@@ -1,0 +1,170 @@
+﻿@model Omni.Agence.DAL.ContratLocation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ContratLocation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateJuissance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateJuissance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoyerDebase)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoyerDebase)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Augementation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Augementation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateAugmentation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateAugmentation)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Charge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Charge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxeDedilite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxeDedilite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Garage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Garage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoyerNet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoyerNet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Caution)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Caution)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateFinContrat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateFinContrat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FrequencePaiement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FrequencePaiement)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.adults)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adults)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.enfants)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.enfants)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.animaux)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.animaux)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.commentaire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.commentaire)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Local.TitreLocal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Local.TitreLocal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Personne.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Personne.nom)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Augementation1.idAug)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Augementation1.idAug)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

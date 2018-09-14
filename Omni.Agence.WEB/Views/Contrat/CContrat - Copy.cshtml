@@ -1,0 +1,1082 @@
+﻿@model Omni.Agence.DAL.ContratLocation
+
+@{
+    
+    ViewBag.Title = "Création Contrat";
+    ViewBag.C = "start active open";
+    ViewBag.CC1 = "active";
+    ViewBag.PL3 = "selected";
+}
+
+@section Styles {
+    @Styles.Render("~/bundles/DatePicker")
+}
+<h3 class="page-title">
+    Contrat <small>Création</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i>
+            <a href="@Url.Action("Index")">Contrat</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+
+    </ul>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box green-haze" id="form_wizard_1">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gift"></i> Contrat <span class="step-title">
+                        Etape 1 sur 4
+                    </span>
+                </div>
+                <div class="tools hidden-xs">
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form action="#" class="form-horizontal" id="submit_form" method="POST">
+                    <div class="form-wizard">
+                        <div class="form-body">
+                            <ul class="nav nav-pills nav-justified steps">
+                                <li>
+                                    <a href="#tab1" data-toggle="tab" class="step">
+                                        <span class="number">
+                                            1
+                                        </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> Local
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#tab2" data-toggle="tab" class="step">
+                                        <span class="number">
+                                            2
+                                        </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> Locataire
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#tab3" data-toggle="tab" class="step active">
+                                        <span class="number">
+                                            3
+                                        </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> Contrat
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#tab4" data-toggle="tab" class="step">
+                                        <span class="number">
+                                            4
+                                        </span>
+                                        <span class="desc">
+                                            <i class="fa fa-check"></i> Confirmation
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div id="bar" class="progress progress-striped" role="progressbar">
+                                <div class="progress-bar progress-bar-success">
+                                </div>
+                            </div>
+                            <div class="tab-content">
+                                <div class="alert alert-danger display-none">
+                                    <button class="close" data-dismiss="alert"></button>
+                                    vous avez une erreur.
+                                </div>
+                                <div class="alert alert-success display-none">
+                                    <button class="close" data-dismiss="alert"></button>
+                                    Your form validation is successful!
+                                </div>
+                                <div class="tab-pane active" id="tab1">
+                                    <hr />
+                                    <h3 class="block">Sélectionnez le local</h3>
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <input type="hidden" name="fullname" id="fullname" value="0" />
+                                            <span class="help-block">
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                    @Html.Partial("ListLoc")
+                                    <span class="help-block">
+                                        
+                                    </span>
+                                </div>
+                                <div class="tab-pane" id="tab2">
+                                    <h3 class="block">Locataire</h3>
+                                    <div class="row">
+                                            @*<label class="col-md-3 control-label">Inline Radio</label>*@
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"></label>
+                                                <div class="col-md-9">
+                                                    <div class="input-group">
+                                                        @using Omni.Agence.DAL;
+                                                        @{
+                                                            List<Personne> ListLoc = ViewBag.ListLoc;
+                                                        }
+                                                        <select class="form-control input-medium select2me" id="Locataire" name="Locataire" data-placeholder="Selectionnez..."
+                                                                data-live-search="true" data-size="8" onchange="selectLoc();">
+                                                            <option value=""></option>
+                                                            @foreach (Personne pers in ListLoc)
+                                                            {
+                                                                <option value="@pers.CodePers;@pers.cin;@pers.carteSejour;@pers.nom;@pers.prenom;@pers.sexe;@pers.situationMatrimonial;@pers.nationalite;@pers.TelMobilPers;@pers.activite;@pers.fonction;@pers.employeur;@pers.identifiantFiscale;@pers.rc;@pers.raisonSocial;@pers.EmailPers;@pers.nPatente;@pers.TelFixPers;@pers.FaxPers;@pers.Adresse.CPadress;@pers.Adresse.descAdresse;@pers.Adresse.quartier;@pers.Adresse.Ville;@pers.Adresse.Pays">
+                                                                    @pers.nom @pers.prenom (@pers.cin : @pers.carteSejour)
+                                                                </option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                    <!-- /input-group -->
+                                                </div>
+                                            </div>
+                                           </div>
+                                        </div>
+                                    <h3 class="form-section">Informations</h3>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                <div class="col-md-3"></div>
+
+                                                <div class="col-md-9">
+                                                    <select class="form-control btn green-haze-stripe" id="CIN" name="CIN">
+                                                        <option value="CIN">CIN</option>
+                                                        <option value="Carte Séjour">Carte séjour</option>
+                                                        <option value="Passport">Passeport</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control" id="CSLocataire" name="CSLocataire" />
+                                                </div>
+                                                <div class="col-md-3"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">
+                                                        Nom
+                                                        <span class="required">
+                                                            *
+                                                        </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" id="nomLocataire" name="nomLocataire" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/span-->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">
+                                                        Prénom<span class="required">
+                                                            *
+                                                        </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" id="prenomLocataire" name="prenomLocataire" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/span-->
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">
+                                                        Sexe<span class="required">
+                                                            *
+                                                        </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                        <select id="sexe" name="sexe" class="form-control">
+                                                            <option value="1">Homme</option>
+                                                            <option value="0">Femme</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/span-->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">
+                                                        Situation
+                                                        <span class="required">
+                                                            *
+                                                        </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+
+                                                        <select id="situationMatrimonial" name="situationMatrimonial" class="select2_category form-control" data-placeholder="Choisisser une situation" tabindex="1">
+                                                            <option value="">Sélectionner...</option>
+                                                            <option value="Célibataire">Célibataire</option>
+                                                            <option value="Marié">Marié(e)</option>
+                                                            <option value="Divorcé">Divorcé(e)</option>
+                                                            <option value="Veuf">Veuf(ve)</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/span-->
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+
+                                                    <label class="control-label col-md-3">
+                                                        Nationalité
+
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" id="NatLocataire" name="NatLocataire" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+
+                                                    <label class="control-label col-md-3">
+                                                        Mobile
+                                                        <span class="required">
+                                                            *
+                                                        </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" id="MobileLocataire" name="MobileLocataire" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h3 class="form-section">Informations professionnelles</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+
+                                                <label class="control-label col-md-3">Email </label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control" id="EmailLocataire" name="EmailLocataire" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+
+                                                <label class="control-label col-md-3">Fixe </label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control" id="FixLocataire" name="FixLocataire" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <!--/span-->
+                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Activité </label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" id="ActLocataire" name="ActLocataire" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+
+                                                    <label class="control-label col-md-3">Fonction </label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" id="FoncLocataire" name="FoncLocataire" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--/span-->
+                                            <!--/span-->
+                                        </div><!--/row-->
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+
+                                                    <label class="control-label col-md-3">Employeur </label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" id="EmpLocataire" name="EmpLocataire" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @*<div class="col-md-6">
+                                                <div class="form-group">
+
+                                                    <label class="control-label col-md-3">Id. Fiscale </label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" id="IFLocataire" name="IFLocataire" />
+
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                            <!--/span-->
+                                            <!--/span-->
+                                        </div>
+                                                                            
+                                        <div class="row">
+                                        </div>
+                                        <div class="row">
+                                        </div>
+
+                                        <h3 class="form-section">Adresse</h3>
+                                        <!--/row-->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Code postal</label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" id="CPLocataire" name="CPLocataire" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">
+                                                        Adresse
+                                                        <span class="required">
+                                                            *
+                                                        </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" id="AdrLocataire" name="AdrLocataire" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">
+                                                        Quartier
+                                                        <span class="required">
+                                                            *
+                                                        </span>
+                                                    </label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" id="QuLocataire" name="QuLocataire" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Ville</label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" id="VilleLocataire" name="VilleLocataire" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/span-->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Pays</label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control" id="PaysLocataire" name="PaysLocataire" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/span-->
+                                        </div>
+                                    </div>
+                                <div class="tab-pane" id="tab3">
+                                    <h3 class="block">Détails contrat</h3>
+                                    <div class=" date-picker input-daterange" data-date="10/11/2012" data-date-format="dd/mm/yyyy">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Date jouissance <span class="required">
+                                                    *
+                                                </span>
+                                            </label>
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" id="DateJuissance" name="DateJuissance" />
+                                                <!-- /input-group -->
+                                                <span class="help-block">
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Date fin <span class="required">
+                                                    *
+                                                </span>
+                                            </label>
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" id="DateFinContrat" name="DateFinContrat" />
+                                                <!-- /input-group -->
+                                                <span class="help-block">
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Usage <span class="required">
+                                                *
+                                            </span>
+                                        </label>
+
+                                        <div class="col-md-4">
+                                            <div class="radio-list">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="fpu" id="fpu" value="0" checked="checked" onclick="selectUsageH('Habitation');" />habitation
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="fpu" id="fpu" value="1" onclick="selectUsageC('Commercial');" />Commercial
+                                                </label>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        
+                                            <label class="control-label col-md-3">
+                                                Loyer de base <span class="required">
+                                                    *
+                                                </span>
+                                            </label>
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    @*<input type="text" placeholder="" class="form-control" name="card_cvc" />*@
+                                                    <input type="text" id="LoyerDebase" name="LoyerBase" class="form-control" />
+                                                    <span class="input-group-addon right">
+                                                        <i class="fa">DH</i>
+                                                    </span>
+                                                    <span class="help-block">
+                                                    </span>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Charge <span class="required">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-3">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="Charge" />
+                                                <span class="input-group-addon right">
+                                                    <i class="fa">&nbsp;%&nbsp;</i>
+                                                </span>
+                                                <span class="help-block">
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Taxe <span class="required">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-3">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="Taxe" />
+                                                <span class="input-group-addon right">
+                                                    <i class="fa">&nbsp;%&nbsp;</i>
+                                                </span>
+                                                <span class="help-block">
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Garage 
+                                        </label>
+                                        <div class="col-md-3">
+                                            <div class="input-group">
+                                                <input type="text" min="0" class="form-control" name="Garage" value="0" />
+                                                <span class="input-group-addon right">
+                                                    <i class="fa">DH</i>
+                                                </span>
+                                                <span class="help-block">
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Fréquence de paiement <span class="required">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-4">
+                                            <div class="radio-list">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="fp" id="fp" value="0" checked="checked" onclick="selectfpm('Mensuelle');" />Mensuelle
+                                                    @*@Html.RadioButtonFor(m => m.Usage, "0", new { @checked = "checked" }) habitation>*@
+                                                </label>
+                                                <label class="radio-inline">
+                                                    @*@Html.RadioButtonFor(m => m.Usage, "1") Commercial*@
+                                                    <input type="radio" name="fp" id="fp" value="1" onclick="selectfpt('Trimestrielle');" />Trimestrielle
+                                                </label>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Adultes</label>
+                                        <div class="col-md-3">
+                                            <input type="text" name="Adults" class="form-control" />
+
+                                            <span class="help-block">
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Enfants</label>
+                                        <div class="col-md-3">
+                                            <input type="text" name="Enfants" class="form-control" />
+
+                                            <!-- /input-group -->
+                                            <span class="help-block">
+
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 checkbox">Autres&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <label class="col-md-3 checkbox">
+                                            @*@Html.CheckBoxFor(model => model.animaux) Animaux*@
+                                            <input type="checkbox" name="animaux" />&nbsp; Animaux
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Commentaires</label>
+                                        <div class="col-md-3">
+                                            <textarea class="form-control" rows="3" name="Commentaire"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="tab-pane" id="tab4">
+                                    <h3 class="block">Confirmation</h3>
+                                    <h4 class="form-section">Local</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Code:</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" id="CodeLoc">
+                                                </p>
+                                                @*<p class="form-control-static" data-display="fullname">
+                                                </p>*@
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Superficie:</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" id="supLocal">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Pièces:</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" id="nbrP">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Nom:</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" id="NomLoc">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Adresse:</label>
+                                            <div class="col-md-3">
+                                                @*<p class="form-control-static" data-display="username">
+                                                </p>*@
+                                                <p class="form-control-static" id="AdrLocal">
+                                                </p>
+                                                <p class="form-control-static" id="QuLocal">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Type:</label>
+                                            <div class="col-md-3">
+
+                                                <p class="form-control-static" id="TypeLocal">
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h4 class="form-section">Locataire</h4>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Locataire:</label>
+                                        <div class="col-md-4">
+                                            @*<p class="form-control-static" id="nameLoc">
+                                            </p>*@
+                                            <p class="form-control-static" data-display="Locataire">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="col-md-offset-3">
+                                                <p class="form-control-static" data-display="CIN">
+                                                </p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <p class="form-control-static" data-display="CSLocataire">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Nom/Prénom</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="nomLocataire">
+                                                </p>
+                                                <p class="form-control-static" data-display="prenomLocataire">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Sexe</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="sexe">
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Situation</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="situationMatrimonial">
+                                                </p>
+                                             
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Nationalité</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="NatLocataire">
+                                                </p>
+                                              
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Mobile</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="MobileLocataire">
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                    </div><div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Activité</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="ActLocataire">
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Fonction</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="FoncLocataire">
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Employeur</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="EmpLocataire">
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Id. Fiscale</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="IFLocataire">
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">RC</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="RCLocataire">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Raison sociale</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="RSLocataire">
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Email</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="EmailLocataire">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Patente</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="PatLocataire">
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Fixe</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="FixLocataire">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Fax</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="FaxLocataire">
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Code postal</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="CPLocataire">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Adresse</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="AdrLocataire">
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Quartier</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="QuLocataire">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Adresse</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="VilleLocataire">
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Pays</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="PaysLocataire">
+                                                </p>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                    <h4 class="form-section">Contrat</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Date de jouissance</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="DateJuissance">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Date fin contrat</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="DateFinContrat">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Usage</label>
+                                            <div class="col-md-3">
+                                                @*<label id="usageLoc" ></label>*@
+
+
+                                                <p class="form-control-static" id="usageLoc">
+                                                    Habitation
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Loyer de base</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="LoyerBase">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Charge</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="Charge">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Taxe</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="Taxe">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Garage</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" data-display="Garage">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label col-md-5">Fréquence de paiement</label>
+                                            <div class="col-md-3">
+                                                <p class="form-control-static" id="fqp">
+                                                    Mensuelle
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label class="control-label col-md-5">Adultes</label>
+                                                <div class="col-md-3">
+                                                    <p class="form-control-static" data-display="Adults">
+                                                    </p>
+                                                </div>
+                                            </div>
+                                                <div class="col-md-6">
+                                                    <label class="control-label col-md-5">Enfants</label>
+                                                    <div class="col-md-3">
+                                                        <p class="form-control-static" data-display="Enfants">
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label class="control-label col-md-5">Commentaire</label>
+                                                    <div class="col-md-3">
+                                                        <p class="form-control-static" data-display="Commentaire">
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <a href="javascript:;" class="btn default button-previous">
+                                        <i class="m-icon-swapleft"></i> Retour
+                                    </a>
+                                    <a href="javascript:;" class="btn blue button-next" onclick="calculer();">
+                                        Continue <i class="m-icon-swapright m-icon-white"></i>
+                                    </a>
+                                    <a href="javascript:;" class="btn green-haze button-submit">
+                                        Valider <i class="m-icon-swapright m-icon-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script type="text/javascript" src="~/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+
+    <script src="~/admin/pages/scripts/form-wizard.js"></script>
+<script type="text/javascript" src="~/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="~/plugins/jquery-validation/js/additional-methods.min.js"></script>
+@Scripts.Render("~/Scripts/DatePicker")
+<script type="text/javascript">
+    // When the document is ready
+    $(document).ready(function () {
+
+        $('.input-daterange').datepicker({
+            todayBtn: "linked"
+        });
+
+    });
+</script>
+<script>
+    jQuery(document).ready(function () {
+       
+        FormWizard.init();
+    });
+</script>
+<script type="text/javascript">
+    // When the document is ready
+    function affText(i,s,n,p,t,d,q,tl) {
+        document.getElementById('CodeLoc').innerHTML = i;
+        
+        document.getElementById('supLocal').innerHTML = s;
+        document.getElementById('LoyerDebase').value = p;
+        document.getElementById('nbrP').innerHTML = n;
+        document.getElementById('NomLoc').innerHTML = t;
+        document.getElementById('AdrLocal').innerHTML = d;
+        document.getElementById('QuLocal').innerHTML = q;
+        document.getElementById('TypeLocal').innerHTML = tl;
+    }
+    function selectLoc() {
+
+        var codeLocataire = document.getElementById("Locataire").value;
+        var splitcodeLocataire = codeLocataire.split(';');
+        document.getElementById("CIN").value = splitcodeLocataire[1]
+        document.getElementById("CSLocataire").value = splitcodeLocataire[2] || '';;
+
+       
+        document.getElementById("nomLocataire").value = splitcodeLocataire[3] || '';
+        document.getElementById("prenomLocataire").value = splitcodeLocataire[4] || '';
+        document.getElementById("sexe").value = splitcodeLocataire[5];
+        document.getElementById("situationMatrimonial").value = splitcodeLocataire[6] || '';
+        document.getElementById("NatLocataire").value = splitcodeLocataire[7] || '';
+        document.getElementById("MobileLocataire").value = splitcodeLocataire[8] || '';
+        document.getElementById("ActLocataire").value = splitcodeLocataire[9] || '';
+        document.getElementById("FoncLocataire").value = splitcodeLocataire[10] || '';
+        document.getElementById("EmpLocataire").value = splitcodeLocataire[11] || '';
+        document.getElementById("IFLocataire").value = splitcodeLocataire[12] || '';
+        document.getElementById("RCLocataire").value = splitcodeLocataire[13] || '';
+        document.getElementById("RSLocataire").value = splitcodeLocataire[14] || '';
+        document.getElementById("EmailLocataire").value = splitcodeLocataire[15] || '';
+        document.getElementById("PatLocataire").value = splitcodeLocataire[16] || '';
+        document.getElementById("FixLocataire").value = splitcodeLocataire[17] || '';
+        document.getElementById("FaxLocataire").value = splitcodeLocataire[18] || '';
+        document.getElementById("CPLocataire").value = splitcodeLocataire[19] || '';
+
+        document.getElementById("AdrLocataire").value = splitcodeLocataire[20] || '';
+        document.getElementById("QuLocataire").value = splitcodeLocataire[21] || '';
+        document.getElementById("VilleLocataire").value = splitcodeLocataire[22] || '';
+        document.getElementById("PaysLocataire").value = splitcodeLocataire[23] || '';
+
+        
+
+        //document.getElementById("affLoc").innerHTML = splitcodeLocataire[0] + " |||| " + splitcodeLocataire[1] + " |||| " + splitcodeLocataire[2];
+    }
+    function selectUsageH(x) {
+        
+            document.getElementById('usageLoc').innerHTML = x;
+        }
+    function selectUsageC(x) {
+        
+        document.getElementById('usageLoc').innerHTML =x;
+    }
+    function selectfpm(x) {
+
+        document.getElementById('fqp').innerHTML = x;
+    }
+    function selectfpt(x) {
+
+        document.getElementById('fqp').innerHTML = x;
+    }
+    function calculer() {
+
+        document.getElementById('fqp').innerHTML = x;
+    }
+       
+    
+
+</script>
+
+}

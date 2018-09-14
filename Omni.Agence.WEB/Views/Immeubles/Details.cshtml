@@ -1,0 +1,500 @@
+﻿@model Omni.Agence.DAL.Operation
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Details Immeuble";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PLI = "active";
+    ViewBag.PL3 = "selected";
+}
+
+@section Styles {
+    @Styles.Render("~/bundles/DatePicker")
+    @Styles.Render("~/Content/DataTableM")
+}
+@{
+    Omni.Agence.DAL.Immeuble immeuble = ViewBag.immeuble;
+}
+<h3 class="page-title">
+    Immeuble <small>Détails</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-building"></i><a href="@Url.Action("Index")">Immeuble</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+    </ul>
+</div>
+
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-equalizer default"></i>
+            <span class="caption-subject default bold uppercase">Infos</span>
+            <span class="caption-helper">Immeuble</span>
+        </div>
+        <div class="tools">
+            <a href="" class="collapse">
+            </a>
+
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <form action="#" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Nom:</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => immeuble.NomImmeuble)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Propriétaire:</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => immeuble.Personne.nom) @Html.DisplayFor(model => immeuble.Personne.prenom)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Etages:</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => immeuble.NbrEtage)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Service:</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => immeuble.ServiceImmeuble)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        
+                        <div class="form-group">
+                            <div class="checkbox-list">
+                                <label class="checkbox-inline">Autres informations</label>
+                                <label class="checkbox-inline">
+                                    @Html.CheckBoxFor(model => immeuble.Parking, new { @disabled = "disabled" })
+                                    @Html.HiddenFor(model => immeuble.Parking) Parking
+                                </label>
+                                <label class="checkbox-inline">
+                                    @Html.CheckBoxFor(model => immeuble.Jardin, new { @disabled = "disabled" })
+                                    @Html.HiddenFor(model => immeuble.Jardin) Jardin
+                                </label>
+                                <label class="checkbox-inline">
+                                    @Html.CheckBoxFor(model => immeuble.Interphone, new { @disabled = "disabled" })
+                                    @Html.HiddenFor(model => immeuble.Interphone)  Interphone
+                                </label>
+                            </div>                            
+
+                        </div>
+                    </div>
+                </div>
+                <h3 class="form-section">Concierge</h3>
+                <!--/row-->
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Nom Prénom:</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => immeuble.Concierge.NomConci) @Html.DisplayFor(model => immeuble.Concierge.PrenomConci)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                CIN
+                            </label><div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => immeuble.Concierge.CinConci)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Salaire concierge:</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => immeuble.Concierge.SalaireConci)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                Télephone
+                            </label><div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => immeuble.Concierge.TelConci)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="form-section">Adresse</h3>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                Code Postale :
+                            </label><label class="control-label col-md-3">
+                                @Html.DisplayFor(model => immeuble.Adresse.CPadress)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                Adresse :
+                            </label><label class="control-label col-md-3">
+                                @Html.DisplayFor(model => immeuble.Adresse.descAdresse)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                Quartier :
+                            </label><label class="control-label col-md-3">
+                                @Html.DisplayFor(model => immeuble.Adresse.quartier)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                Ville :
+                            </label><label class="control-label col-md-3">
+                                @Html.DisplayFor(model => immeuble.Adresse.Ville)
+                            </label>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                Pays :
+                            </label><label class="control-label col-md-3">
+                                @Html.DisplayFor(model => immeuble.Adresse.Pays)
+                            </label>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <div class="row">
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+
+                                        <a href="@Url.Action("Edit", new { id = immeuble.CodeImmeuble })" class="btn purple-intense">
+                                            <i class="fa fa-pencil"></i>Modifier
+                                        </a>
+                                        <a href="@Url.Action("Delete", new { id = immeuble.CodeImmeuble })" class="btn red">
+                                            <i class="fa fa-trash-o"></i>Supprimer
+                                        </a>
+                                        <a href="@Url.Action("Index")" class="btn default">
+                                            Retour
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--/span-->
+                </div>
+
+            </div>
+
+        </form>
+        <!-- END FORM-->
+    </div>
+
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box red-sunglo">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-edit"></i>Toutes les dépenses de l'immeuble @Html.DisplayFor(model => immeuble.CodeImmeuble)
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            @*<a href="@Url.Action("CreateDepense", new { id = immeuble.CodeImmeuble })" class="btn red-sunglo tooltips" data-placement="right" data-original-title="Nouvelle dépense">
+
+                                    <i class="fa fa-plus"></i>
+                                </a>*@
+                            <a class="btn red-sunglo tooltips" data-toggle="modal" href="#responsive" data-original-title="Nouvelle dépense">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                @using System.Linq;
+                @using System.Data.Entity;
+
+                @{
+                    Omni.Agence.DAL.AgenceEntities db = new Omni.Agence.DAL.AgenceEntities();
+                    var depenses = db.Depenses.Include(d => d.Immeuble).Include(d => d.Local).Include(d => d.TypeDesignationDepense).Include(d => d.Operation).Where(d => d.CodeImmeuble == immeuble.CodeImmeuble);
+
+                    List<Omni.Agence.DAL.Depense> dps = depenses.OrderByDescending(d => d.Operation.dateOp).ToList();
+
+                }
+
+
+                <table class="table table-striped table-bordered table-hover" id="sample_3">
+                    <thead>
+                        <tr>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Date de paiement
+                            </th>
+                            <th>
+                                Montant
+                            </th>
+                            <th>
+                                Type
+                            </th>
+                            <th>Date facturation</th>
+                            <th></th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var item in dps)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Operation.dateOp)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Operation.montant)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TypeDesignationDepense.Description)
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.DateFact)</td>
+                                <td>
+
+                                    <a href="@Url.Action("ModifierDepense", new { id = item.codeOp }) " class="btn default btn-xs red-sunglo tooltips" data-placement="left" data-original-title="Modifier dépense">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="@Url.Action("DeleteDepense", new { id = item.codeOp })" class="btn default btn-xs black  tooltips" data-placement="left" data-original-title="Supprimer dépense">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="responsive" class="modal fade" tabindex="-1" aria-hidden="true">
+    @*<div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Nouvel Appartement</h4>
+            </div>*@
+    <div class="modal-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="tab-content">
+                <div class="tab-pane active">
+                    <div class="portlet box red-sunglo">
+                        <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+                            <form action="#" class="horizontal-form">
+                                <div class="form-body">
+                                    <h3 class="form-section">Informations dépense Local</h3>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+
+                                                <label class="control-label col-md-3">Désignation :</label>
+
+                                                <div class="col-md-9">
+
+                                                    @Html.DropDownListFor(
+                                                   model => model.Depense.NumTypeDesignationDespense,
+                                                   new SelectList(
+                                                          new List<Object>{
+                                                               new { value = 1 , text = "Réparation"  },
+                                                               new { value = 2 , text = "Salaire" },
+                                                               new { value = 3 , text = "Facture"}
+                                                            },
+                                                          "value",
+                                                            "text"
+
+                                                               ), new { @class = "form-control" }
+                                                            )
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                @*@Html.LabelFor(model => model.numPassport, htmlAttributes: new { @class = "control-label col-md-4" })*@
+                                                <label class="control-label col-md-3">Montant :</label>
+                                                <div class="col-md-9">
+                                                    @Html.EditorFor(model => model.montant, new { htmlAttributes = new { @class = "form-control" } })
+                                                    <span class="help-block">
+                                                        @Html.ValidationMessageFor(model => model.montant, "", new { @class = "text-danger" })
+                                                    </span>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <!--/span-->
+                                    </div>
+                                    <!--/row-->
+                                    <!--/row-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Date Dépense</label>
+                                                <div class="col-md-9  date-picker input-daterange" data-date="10/11/2012" data-date-format="dd/mm/yyyy">
+                                                    <input type="text" id="DateDepense" name="Depense.DateDepense" class="form-control" required />
+                                                    @*@Html.EditorFor(model => model.Depense.DateDepense, new { htmlAttributes = new { @class = "form-control" } })*@
+                                                    @*<span class="help-block">
+                                                            @Html.ValidationMessageFor(model => model.Depense.DateDepense, "", new { @class = "text-danger" })
+                                                        </span>*@
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Description :</label>
+                                                <div class="col-md-9">
+                                                    @Html.TextAreaFor(model => model.Depense.Description, new { @class = "form-control" })
+                                                    <span class="help-block">
+                                                        @Html.ValidationMessageFor(model => model.Depense.Description, "", new { @class = "text-danger" })
+                                                    </span>
+                                                </div>
+                                                @*@Html.LabelFor(model => model.situationMatrimonial, htmlAttributes: new { @class = "control-label col-md-4" })*@
+
+                                            </div>
+
+                                        </div>
+                                        <!--/span-->
+                                        <!--/span-->
+                                    </div>
+
+
+                                </div>
+                                <div class="form-actions right">
+                                    <button type="reset" class="btn default">Annuler</button>
+
+                                    <input type="submit" value="Enregistrer" class="btn red-sunglo" />
+
+
+                                </div>
+                            </form>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+    @*<div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn default">Close</button>
+            <button type="button" class="btn green">Save changes</button>
+        </div>*@
+    @*</div>
+        </div>*@
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/DataTableM")
+    @Scripts.Render("~/Scripts/DatePicker")
+    <script type="text/javascript">
+        // When the document is ready
+        $(document).ready(function () {
+            $('.input-daterange').datepicker({
+                todayBtn: "linked"
+            });
+        });
+    </script>
+
+    <script>
+        jQuery(document).ready(function () {
+            TableManaged.init();
+        });
+    </script>
+}
+
+

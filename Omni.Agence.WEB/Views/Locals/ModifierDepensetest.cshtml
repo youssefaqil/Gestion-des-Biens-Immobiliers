@@ -1,0 +1,66 @@
+﻿@model Omni.Agence.DAL.Operation
+
+@{
+    ViewBag.Title = "ModifierDepensetest";
+}
+
+<h2>ModifierDepensetest</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Operation</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*@Html.HiddenFor(model => model.codeOp)
+        @Html.HiddenFor(model => model.CodePers)
+        @Html.HiddenFor(model => model.dateOp)
+        @Html.HiddenFor(model => model.Depense.NumTypeDesignationDespense)*@
+
+        @Html.HiddenFor(model => model.codeOp)
+        @Html.HiddenFor(model => model.Depense.codeOp)
+        @Html.HiddenFor(model => model.codeType)
+        @Html.HiddenFor(model => model.CodePers)
+        @Html.HiddenFor(model => model.dateOp)
+        @Html.HiddenFor(model => model.Depense.NumTypeDesignationDespense)
+        @Html.HiddenFor(model => model.Depense.CodeLocal)
+        @Html.HiddenFor(model => model.Depense.CodeImmeuble)
+
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.codeType, "codeType", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("codeType", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.codeType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.montant, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.montant, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.montant, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Depense.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Depense.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Depense.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

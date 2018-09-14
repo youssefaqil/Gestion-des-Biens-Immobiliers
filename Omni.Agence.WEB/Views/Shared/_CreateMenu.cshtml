@@ -1,0 +1,81 @@
+﻿<!-- BEGIN SIDEBAR MENU -->
+<ul class="page-sidebar-menu " data-auto-scroll="true" data-slide-speed="200">
+    <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+    <li class="sidebar-toggler-wrapper">
+        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+        <div class="sidebar-toggler">
+        </div>
+        <!-- END SIDEBAR TOGGLER BUTTON -->
+    </li>
+
+    @{
+        foreach (var item in Model)
+        {
+            if (@item.RowUrl == null)
+            {
+                <li class="@item.CssClass">
+                    <a href='@Url.Action(@item.Action, @item.Controller)'>
+                        @Html.Raw(HttpUtility.HtmlDecode(@item.HtmlText.ToString().Replace("{0}", @item.Titre)))
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="@item.CssClass">
+                    <a href='@item.RowUrl'>
+                        @Html.Raw(HttpUtility.HtmlDecode(@item.HtmlText.ToString().Replace("{0}", @item.Titre)))
+                    </a>
+                    @if (@item.ChildItems.Count > 0)
+                    {<ul class="sub-menu">
+                        @foreach (var child1 in @item.ChildItems)
+                        {
+                            if (@child1.RowUrl == null)
+                            {
+                                <li>
+                                    <a href='@Url.Action(@child1.Action, @child1.Controller)'>
+                                        @Html.Raw(HttpUtility.HtmlDecode(@child1.HtmlText.ToString().Replace("{0}", @child1.Titre)))
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href='@child1.RowUrl'>
+                                        @Html.Raw(HttpUtility.HtmlDecode(@child1.HtmlText.ToString().Replace("{0}", @child1.Titre)))
+                                    </a>
+                                    @if (@child1.ChildItems.Count > 0)
+                                    {
+                                    <ul class="sub-menu">
+                                        @foreach (var child2 in @child1.ChildItems)
+                                        {
+                                            if (@child2.RowUrl == null)
+                                            {
+                                                <li>
+                                                    <a href='@Url.Action(@child2.Action, @child2.Controller)'>
+                                                        @Html.Raw(HttpUtility.HtmlDecode(@child2.HtmlText.ToString().Replace("{0}", @child2.Titre)))
+                                                    </a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li>
+                                                    <a href='@child2.RowUrl'>
+                                                        @Html.Raw(HttpUtility.HtmlDecode(@child2.HtmlText.ToString().Replace("{0}", @child2.Titre)))
+                                                    </a>
+                                                </li>}
+
+                                        }
+
+                                    </ul>
+                                    }
+                                </li>
+
+                            }
+                        }
+                    </ul>
+                    }
+                </li>
+            }
+        }
+    }
+</ul>

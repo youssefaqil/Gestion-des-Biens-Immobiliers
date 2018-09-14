@@ -1,0 +1,2021 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AgenceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Adresses">
+          <Key>
+            <PropertyRef Name="NumAdresse" />
+          </Key>
+          <Property Name="NumAdresse" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pays" Type="varchar" MaxLength="254" />
+          <Property Name="Ville" Type="varchar" MaxLength="254" />
+          <Property Name="quartier" Type="varchar" MaxLength="254" />
+          <Property Name="descAdresse" Type="varchar" MaxLength="254" />
+          <Property Name="CPadress" Type="int" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Augementations">
+          <Key>
+            <PropertyRef Name="idAug" />
+          </Key>
+          <Property Name="idAug" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dateAug" Type="date" />
+          <Property Name="pcAug" Type="int" />
+          <Property Name="CodeContrat" Type="int" />
+          <Property Name="CodePers" Type="int" />
+          <Property Name="CodeLocal" Type="int" />
+        </EntityType>
+        <EntityType Name="Concierges">
+          <Key>
+            <PropertyRef Name="NumConcierge" />
+          </Key>
+          <Property Name="NumConcierge" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomConci" Type="varchar" MaxLength="254" />
+          <Property Name="PrenomConci" Type="varchar" MaxLength="254" />
+          <Property Name="CinConci" Type="varchar" MaxLength="254" />
+          <Property Name="SalaireConci" Type="float" />
+          <Property Name="TelConci" Type="varchar" MaxLength="254" />
+        </EntityType>
+        <EntityType Name="ContratLocations">
+          <Key>
+            <PropertyRef Name="CodePers" />
+            <PropertyRef Name="CodeLocal" />
+            <PropertyRef Name="CodeContrat" />
+          </Key>
+          <Property Name="CodePers" Type="int" Nullable="false" />
+          <Property Name="CodeLocal" Type="int" Nullable="false" />
+          <Property Name="CodeContrat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateJuissance" Type="date" />
+          <Property Name="Usage" Type="int" />
+          <Property Name="LoyerDebase" Type="float" />
+          <Property Name="isClosed" Type="int" />
+          <Property Name="dateClose" Type="datetime" />
+          <Property Name="Charge" Type="int" />
+          <Property Name="TaxeDedilite" Type="int" />
+          <Property Name="Garage" Type="int" />
+          <Property Name="LoyerNet" Type="float" />
+          <Property Name="Caution" Type="int" />
+          <Property Name="DateFinContrat" Type="date" />
+          <Property Name="FrequencePaiement" Type="int" />
+          <Property Name="adults" Type="int" />
+          <Property Name="enfants" Type="int" />
+          <Property Name="animaux" Type="bit" />
+          <Property Name="commentaire" Type="varchar" MaxLength="100" />
+          <Property Name="dateModification" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Depenses">
+          <Key>
+            <PropertyRef Name="codeOp" />
+          </Key>
+          <Property Name="codeOp" Type="int" Nullable="false" />
+          <Property Name="CodeImmeuble" Type="int" />
+          <Property Name="CodeLocal" Type="int" />
+          <Property Name="NumTypeDesignationDespense" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="254" />
+          <Property Name="DateDepense" Type="date" />
+          <Property Name="DateFact" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EtatPaiements">
+          <Key>
+            <PropertyRef Name="codeEP" />
+          </Key>
+          <Property Name="codeEP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cheminEP" Type="varchar" MaxLength="254" />
+          <Property Name="codeOp" Type="int" />
+        </EntityType>
+        <EntityType Name="Immeubles">
+          <Key>
+            <PropertyRef Name="CodeImmeuble" />
+          </Key>
+          <Property Name="CodeImmeuble" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumAdresse" Type="int" Nullable="false" />
+          <Property Name="NumConcierge" Type="int" />
+          <Property Name="NomImmeuble" Type="varchar" MaxLength="254" />
+          <Property Name="ServiceImmeuble" Type="int" />
+          <Property Name="CodePers" Type="int" />
+          <Property Name="NbrEtage" Type="int" />
+          <Property Name="Lon" Type="varchar" MaxLength="50" />
+          <Property Name="Lat" Type="varchar" MaxLength="50" />
+          <Property Name="Parking" Type="bit" Nullable="false" />
+          <Property Name="Jardin" Type="bit" Nullable="false" />
+          <Property Name="Interphone" Type="bit" Nullable="false" />
+          <Property Name="RefCodeImm" Type="int" />
+        </EntityType>
+        <EntityType Name="Locals">
+          <Key>
+            <PropertyRef Name="CodeLocal" />
+          </Key>
+          <Property Name="CodeLocal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumTypeLocal" Type="int" Nullable="false" />
+          <Property Name="NumAdresse" Type="int" Nullable="false" />
+          <Property Name="CodeImmeuble" Type="int" />
+          <Property Name="CodePers" Type="int" />
+          <Property Name="CodeSynd" Type="int" />
+          <Property Name="SuperficieLocal" Type="float" />
+          <Property Name="NbrPieceLocal" Type="int" />
+          <Property Name="NbrChambreLocal" Type="int" />
+          <Property Name="TitreLocal" Type="varchar" MaxLength="254" />
+          <Property Name="DescrLocal" Type="varchar" MaxLength="254" />
+          <Property Name="MeubleLocal" Type="int" />
+          <Property Name="PrixRefLocationLocal" Type="float" />
+          <Property Name="ServiceLocal" Type="int" />
+          <Property Name="Staut" Type="int" />
+          <Property Name="rezCh" Type="bit" />
+          <Property Name="Interphone" Type="bit" />
+          <Property Name="Parking" Type="bit" />
+          <Property Name="Garage" Type="bit" />
+          <Property Name="Jardin" Type="bit" />
+          <Property Name="DateDDispo" Type="date" />
+          <Property Name="DateFDispo" Type="date" />
+          <Property Name="NumLocal" Type="int" />
+          <Property Name="RefCodeLocal" Type="int" />
+        </EntityType>
+        <EntityType Name="MenuItems">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="HtmlText" Type="nvarchar(max)" />
+          <Property Name="RowUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="CssClass" Type="nvarchar" MaxLength="100" />
+          <Property Name="Roles" Type="nvarchar" MaxLength="100" />
+          <Property Name="Parent_Id" Type="int" />
+          <Property Name="Order" Type="int" />
+          <Property Name="Controller" Type="nvarchar" MaxLength="50" />
+          <Property Name="Action" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Operations">
+          <Key>
+            <PropertyRef Name="codeOp" />
+          </Key>
+          <Property Name="codeOp" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodePers" Type="int" />
+          <Property Name="codeType" Type="int" Nullable="false" />
+          <Property Name="montant" Type="float" />
+          <Property Name="dateOp" Type="datetime" />
+          <Property Name="Commentaire" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PaiementLoyers">
+          <Key>
+            <PropertyRef Name="codeOp" />
+          </Key>
+          <Property Name="codeOp" Type="int" Nullable="false" />
+          <Property Name="CodePers" Type="int" />
+          <Property Name="CodeLocal" Type="int" />
+          <Property Name="CodeContrat" Type="int" />
+          <Property Name="MoyenPaiement" Type="varchar" MaxLength="254" />
+          <Property Name="Reference" Type="varchar" MaxLength="254" />
+          <Property Name="DteDebut" Type="date" />
+          <Property Name="DteFin" Type="date" />
+          <Property Name="NbrQuittanceImprime" Type="int" />
+          <Property Name="DateFact" Type="datetime" />
+          <Property Name="DateJuissance" Type="date" />
+          <Property Name="LoyerDebase" Type="float" />
+          <Property Name="Charge" Type="int" />
+          <Property Name="TaxeDedilite" Type="int" />
+          <Property Name="Garage" Type="int" />
+          <Property Name="LoyerNet" Type="float" />
+          <Property Name="DateFinContrat" Type="date" />
+          <Property Name="FrequencePaiement" Type="int" />
+        </EntityType>
+        <EntityType Name="Personnes">
+          <Key>
+            <PropertyRef Name="CodePers" />
+          </Key>
+          <Property Name="CodePers" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodeTypePersonne" Type="int" Nullable="false" />
+          <Property Name="NumAdresse" Type="int" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="254" />
+          <Property Name="prenom" Type="varchar" MaxLength="254" />
+          <Property Name="nationalite" Type="varchar" MaxLength="254" />
+          <Property Name="sexe" Type="int" />
+          <Property Name="situationMatrimonial" Type="varchar" MaxLength="254" />
+          <Property Name="numPassport" Type="varchar" MaxLength="254" />
+          <Property Name="cin" Type="varchar" MaxLength="254" />
+          <Property Name="raisonSocial" Type="varchar" MaxLength="254" />
+          <Property Name="employeur" Type="varchar" MaxLength="254" />
+          <Property Name="identifiantFiscale" Type="varchar" MaxLength="254" />
+          <Property Name="nPatente" Type="varchar" MaxLength="254" />
+          <Property Name="rc" Type="varchar" MaxLength="254" />
+          <Property Name="activite" Type="varchar" MaxLength="254" />
+          <Property Name="fonction" Type="varchar" MaxLength="254" />
+          <Property Name="carteSejour" Type="varchar" MaxLength="254" />
+          <Property Name="TelFixPers" Type="varchar" MaxLength="254" />
+          <Property Name="TelMobilPers" Type="varchar" MaxLength="254" />
+          <Property Name="TelPers3" Type="varchar" MaxLength="254" />
+          <Property Name="EmailPers" Type="varchar" MaxLength="254" />
+          <Property Name="FaxPers" Type="varchar" MaxLength="254" />
+          <Property Name="Solde" Type="float" />
+          <!--<Property Name="DateNaiss" Type="date" />-->
+          <Property Name="RefCodePers" Type="int" />
+        </EntityType>
+        <EntityType Name="Syndics">
+          <Key>
+            <PropertyRef Name="CodeSynd" />
+          </Key>
+          <Property Name="CodeSynd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumAdresse" Type="int" Nullable="false" />
+          <Property Name="NomSynd" Type="varchar" MaxLength="254" />
+          <Property Name="PrenomSynd" Type="varchar" MaxLength="254" />
+          <Property Name="TelSynd" Type="varchar" MaxLength="254" />
+          <Property Name="CinSynd" Type="varchar" MaxLength="50" />
+          <Property Name="Salaire" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TypeDesignationDepenses">
+          <Key>
+            <PropertyRef Name="NumTypeDesignationDespense" />
+          </Key>
+          <Property Name="NumTypeDesignationDespense" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="254" />
+        </EntityType>
+        <EntityType Name="TypeLocals">
+          <Key>
+            <PropertyRef Name="NumTypeLocal" />
+          </Key>
+          <Property Name="NumTypeLocal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="254" />
+        </EntityType>
+        <EntityType Name="TypeOps">
+          <Key>
+            <PropertyRef Name="codeType" />
+          </Key>
+          <Property Name="codeType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelle" Type="varchar" MaxLength="254" />
+        </EntityType>
+        <EntityType Name="TypePersonnes">
+          <Key>
+            <PropertyRef Name="CodeTypePersonne" />
+          </Key>
+          <Property Name="CodeTypePersonne" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="varchar" MaxLength="254" />
+        </EntityType>
+        <Association Name="FK_Augementation_ContratLocations">
+          <End Role="ContratLocations" Type="Self.ContratLocations" Multiplicity="0..1" />
+          <End Role="Augementations" Type="Self.Augementations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContratLocations">
+              <PropertyRef Name="CodePers" />
+              <PropertyRef Name="CodeLocal" />
+              <PropertyRef Name="CodeContrat" />
+            </Principal>
+            <Dependent Role="Augementations">
+              <PropertyRef Name="CodePers" />
+              <PropertyRef Name="CodeLocal" />
+              <PropertyRef Name="CodeContrat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTRATL_ASSOCIATI_LOCAL">
+          <End Role="Locals" Type="Self.Locals" Multiplicity="1" />
+          <End Role="ContratLocations" Type="Self.ContratLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locals">
+              <PropertyRef Name="CodeLocal" />
+            </Principal>
+            <Dependent Role="ContratLocations">
+              <PropertyRef Name="CodeLocal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTRATL_ASSOCIATI_PERSONNE">
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="1" />
+          <End Role="ContratLocations" Type="Self.ContratLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnes">
+              <PropertyRef Name="CodePers" />
+            </Principal>
+            <Dependent Role="ContratLocations">
+              <PropertyRef Name="CodePers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEPENSE_ASSOCIATI_IMMEUBLE">
+          <End Role="Immeubles" Type="Self.Immeubles" Multiplicity="0..1" />
+          <End Role="Depenses" Type="Self.Depenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Immeubles">
+              <PropertyRef Name="CodeImmeuble" />
+            </Principal>
+            <Dependent Role="Depenses">
+              <PropertyRef Name="CodeImmeuble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEPENSE_ASSOCIATI_LOCAL">
+          <End Role="Locals" Type="Self.Locals" Multiplicity="0..1" />
+          <End Role="Depenses" Type="Self.Depenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locals">
+              <PropertyRef Name="CodeLocal" />
+            </Principal>
+            <Dependent Role="Depenses">
+              <PropertyRef Name="CodeLocal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEPENSE_ASSOCIATI_TYPEDESI">
+          <End Role="TypeDesignationDepenses" Type="Self.TypeDesignationDepenses" Multiplicity="1" />
+          <End Role="Depenses" Type="Self.Depenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeDesignationDepenses">
+              <PropertyRef Name="NumTypeDesignationDespense" />
+            </Principal>
+            <Dependent Role="Depenses">
+              <PropertyRef Name="NumTypeDesignationDespense" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEPENSE_GENERALIZ_OPERATIO">
+          <End Role="Operations" Type="Self.Operations" Multiplicity="1" />
+          <End Role="Depenses" Type="Self.Depenses" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Operations">
+              <PropertyRef Name="codeOp" />
+            </Principal>
+            <Dependent Role="Depenses">
+              <PropertyRef Name="codeOp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EtatPaiement_Operation">
+          <End Role="Operations" Type="Self.Operations" Multiplicity="0..1" />
+          <End Role="EtatPaiements" Type="Self.EtatPaiements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operations">
+              <PropertyRef Name="codeOp" />
+            </Principal>
+            <Dependent Role="EtatPaiements">
+              <PropertyRef Name="codeOp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMMEUBLE_ASSOCIATI_CONCIERG">
+          <End Role="Concierges" Type="Self.Concierges" Multiplicity="0..1" />
+          <End Role="Immeubles" Type="Self.Immeubles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Concierges">
+              <PropertyRef Name="NumConcierge" />
+            </Principal>
+            <Dependent Role="Immeubles">
+              <PropertyRef Name="NumConcierge" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Immeuble_Personne">
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Immeubles" Type="Self.Immeubles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnes">
+              <PropertyRef Name="CodePers" />
+            </Principal>
+            <Dependent Role="Immeubles">
+              <PropertyRef Name="CodePers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Immeubles_Adresses">
+          <End Role="Adresses" Type="Self.Adresses" Multiplicity="1" />
+          <End Role="Immeubles" Type="Self.Immeubles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresses">
+              <PropertyRef Name="NumAdresse" />
+            </Principal>
+            <Dependent Role="Immeubles">
+              <PropertyRef Name="NumAdresse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCAL_ASSOCIATI_ADRESSE">
+          <End Role="Adresses" Type="Self.Adresses" Multiplicity="1" />
+          <End Role="Locals" Type="Self.Locals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresses">
+              <PropertyRef Name="NumAdresse" />
+            </Principal>
+            <Dependent Role="Locals">
+              <PropertyRef Name="NumAdresse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCAL_ASSOCIATI_IMMEUBLE">
+          <End Role="Immeubles" Type="Self.Immeubles" Multiplicity="0..1" />
+          <End Role="Locals" Type="Self.Locals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Immeubles">
+              <PropertyRef Name="CodeImmeuble" />
+            </Principal>
+            <Dependent Role="Locals">
+              <PropertyRef Name="CodeImmeuble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCAL_ASSOCIATI_PERSONNE">
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Locals" Type="Self.Locals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnes">
+              <PropertyRef Name="CodePers" />
+            </Principal>
+            <Dependent Role="Locals">
+              <PropertyRef Name="CodePers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCAL_ASSOCIATI_SYNDIC">
+          <End Role="Syndics" Type="Self.Syndics" Multiplicity="0..1" />
+          <End Role="Locals" Type="Self.Locals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Syndics">
+              <PropertyRef Name="CodeSynd" />
+            </Principal>
+            <Dependent Role="Locals">
+              <PropertyRef Name="CodeSynd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCAL_ASSOCIATI_TYPELOCA">
+          <End Role="TypeLocals" Type="Self.TypeLocals" Multiplicity="1" />
+          <End Role="Locals" Type="Self.Locals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeLocals">
+              <PropertyRef Name="NumTypeLocal" />
+            </Principal>
+            <Dependent Role="Locals">
+              <PropertyRef Name="NumTypeLocal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Parent">
+          <End Role="MenuItems" Type="Self.MenuItems" Multiplicity="0..1" />
+          <End Role="MenuItems1" Type="Self.MenuItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItems">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MenuItems1">
+              <PropertyRef Name="Parent_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OPERATIO_ASSOCIATI_PERSONNE">
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="0..1" />
+          <End Role="Operations" Type="Self.Operations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnes">
+              <PropertyRef Name="CodePers" />
+            </Principal>
+            <Dependent Role="Operations">
+              <PropertyRef Name="CodePers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OPERATIO_ASSOCIATI_TYPEOP">
+          <End Role="TypeOps" Type="Self.TypeOps" Multiplicity="1" />
+          <End Role="Operations" Type="Self.Operations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOps">
+              <PropertyRef Name="codeType" />
+            </Principal>
+            <Dependent Role="Operations">
+              <PropertyRef Name="codeType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAIEMENT_ASSOCIATI_CONTRATL">
+          <End Role="ContratLocations" Type="Self.ContratLocations" Multiplicity="0..1" />
+          <End Role="PaiementLoyers" Type="Self.PaiementLoyers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContratLocations">
+              <PropertyRef Name="CodePers" />
+              <PropertyRef Name="CodeLocal" />
+              <PropertyRef Name="CodeContrat" />
+            </Principal>
+            <Dependent Role="PaiementLoyers">
+              <PropertyRef Name="CodePers" />
+              <PropertyRef Name="CodeLocal" />
+              <PropertyRef Name="CodeContrat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAIEMENT_GENERALIZ_OPERATIO">
+          <End Role="Operations" Type="Self.Operations" Multiplicity="1" />
+          <End Role="PaiementLoyers" Type="Self.PaiementLoyers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Operations">
+              <PropertyRef Name="codeOp" />
+            </Principal>
+            <Dependent Role="PaiementLoyers">
+              <PropertyRef Name="codeOp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSONNE_ASSOCIATI_ADRESSE">
+          <End Role="Adresses" Type="Self.Adresses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresses">
+              <PropertyRef Name="NumAdresse" />
+            </Principal>
+            <Dependent Role="Personnes">
+              <PropertyRef Name="NumAdresse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSONNE_ASSOCIATI_TYPEPERS">
+          <End Role="TypePersonnes" Type="Self.TypePersonnes" Multiplicity="1" />
+          <End Role="Personnes" Type="Self.Personnes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypePersonnes">
+              <PropertyRef Name="CodeTypePersonne" />
+            </Principal>
+            <Dependent Role="Personnes">
+              <PropertyRef Name="CodeTypePersonne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYNDIC_ASSOCIATI_ADRESSE">
+          <End Role="Adresses" Type="Self.Adresses" Multiplicity="1" />
+          <End Role="Syndics" Type="Self.Syndics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresses">
+              <PropertyRef Name="NumAdresse" />
+            </Principal>
+            <Dependent Role="Syndics">
+              <PropertyRef Name="NumAdresse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AgenceModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Adresses" EntityType="Self.Adresses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Augementations" EntityType="Self.Augementations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Concierges" EntityType="Self.Concierges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContratLocations" EntityType="Self.ContratLocations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Depenses" EntityType="Self.Depenses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EtatPaiements" EntityType="Self.EtatPaiements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Immeubles" EntityType="Self.Immeubles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Locals" EntityType="Self.Locals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuItems" EntityType="Self.MenuItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Operations" EntityType="Self.Operations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaiementLoyers" EntityType="Self.PaiementLoyers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personnes" EntityType="Self.Personnes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Syndics" EntityType="Self.Syndics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeDesignationDepenses" EntityType="Self.TypeDesignationDepenses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeLocals" EntityType="Self.TypeLocals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOps" EntityType="Self.TypeOps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypePersonnes" EntityType="Self.TypePersonnes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Augementation_ContratLocations" Association="Self.FK_Augementation_ContratLocations">
+            <End Role="ContratLocations" EntitySet="ContratLocations" />
+            <End Role="Augementations" EntitySet="Augementations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTRATL_ASSOCIATI_LOCAL" Association="Self.FK_CONTRATL_ASSOCIATI_LOCAL">
+            <End Role="Locals" EntitySet="Locals" />
+            <End Role="ContratLocations" EntitySet="ContratLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTRATL_ASSOCIATI_PERSONNE" Association="Self.FK_CONTRATL_ASSOCIATI_PERSONNE">
+            <End Role="Personnes" EntitySet="Personnes" />
+            <End Role="ContratLocations" EntitySet="ContratLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEPENSE_ASSOCIATI_IMMEUBLE" Association="Self.FK_DEPENSE_ASSOCIATI_IMMEUBLE">
+            <End Role="Immeubles" EntitySet="Immeubles" />
+            <End Role="Depenses" EntitySet="Depenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEPENSE_ASSOCIATI_LOCAL" Association="Self.FK_DEPENSE_ASSOCIATI_LOCAL">
+            <End Role="Locals" EntitySet="Locals" />
+            <End Role="Depenses" EntitySet="Depenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEPENSE_ASSOCIATI_TYPEDESI" Association="Self.FK_DEPENSE_ASSOCIATI_TYPEDESI">
+            <End Role="TypeDesignationDepenses" EntitySet="TypeDesignationDepenses" />
+            <End Role="Depenses" EntitySet="Depenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEPENSE_GENERALIZ_OPERATIO" Association="Self.FK_DEPENSE_GENERALIZ_OPERATIO">
+            <End Role="Operations" EntitySet="Operations" />
+            <End Role="Depenses" EntitySet="Depenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EtatPaiement_Operation" Association="Self.FK_EtatPaiement_Operation">
+            <End Role="Operations" EntitySet="Operations" />
+            <End Role="EtatPaiements" EntitySet="EtatPaiements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMMEUBLE_ASSOCIATI_CONCIERG" Association="Self.FK_IMMEUBLE_ASSOCIATI_CONCIERG">
+            <End Role="Concierges" EntitySet="Concierges" />
+            <End Role="Immeubles" EntitySet="Immeubles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Immeuble_Personne" Association="Self.FK_Immeuble_Personne">
+            <End Role="Personnes" EntitySet="Personnes" />
+            <End Role="Immeubles" EntitySet="Immeubles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Immeubles_Adresses" Association="Self.FK_Immeubles_Adresses">
+            <End Role="Adresses" EntitySet="Adresses" />
+            <End Role="Immeubles" EntitySet="Immeubles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCAL_ASSOCIATI_ADRESSE" Association="Self.FK_LOCAL_ASSOCIATI_ADRESSE">
+            <End Role="Adresses" EntitySet="Adresses" />
+            <End Role="Locals" EntitySet="Locals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCAL_ASSOCIATI_IMMEUBLE" Association="Self.FK_LOCAL_ASSOCIATI_IMMEUBLE">
+            <End Role="Immeubles" EntitySet="Immeubles" />
+            <End Role="Locals" EntitySet="Locals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCAL_ASSOCIATI_PERSONNE" Association="Self.FK_LOCAL_ASSOCIATI_PERSONNE">
+            <End Role="Personnes" EntitySet="Personnes" />
+            <End Role="Locals" EntitySet="Locals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCAL_ASSOCIATI_SYNDIC" Association="Self.FK_LOCAL_ASSOCIATI_SYNDIC">
+            <End Role="Syndics" EntitySet="Syndics" />
+            <End Role="Locals" EntitySet="Locals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCAL_ASSOCIATI_TYPELOCA" Association="Self.FK_LOCAL_ASSOCIATI_TYPELOCA">
+            <End Role="TypeLocals" EntitySet="TypeLocals" />
+            <End Role="Locals" EntitySet="Locals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Parent" Association="Self.FK_Menu_Parent">
+            <End Role="MenuItems" EntitySet="MenuItems" />
+            <End Role="MenuItems1" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OPERATIO_ASSOCIATI_PERSONNE" Association="Self.FK_OPERATIO_ASSOCIATI_PERSONNE">
+            <End Role="Personnes" EntitySet="Personnes" />
+            <End Role="Operations" EntitySet="Operations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OPERATIO_ASSOCIATI_TYPEOP" Association="Self.FK_OPERATIO_ASSOCIATI_TYPEOP">
+            <End Role="TypeOps" EntitySet="TypeOps" />
+            <End Role="Operations" EntitySet="Operations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAIEMENT_ASSOCIATI_CONTRATL" Association="Self.FK_PAIEMENT_ASSOCIATI_CONTRATL">
+            <End Role="ContratLocations" EntitySet="ContratLocations" />
+            <End Role="PaiementLoyers" EntitySet="PaiementLoyers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAIEMENT_GENERALIZ_OPERATIO" Association="Self.FK_PAIEMENT_GENERALIZ_OPERATIO">
+            <End Role="Operations" EntitySet="Operations" />
+            <End Role="PaiementLoyers" EntitySet="PaiementLoyers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSONNE_ASSOCIATI_ADRESSE" Association="Self.FK_PERSONNE_ASSOCIATI_ADRESSE">
+            <End Role="Adresses" EntitySet="Adresses" />
+            <End Role="Personnes" EntitySet="Personnes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSONNE_ASSOCIATI_TYPEPERS" Association="Self.FK_PERSONNE_ASSOCIATI_TYPEPERS">
+            <End Role="TypePersonnes" EntitySet="TypePersonnes" />
+            <End Role="Personnes" EntitySet="Personnes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYNDIC_ASSOCIATI_ADRESSE" Association="Self.FK_SYNDIC_ASSOCIATI_ADRESSE">
+            <End Role="Adresses" EntitySet="Adresses" />
+            <End Role="Syndics" EntitySet="Syndics" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AgenceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AgenceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Adresses" EntityType="AgenceModel.Adresse" />
+          <EntitySet Name="Concierges" EntityType="AgenceModel.Concierge" />
+          <EntitySet Name="ContratLocations" EntityType="AgenceModel.ContratLocation" />
+          <EntitySet Name="Depenses" EntityType="AgenceModel.Depense" />
+          <EntitySet Name="EtatPaiements" EntityType="AgenceModel.EtatPaiement" />
+          <EntitySet Name="Locals" EntityType="AgenceModel.Local" />
+          <EntitySet Name="MenuItems" EntityType="AgenceModel.MenuItem" />
+          <EntitySet Name="Operations" EntityType="AgenceModel.Operation" />
+          <EntitySet Name="PaiementLoyers" EntityType="AgenceModel.PaiementLoyer" />
+          <EntitySet Name="Personnes" EntityType="AgenceModel.Personne" />
+          <EntitySet Name="Syndics" EntityType="AgenceModel.Syndic" />
+          <EntitySet Name="TypeDesignationDepenses" EntityType="AgenceModel.TypeDesignationDepense" />
+          <EntitySet Name="TypeLocals" EntityType="AgenceModel.TypeLocal" />
+          <EntitySet Name="TypeOps" EntityType="AgenceModel.TypeOp" />
+          <EntitySet Name="TypePersonnes" EntityType="AgenceModel.TypePersonne" />
+          <AssociationSet Name="FK_LOCAL_ASSOCIATI_ADRESSE" Association="AgenceModel.FK_LOCAL_ASSOCIATI_ADRESSE">
+            <End Role="Adress" EntitySet="Adresses" />
+            <End Role="Local" EntitySet="Locals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSONNE_ASSOCIATI_ADRESSE" Association="AgenceModel.FK_PERSONNE_ASSOCIATI_ADRESSE">
+            <End Role="Adress" EntitySet="Adresses" />
+            <End Role="Personne" EntitySet="Personnes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYNDIC_ASSOCIATI_ADRESSE" Association="AgenceModel.FK_SYNDIC_ASSOCIATI_ADRESSE">
+            <End Role="Adress" EntitySet="Adresses" />
+            <End Role="Syndic" EntitySet="Syndics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTRATL_ASSOCIATI_LOCAL" Association="AgenceModel.FK_CONTRATL_ASSOCIATI_LOCAL">
+            <End Role="Local" EntitySet="Locals" />
+            <End Role="ContratLocation" EntitySet="ContratLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTRATL_ASSOCIATI_PERSONNE" Association="AgenceModel.FK_CONTRATL_ASSOCIATI_PERSONNE">
+            <End Role="Personne" EntitySet="Personnes" />
+            <End Role="ContratLocation" EntitySet="ContratLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAIEMENT_ASSOCIATI_CONTRATL" Association="AgenceModel.FK_PAIEMENT_ASSOCIATI_CONTRATL">
+            <End Role="ContratLocation" EntitySet="ContratLocations" />
+            <End Role="PaiementLoyer" EntitySet="PaiementLoyers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEPENSE_ASSOCIATI_LOCAL" Association="AgenceModel.FK_DEPENSE_ASSOCIATI_LOCAL">
+            <End Role="Local" EntitySet="Locals" />
+            <End Role="Depens" EntitySet="Depenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEPENSE_ASSOCIATI_TYPEDESI" Association="AgenceModel.FK_DEPENSE_ASSOCIATI_TYPEDESI">
+            <End Role="TypeDesignationDepens" EntitySet="TypeDesignationDepenses" />
+            <End Role="Depens" EntitySet="Depenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEPENSE_GENERALIZ_OPERATIO" Association="AgenceModel.FK_DEPENSE_GENERALIZ_OPERATIO">
+            <End Role="Operation" EntitySet="Operations" />
+            <End Role="Depens" EntitySet="Depenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EtatPaiement_Operation" Association="AgenceModel.FK_EtatPaiement_Operation">
+            <End Role="Operation" EntitySet="Operations" />
+            <End Role="EtatPaiement" EntitySet="EtatPaiements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCAL_ASSOCIATI_PERSONNE" Association="AgenceModel.FK_LOCAL_ASSOCIATI_PERSONNE">
+            <End Role="Personne" EntitySet="Personnes" />
+            <End Role="Local" EntitySet="Locals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCAL_ASSOCIATI_SYNDIC" Association="AgenceModel.FK_LOCAL_ASSOCIATI_SYNDIC">
+            <End Role="Syndic" EntitySet="Syndics" />
+            <End Role="Local" EntitySet="Locals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCAL_ASSOCIATI_TYPELOCA" Association="AgenceModel.FK_LOCAL_ASSOCIATI_TYPELOCA">
+            <End Role="TypeLocal" EntitySet="TypeLocals" />
+            <End Role="Local" EntitySet="Locals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OPERATIO_ASSOCIATI_PERSONNE" Association="AgenceModel.FK_OPERATIO_ASSOCIATI_PERSONNE">
+            <End Role="Personne" EntitySet="Personnes" />
+            <End Role="Operation" EntitySet="Operations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OPERATIO_ASSOCIATI_TYPEOP" Association="AgenceModel.FK_OPERATIO_ASSOCIATI_TYPEOP">
+            <End Role="TypeOp" EntitySet="TypeOps" />
+            <End Role="Operation" EntitySet="Operations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAIEMENT_GENERALIZ_OPERATIO" Association="AgenceModel.FK_PAIEMENT_GENERALIZ_OPERATIO">
+            <End Role="Operation" EntitySet="Operations" />
+            <End Role="PaiementLoyer" EntitySet="PaiementLoyers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSONNE_ASSOCIATI_TYPEPERS" Association="AgenceModel.FK_PERSONNE_ASSOCIATI_TYPEPERS">
+            <End Role="TypePersonne" EntitySet="TypePersonnes" />
+            <End Role="Personne" EntitySet="Personnes" />
+          </AssociationSet>
+          <EntitySet Name="Augementations" EntityType="AgenceModel.Augementation" />
+          <AssociationSet Name="FK_Augementation_ContratLocations" Association="AgenceModel.FK_Augementation_ContratLocations">
+            <End Role="ContratLocation" EntitySet="ContratLocations" />
+            <End Role="Augementation" EntitySet="Augementations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Parent" Association="AgenceModel.FK_Menu_Parent">
+            <End Role="MenuItem" EntitySet="MenuItems" />
+            <End Role="MenuItem1" EntitySet="MenuItems" />
+          </AssociationSet>
+          <EntitySet Name="C__MigrationHistory" EntityType="AgenceModel.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="AgenceModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="AgenceModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="AgenceModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="AgenceModel.AspNetUser" />
+          <EntitySet Name="sysdiagrams" EntityType="AgenceModel.sysdiagram" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="AgenceModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="AgenceModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="AgenceModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Immeubles" EntityType="AgenceModel.Immeuble" />
+          <AssociationSet Name="FK_Immeubles_Adresses" Association="AgenceModel.FK_Immeubles_Adresses">
+            <End Role="Adresse" EntitySet="Adresses" />
+            <End Role="Immeuble" EntitySet="Immeubles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMMEUBLE_ASSOCIATI_CONCIERG" Association="AgenceModel.FK_IMMEUBLE_ASSOCIATI_CONCIERG">
+            <End Role="Concierge" EntitySet="Concierges" />
+            <End Role="Immeuble" EntitySet="Immeubles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEPENSE_ASSOCIATI_IMMEUBLE" Association="AgenceModel.FK_DEPENSE_ASSOCIATI_IMMEUBLE">
+            <End Role="Immeuble" EntitySet="Immeubles" />
+            <End Role="Depense" EntitySet="Depenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Immeuble_Personne" Association="AgenceModel.FK_Immeuble_Personne">
+            <End Role="Personne" EntitySet="Personnes" />
+            <End Role="Immeuble" EntitySet="Immeubles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCAL_ASSOCIATI_IMMEUBLE" Association="AgenceModel.FK_LOCAL_ASSOCIATI_IMMEUBLE">
+            <End Role="Immeuble" EntitySet="Immeubles" />
+            <End Role="Local" EntitySet="Locals" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Adresse">
+          <Key>
+            <PropertyRef Name="NumAdresse" />
+          </Key>
+          <Property Name="NumAdresse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pays" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="Ville" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="quartier" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="descAdresse" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="CPadress" Type="Int32" />
+          <NavigationProperty Name="Locals" Relationship="AgenceModel.FK_LOCAL_ASSOCIATI_ADRESSE" FromRole="Adress" ToRole="Local" />
+          <NavigationProperty Name="Personnes" Relationship="AgenceModel.FK_PERSONNE_ASSOCIATI_ADRESSE" FromRole="Adress" ToRole="Personne" />
+          <NavigationProperty Name="Syndics" Relationship="AgenceModel.FK_SYNDIC_ASSOCIATI_ADRESSE" FromRole="Adress" ToRole="Syndic" />
+          <NavigationProperty Name="Immeubles" Relationship="AgenceModel.FK_Immeubles_Adresses" FromRole="Adresse" ToRole="Immeuble" />
+        </EntityType>
+        <EntityType Name="Concierge">
+          <Key>
+            <PropertyRef Name="NumConcierge" />
+          </Key>
+          <Property Name="NumConcierge" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomConci" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="PrenomConci" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="CinConci" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="SalaireConci" Type="Double" />
+          <Property Name="TelConci" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Immeubles" Relationship="AgenceModel.FK_IMMEUBLE_ASSOCIATI_CONCIERG" FromRole="Concierge" ToRole="Immeuble" />
+        </EntityType>
+        <EntityType Name="ContratLocation">
+          <Key>
+            <PropertyRef Name="CodePers" />
+            <PropertyRef Name="CodeLocal" />
+            <PropertyRef Name="CodeContrat" />
+          </Key>
+          <Property Name="CodePers" Type="Int32" Nullable="false" />
+          <Property Name="CodeLocal" Type="Int32" Nullable="false" />
+          <Property Name="CodeContrat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateJuissance" Type="DateTime" Precision="0" />
+          <Property Name="Usage" Type="Int32" />
+          <Property Name="LoyerDebase" Type="Double" />
+          <Property Name="isClosed" Type="Int32" />
+          <Property Name="dateClose" Type="DateTime" Precision="3" />
+          <Property Name="Charge" Type="Int32" />
+          <Property Name="TaxeDedilite" Type="Int32" />
+          <Property Name="Garage" Type="Int32" />
+          <Property Name="LoyerNet" Type="Double" />
+          <Property Name="Caution" Type="Int32" />
+          <Property Name="DateFinContrat" Type="DateTime" Precision="0" />
+          <Property Name="FrequencePaiement" Type="Int32" />
+          <Property Name="adults" Type="Int32" />
+          <Property Name="enfants" Type="Int32" />
+          <Property Name="animaux" Type="Boolean" />
+          <Property Name="commentaire" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dateModification" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Local" Relationship="AgenceModel.FK_CONTRATL_ASSOCIATI_LOCAL" FromRole="ContratLocation" ToRole="Local" />
+          <NavigationProperty Name="Personne" Relationship="AgenceModel.FK_CONTRATL_ASSOCIATI_PERSONNE" FromRole="ContratLocation" ToRole="Personne" />
+          <NavigationProperty Name="PaiementLoyers" Relationship="AgenceModel.FK_PAIEMENT_ASSOCIATI_CONTRATL" FromRole="ContratLocation" ToRole="PaiementLoyer" />
+          <NavigationProperty Name="Augementations" Relationship="AgenceModel.FK_Augementation_ContratLocations" FromRole="ContratLocation" ToRole="Augementation" />
+        </EntityType>
+        <EntityType Name="Depense">
+          <Key>
+            <PropertyRef Name="codeOp" />
+          </Key>
+          <Property Name="codeOp" Type="Int32" Nullable="false" />
+          <Property Name="CodeImmeuble" Type="Int32" />
+          <Property Name="CodeLocal" Type="Int32" />
+          <Property Name="NumTypeDesignationDespense" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="DateDepense" Type="DateTime" Precision="0" />
+          <Property Name="DateFact" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Local" Relationship="AgenceModel.FK_DEPENSE_ASSOCIATI_LOCAL" FromRole="Depens" ToRole="Local" />
+          <NavigationProperty Name="TypeDesignationDepense" Relationship="AgenceModel.FK_DEPENSE_ASSOCIATI_TYPEDESI" FromRole="Depens" ToRole="TypeDesignationDepens" />
+          <NavigationProperty Name="Operation" Relationship="AgenceModel.FK_DEPENSE_GENERALIZ_OPERATIO" FromRole="Depens" ToRole="Operation" />
+          <NavigationProperty Name="Immeuble" Relationship="AgenceModel.FK_DEPENSE_ASSOCIATI_IMMEUBLE" FromRole="Depense" ToRole="Immeuble" />
+        </EntityType>
+        <EntityType Name="EtatPaiement">
+          <Key>
+            <PropertyRef Name="codeEP" />
+          </Key>
+          <Property Name="codeEP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cheminEP" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="codeOp" Type="Int32" />
+          <NavigationProperty Name="Operation" Relationship="AgenceModel.FK_EtatPaiement_Operation" FromRole="EtatPaiement" ToRole="Operation" />
+        </EntityType>
+        <EntityType Name="Local">
+          <Key>
+            <PropertyRef Name="CodeLocal" />
+          </Key>
+          <Property Name="CodeLocal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumTypeLocal" Type="Int32" Nullable="false" />
+          <Property Name="NumAdresse" Type="Int32" Nullable="false" />
+          <Property Name="CodeImmeuble" Type="Int32" />
+          <Property Name="CodePers" Type="Int32" />
+          <Property Name="CodeSynd" Type="Int32" />
+          <Property Name="SuperficieLocal" Type="Double" />
+          <Property Name="NbrPieceLocal" Type="Int32" />
+          <Property Name="NbrChambreLocal" Type="Int32" />
+          <Property Name="TitreLocal" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="DescrLocal" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="MeubleLocal" Type="Int32" />
+          <Property Name="PrixRefLocationLocal" Type="Double" />
+          <Property Name="ServiceLocal" Type="Int32" />
+          <Property Name="Staut" Type="Int32" />
+          <Property Name="rezCh" Type="Boolean" />
+          <Property Name="Interphone" Type="Boolean" />
+          <Property Name="Parking" Type="Boolean" />
+          <Property Name="Garage" Type="Boolean" />
+          <Property Name="Jardin" Type="Boolean" />
+          <Property Name="DateDDispo" Type="DateTime" Precision="0" />
+          <Property Name="DateFDispo" Type="DateTime" Precision="0" />
+          <Property Name="NumLocal" Type="Int32" />
+          <NavigationProperty Name="Adresse" Relationship="AgenceModel.FK_LOCAL_ASSOCIATI_ADRESSE" FromRole="Local" ToRole="Adress" />
+          <NavigationProperty Name="ContratLocations" Relationship="AgenceModel.FK_CONTRATL_ASSOCIATI_LOCAL" FromRole="Local" ToRole="ContratLocation" />
+          <NavigationProperty Name="Depenses" Relationship="AgenceModel.FK_DEPENSE_ASSOCIATI_LOCAL" FromRole="Local" ToRole="Depens" />
+          <NavigationProperty Name="Personne" Relationship="AgenceModel.FK_LOCAL_ASSOCIATI_PERSONNE" FromRole="Local" ToRole="Personne" />
+          <NavigationProperty Name="Syndic" Relationship="AgenceModel.FK_LOCAL_ASSOCIATI_SYNDIC" FromRole="Local" ToRole="Syndic" />
+          <NavigationProperty Name="TypeLocal" Relationship="AgenceModel.FK_LOCAL_ASSOCIATI_TYPELOCA" FromRole="Local" ToRole="TypeLocal" />
+          <Property Name="RefCodeLocal" Type="Int32" />
+          <NavigationProperty Name="Immeuble" Relationship="AgenceModel.FK_LOCAL_ASSOCIATI_IMMEUBLE" FromRole="Local" ToRole="Immeuble" />
+        </EntityType>
+        <EntityType Name="MenuItem">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HtmlText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RowUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CssClass" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Roles" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Parent_Id" Type="Int32" />
+          <Property Name="Order" Type="Int32" />
+          <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ChildItems" Relationship="AgenceModel.FK_Menu_Parent" FromRole="MenuItem" ToRole="MenuItem1" />
+          <NavigationProperty Name="Parent" Relationship="AgenceModel.FK_Menu_Parent" FromRole="MenuItem1" ToRole="MenuItem" />
+        </EntityType>
+        <EntityType Name="Operation">
+          <Key>
+            <PropertyRef Name="codeOp" />
+          </Key>
+          <Property Name="codeOp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodePers" Type="Int32" />
+          <Property Name="codeType" Type="Int32" Nullable="false" />
+          <Property Name="montant" Type="Double" />
+          <Property Name="dateOp" Type="DateTime" Precision="3" />
+          <Property Name="Commentaire" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Depense" Relationship="AgenceModel.FK_DEPENSE_GENERALIZ_OPERATIO" FromRole="Operation" ToRole="Depens" />
+          <NavigationProperty Name="EtatPaiements" Relationship="AgenceModel.FK_EtatPaiement_Operation" FromRole="Operation" ToRole="EtatPaiement" />
+          <NavigationProperty Name="Personne" Relationship="AgenceModel.FK_OPERATIO_ASSOCIATI_PERSONNE" FromRole="Operation" ToRole="Personne" />
+          <NavigationProperty Name="TypeOp" Relationship="AgenceModel.FK_OPERATIO_ASSOCIATI_TYPEOP" FromRole="Operation" ToRole="TypeOp" />
+          <NavigationProperty Name="PaiementLoyer" Relationship="AgenceModel.FK_PAIEMENT_GENERALIZ_OPERATIO" FromRole="Operation" ToRole="PaiementLoyer" />
+        </EntityType>
+        <EntityType Name="PaiementLoyer">
+          <Key>
+            <PropertyRef Name="codeOp" />
+          </Key>
+          <Property Name="codeOp" Type="Int32" Nullable="false" />
+          <Property Name="CodePers" Type="Int32" />
+          <Property Name="CodeLocal" Type="Int32" />
+          <Property Name="CodeContrat" Type="Int32" />
+          <Property Name="MoyenPaiement" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="Reference" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="DteDebut" Type="DateTime" Precision="0" />
+          <Property Name="DteFin" Type="DateTime" Precision="0" />
+          <Property Name="NbrQuittanceImprime" Type="Int32" />
+          <Property Name="DateFact" Type="DateTime" Precision="3" />
+          <Property Name="DateJuissance" Type="DateTime" Precision="0" />
+          <Property Name="LoyerDebase" Type="Double" />
+          <Property Name="Charge" Type="Int32" />
+          <Property Name="TaxeDedilite" Type="Int32" />
+          <Property Name="Garage" Type="Int32" />
+          <Property Name="LoyerNet" Type="Double" />
+          <Property Name="DateFinContrat" Type="DateTime" Precision="0" />
+          <Property Name="FrequencePaiement" Type="Int32" />
+          <NavigationProperty Name="ContratLocation" Relationship="AgenceModel.FK_PAIEMENT_ASSOCIATI_CONTRATL" FromRole="PaiementLoyer" ToRole="ContratLocation" />
+          <NavigationProperty Name="Operation" Relationship="AgenceModel.FK_PAIEMENT_GENERALIZ_OPERATIO" FromRole="PaiementLoyer" ToRole="Operation" />
+        </EntityType>
+        <EntityType Name="Personne">
+          <Key>
+            <PropertyRef Name="CodePers" />
+          </Key>
+          <Property Name="CodePers" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodeTypePersonne" Type="Int32" Nullable="false" />
+          <Property Name="NumAdresse" Type="Int32" Nullable="false" />
+          <Property Name="nom" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="prenom" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="nationalite" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="sexe" Type="Int32" />
+          <Property Name="situationMatrimonial" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="numPassport" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="cin" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="raisonSocial" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="employeur" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="identifiantFiscale" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="nPatente" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="rc" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="activite" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="fonction" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="carteSejour" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="TelFixPers" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="TelMobilPers" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="TelPers3" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="EmailPers" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="FaxPers" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="Solde" Type="Double" />
+          <NavigationProperty Name="Adresse" Relationship="AgenceModel.FK_PERSONNE_ASSOCIATI_ADRESSE" FromRole="Personne" ToRole="Adress" />
+          <NavigationProperty Name="ContratLocations" Relationship="AgenceModel.FK_CONTRATL_ASSOCIATI_PERSONNE" FromRole="Personne" ToRole="ContratLocation" />
+          <NavigationProperty Name="Locals" Relationship="AgenceModel.FK_LOCAL_ASSOCIATI_PERSONNE" FromRole="Personne" ToRole="Local" />
+          <NavigationProperty Name="Operations" Relationship="AgenceModel.FK_OPERATIO_ASSOCIATI_PERSONNE" FromRole="Personne" ToRole="Operation" />
+          <NavigationProperty Name="TypePersonne" Relationship="AgenceModel.FK_PERSONNE_ASSOCIATI_TYPEPERS" FromRole="Personne" ToRole="TypePersonne" />
+          <!--<Property Name="DateNaiss" Type="DateTime" Precision="0" />-->
+          <Property Name="RefCodePers" Type="Int32" />
+          <NavigationProperty Name="Immeubles" Relationship="AgenceModel.FK_Immeuble_Personne" FromRole="Personne" ToRole="Immeuble" />
+        </EntityType>
+        <EntityType Name="Syndic">
+          <Key>
+            <PropertyRef Name="CodeSynd" />
+          </Key>
+          <Property Name="CodeSynd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumAdresse" Type="Int32" Nullable="false" />
+          <Property Name="NomSynd" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="PrenomSynd" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="TelSynd" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="CinSynd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Salaire" Type="Int32" />
+          <NavigationProperty Name="Adresse" Relationship="AgenceModel.FK_SYNDIC_ASSOCIATI_ADRESSE" FromRole="Syndic" ToRole="Adress" />
+          <NavigationProperty Name="Locals" Relationship="AgenceModel.FK_LOCAL_ASSOCIATI_SYNDIC" FromRole="Syndic" ToRole="Local" />
+        </EntityType>
+        <EntityType Name="TypeDesignationDepense">
+          <Key>
+            <PropertyRef Name="NumTypeDesignationDespense" />
+          </Key>
+          <Property Name="NumTypeDesignationDespense" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Depenses" Relationship="AgenceModel.FK_DEPENSE_ASSOCIATI_TYPEDESI" FromRole="TypeDesignationDepens" ToRole="Depens" />
+        </EntityType>
+        <EntityType Name="TypeLocal">
+          <Key>
+            <PropertyRef Name="NumTypeLocal" />
+          </Key>
+          <Property Name="NumTypeLocal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Locals" Relationship="AgenceModel.FK_LOCAL_ASSOCIATI_TYPELOCA" FromRole="TypeLocal" ToRole="Local" />
+        </EntityType>
+        <EntityType Name="TypeOp">
+          <Key>
+            <PropertyRef Name="codeType" />
+          </Key>
+          <Property Name="codeType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Operations" Relationship="AgenceModel.FK_OPERATIO_ASSOCIATI_TYPEOP" FromRole="TypeOp" ToRole="Operation" />
+        </EntityType>
+        <EntityType Name="TypePersonne">
+          <Key>
+            <PropertyRef Name="CodeTypePersonne" />
+          </Key>
+          <Property Name="CodeTypePersonne" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Personnes" Relationship="AgenceModel.FK_PERSONNE_ASSOCIATI_TYPEPERS" FromRole="TypePersonne" ToRole="Personne" />
+        </EntityType>
+        <Association Name="FK_LOCAL_ASSOCIATI_ADRESSE">
+          <End Type="AgenceModel.Adresse" Role="Adress" Multiplicity="1" />
+          <End Type="AgenceModel.Local" Role="Local" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adress">
+              <PropertyRef Name="NumAdresse" />
+            </Principal>
+            <Dependent Role="Local">
+              <PropertyRef Name="NumAdresse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSONNE_ASSOCIATI_ADRESSE">
+          <End Type="AgenceModel.Adresse" Role="Adress" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AgenceModel.Personne" Role="Personne" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adress">
+              <PropertyRef Name="NumAdresse" />
+            </Principal>
+            <Dependent Role="Personne">
+              <PropertyRef Name="NumAdresse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYNDIC_ASSOCIATI_ADRESSE">
+          <End Type="AgenceModel.Adresse" Role="Adress" Multiplicity="1" />
+          <End Type="AgenceModel.Syndic" Role="Syndic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adress">
+              <PropertyRef Name="NumAdresse" />
+            </Principal>
+            <Dependent Role="Syndic">
+              <PropertyRef Name="NumAdresse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTRATL_ASSOCIATI_LOCAL">
+          <End Type="AgenceModel.Local" Role="Local" Multiplicity="1" />
+          <End Type="AgenceModel.ContratLocation" Role="ContratLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Local">
+              <PropertyRef Name="CodeLocal" />
+            </Principal>
+            <Dependent Role="ContratLocation">
+              <PropertyRef Name="CodeLocal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTRATL_ASSOCIATI_PERSONNE">
+          <End Type="AgenceModel.Personne" Role="Personne" Multiplicity="1" />
+          <End Type="AgenceModel.ContratLocation" Role="ContratLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="CodePers" />
+            </Principal>
+            <Dependent Role="ContratLocation">
+              <PropertyRef Name="CodePers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAIEMENT_ASSOCIATI_CONTRATL">
+          <End Type="AgenceModel.ContratLocation" Role="ContratLocation" Multiplicity="0..1" />
+          <End Type="AgenceModel.PaiementLoyer" Role="PaiementLoyer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContratLocation">
+              <PropertyRef Name="CodePers" />
+              <PropertyRef Name="CodeLocal" />
+              <PropertyRef Name="CodeContrat" />
+            </Principal>
+            <Dependent Role="PaiementLoyer">
+              <PropertyRef Name="CodePers" />
+              <PropertyRef Name="CodeLocal" />
+              <PropertyRef Name="CodeContrat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEPENSE_ASSOCIATI_LOCAL">
+          <End Type="AgenceModel.Local" Role="Local" Multiplicity="0..1" />
+          <End Type="AgenceModel.Depense" Role="Depens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Local">
+              <PropertyRef Name="CodeLocal" />
+            </Principal>
+            <Dependent Role="Depens">
+              <PropertyRef Name="CodeLocal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEPENSE_ASSOCIATI_TYPEDESI">
+          <End Type="AgenceModel.TypeDesignationDepense" Role="TypeDesignationDepens" Multiplicity="1" />
+          <End Type="AgenceModel.Depense" Role="Depens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeDesignationDepens">
+              <PropertyRef Name="NumTypeDesignationDespense" />
+            </Principal>
+            <Dependent Role="Depens">
+              <PropertyRef Name="NumTypeDesignationDespense" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEPENSE_GENERALIZ_OPERATIO">
+          <End Type="AgenceModel.Operation" Role="Operation" Multiplicity="1" />
+          <End Type="AgenceModel.Depense" Role="Depens" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Operation">
+              <PropertyRef Name="codeOp" />
+            </Principal>
+            <Dependent Role="Depens">
+              <PropertyRef Name="codeOp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EtatPaiement_Operation">
+          <End Type="AgenceModel.Operation" Role="Operation" Multiplicity="0..1" />
+          <End Type="AgenceModel.EtatPaiement" Role="EtatPaiement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation">
+              <PropertyRef Name="codeOp" />
+            </Principal>
+            <Dependent Role="EtatPaiement">
+              <PropertyRef Name="codeOp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCAL_ASSOCIATI_PERSONNE">
+          <End Type="AgenceModel.Personne" Role="Personne" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AgenceModel.Local" Role="Local" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="CodePers" />
+            </Principal>
+            <Dependent Role="Local">
+              <PropertyRef Name="CodePers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCAL_ASSOCIATI_SYNDIC">
+          <End Type="AgenceModel.Syndic" Role="Syndic" Multiplicity="0..1" />
+          <End Type="AgenceModel.Local" Role="Local" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Syndic">
+              <PropertyRef Name="CodeSynd" />
+            </Principal>
+            <Dependent Role="Local">
+              <PropertyRef Name="CodeSynd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCAL_ASSOCIATI_TYPELOCA">
+          <End Type="AgenceModel.TypeLocal" Role="TypeLocal" Multiplicity="1" />
+          <End Type="AgenceModel.Local" Role="Local" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeLocal">
+              <PropertyRef Name="NumTypeLocal" />
+            </Principal>
+            <Dependent Role="Local">
+              <PropertyRef Name="NumTypeLocal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OPERATIO_ASSOCIATI_PERSONNE">
+          <End Type="AgenceModel.Personne" Role="Personne" Multiplicity="0..1" />
+          <End Type="AgenceModel.Operation" Role="Operation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="CodePers" />
+            </Principal>
+            <Dependent Role="Operation">
+              <PropertyRef Name="CodePers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OPERATIO_ASSOCIATI_TYPEOP">
+          <End Type="AgenceModel.TypeOp" Role="TypeOp" Multiplicity="1" />
+          <End Type="AgenceModel.Operation" Role="Operation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOp">
+              <PropertyRef Name="codeType" />
+            </Principal>
+            <Dependent Role="Operation">
+              <PropertyRef Name="codeType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAIEMENT_GENERALIZ_OPERATIO">
+          <End Type="AgenceModel.Operation" Role="Operation" Multiplicity="1" />
+          <End Type="AgenceModel.PaiementLoyer" Role="PaiementLoyer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Operation">
+              <PropertyRef Name="codeOp" />
+            </Principal>
+            <Dependent Role="PaiementLoyer">
+              <PropertyRef Name="codeOp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSONNE_ASSOCIATI_TYPEPERS">
+          <End Type="AgenceModel.TypePersonne" Role="TypePersonne" Multiplicity="1" />
+          <End Type="AgenceModel.Personne" Role="Personne" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypePersonne">
+              <PropertyRef Name="CodeTypePersonne" />
+            </Principal>
+            <Dependent Role="Personne">
+              <PropertyRef Name="CodeTypePersonne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Augementation">
+          <Key>
+            <PropertyRef Name="idAug" />
+          </Key>
+          <Property Name="idAug" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dateAug" Type="DateTime" Precision="0" />
+          <Property Name="pcAug" Type="Int32" />
+          <Property Name="CodeContrat" Type="Int32" />
+          <Property Name="CodePers" Type="Int32" />
+          <Property Name="CodeLocal" Type="Int32" />
+          <NavigationProperty Name="ContratLocation" Relationship="AgenceModel.FK_Augementation_ContratLocations" FromRole="Augementation" ToRole="ContratLocation" />
+        </EntityType>
+        <Association Name="FK_Augementation_ContratLocations">
+          <End Type="AgenceModel.ContratLocation" Role="ContratLocation" Multiplicity="0..1" />
+          <End Type="AgenceModel.Augementation" Role="Augementation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContratLocation">
+              <PropertyRef Name="CodePers" />
+              <PropertyRef Name="CodeLocal" />
+              <PropertyRef Name="CodeContrat" />
+            </Principal>
+            <Dependent Role="Augementation">
+              <PropertyRef Name="CodePers" />
+              <PropertyRef Name="CodeLocal" />
+              <PropertyRef Name="CodeContrat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Parent">
+          <End Type="AgenceModel.MenuItem" Role="MenuItem" Multiplicity="0..1" />
+          <End Type="AgenceModel.MenuItem" Role="MenuItem1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItem">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MenuItem1">
+              <PropertyRef Name="Parent_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="AgenceModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="AgenceModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="AgenceModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="AgenceModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="AgenceModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetRoles" Relationship="AgenceModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="AgenceModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AgenceModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="AgenceModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AgenceModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="AgenceModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="AgenceModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Immeuble">
+          <Key>
+            <PropertyRef Name="CodeImmeuble" />
+          </Key>
+          <Property Name="CodeImmeuble" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumAdresse" Type="Int32" Nullable="false" />
+          <Property Name="NumConcierge" Type="Int32" />
+          <Property Name="NomImmeuble" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceImmeuble" Type="Int32" />
+          <Property Name="CodePers" Type="Int32" />
+          <Property Name="NbrEtage" Type="Int32" />
+          <Property Name="Lon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Lat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Parking" Type="Boolean" Nullable="false" />
+          <Property Name="Jardin" Type="Boolean" Nullable="false" />
+          <Property Name="Interphone" Type="Boolean" Nullable="false" />
+          <Property Name="RefCodeImm" Type="Int32" />
+          <NavigationProperty Name="Adresse" Relationship="AgenceModel.FK_Immeubles_Adresses" FromRole="Immeuble" ToRole="Adresse" />
+          <NavigationProperty Name="Concierge" Relationship="AgenceModel.FK_IMMEUBLE_ASSOCIATI_CONCIERG" FromRole="Immeuble" ToRole="Concierge" />
+          <NavigationProperty Name="Depenses" Relationship="AgenceModel.FK_DEPENSE_ASSOCIATI_IMMEUBLE" FromRole="Immeuble" ToRole="Depense" />
+          <NavigationProperty Name="Personne" Relationship="AgenceModel.FK_Immeuble_Personne" FromRole="Immeuble" ToRole="Personne" />
+          <NavigationProperty Name="Locals" Relationship="AgenceModel.FK_LOCAL_ASSOCIATI_IMMEUBLE" FromRole="Immeuble" ToRole="Local" />
+        </EntityType>
+        <Association Name="FK_Immeubles_Adresses">
+          <End Type="AgenceModel.Adresse" Role="Adresse" Multiplicity="1" />
+          <End Type="AgenceModel.Immeuble" Role="Immeuble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresse">
+              <PropertyRef Name="NumAdresse" />
+            </Principal>
+            <Dependent Role="Immeuble">
+              <PropertyRef Name="NumAdresse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMMEUBLE_ASSOCIATI_CONCIERG">
+          <End Type="AgenceModel.Concierge" Role="Concierge" Multiplicity="0..1" />
+          <End Type="AgenceModel.Immeuble" Role="Immeuble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Concierge">
+              <PropertyRef Name="NumConcierge" />
+            </Principal>
+            <Dependent Role="Immeuble">
+              <PropertyRef Name="NumConcierge" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEPENSE_ASSOCIATI_IMMEUBLE">
+          <End Type="AgenceModel.Immeuble" Role="Immeuble" Multiplicity="0..1" />
+          <End Type="AgenceModel.Depense" Role="Depense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Immeuble">
+              <PropertyRef Name="CodeImmeuble" />
+            </Principal>
+            <Dependent Role="Depense">
+              <PropertyRef Name="CodeImmeuble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Immeuble_Personne">
+          <End Type="AgenceModel.Personne" Role="Personne" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AgenceModel.Immeuble" Role="Immeuble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="CodePers" />
+            </Principal>
+            <Dependent Role="Immeuble">
+              <PropertyRef Name="CodePers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCAL_ASSOCIATI_IMMEUBLE">
+          <End Type="AgenceModel.Immeuble" Role="Immeuble" Multiplicity="0..1" />
+          <End Type="AgenceModel.Local" Role="Local" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Immeuble">
+              <PropertyRef Name="CodeImmeuble" />
+            </Principal>
+            <Dependent Role="Local">
+              <PropertyRef Name="CodeImmeuble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AgenceModelStoreContainer" CdmEntityContainer="AgenceEntities">
+    <EntitySetMapping Name="Adresses">
+      <EntityTypeMapping TypeName="IsTypeOf(AgenceModel.Adresse)">
+        <MappingFragment StoreEntitySet="Adresses">
+          <ScalarProperty Name="NumAdresse" ColumnName="NumAdresse" />
+          <ScalarProperty Name="Pays" ColumnName="Pays" />
+          <ScalarProperty Name="Ville" ColumnName="Ville" />
+          <ScalarProperty Name="quartier" ColumnName="quartier" />
+          <ScalarProperty Name="descAdresse" ColumnName="descAdresse" />
+          <ScalarProperty Name="CPadress" ColumnName="CPadress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Concierges">
+      <EntityTypeMapping TypeName="IsTypeOf(AgenceModel.Concierge)">
+        <MappingFragment StoreEntitySet="Concierges">
+          <ScalarProperty Name="NumConcierge" ColumnName="NumConcierge" />
+          <ScalarProperty Name="NomConci" ColumnName="NomConci" />
+          <ScalarProperty Name="PrenomConci" ColumnName="PrenomConci" />
+          <ScalarProperty Name="CinConci" ColumnName="CinConci" />
+          <ScalarProperty Name="SalaireConci" ColumnName="SalaireConci" />
+          <ScalarProperty Name="TelConci" ColumnName="TelConci" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContratLocations">
+      <EntityTypeMapping TypeName="IsTypeOf(AgenceModel.ContratLocation)">
+        <MappingFragment StoreEntitySet="ContratLocations">
+          <ScalarProperty Name="CodePers" ColumnName="CodePers" />
+          <ScalarProperty Name="CodeLocal" ColumnName="CodeLocal" />
+          <ScalarProperty Name="CodeContrat" ColumnName="CodeContrat" />
+          <ScalarProperty Name="DateJuissance" ColumnName="DateJuissance" />
+          <ScalarProperty Name="Usage" ColumnName="Usage" />
+          <ScalarProperty Name="LoyerDebase" ColumnName="LoyerDebase" />
+          <ScalarProperty Name="isClosed" ColumnName="isClosed" />
+          <ScalarProperty Name="dateClose" ColumnName="dateClose" />
+          <ScalarProperty Name="Charge" ColumnName="Charge" />
+          <ScalarProperty Name="TaxeDedilite" ColumnName="TaxeDedilite" />
+          <ScalarProperty Name="Garage" ColumnName="Garage" />
+          <ScalarProperty Name="LoyerNet" ColumnName="LoyerNet" />
+          <ScalarProperty Name="Caution" ColumnName="Caution" />
+          <ScalarProperty Name="DateFinContrat" ColumnName="DateFinContrat" />
+          <ScalarProperty Name="FrequencePaiement" ColumnName="FrequencePaiement" />
+          <ScalarProperty Name="adults" ColumnName="adults" />
+          <ScalarProperty Name="enfants" ColumnName="enfants" />
+          <ScalarProperty Name="animaux" ColumnName="animaux" />
+          <ScalarProperty Name="commentaire" ColumnName="commentaire" />
+          <ScalarProperty Name="dateModification" ColumnName="dateModification" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Depenses">
+      <EntityTypeMapping TypeName="IsTypeOf(AgenceModel.Depense)">
+        <MappingFragment StoreEntitySet="Depenses">
+          <ScalarProperty Name="codeOp" ColumnName="codeOp" />
+          <ScalarProperty Name="CodeImmeuble" ColumnName="CodeImmeuble" />
+          <ScalarProperty Name="CodeLocal" ColumnName="CodeLocal" />
+          <ScalarProperty Name="NumTypeDesignationDespense" ColumnName="NumTypeDesignationDespense" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DateDepense" ColumnName="DateDepense" />
+          <ScalarProperty Name="DateFact" ColumnName="DateFact" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EtatPaiements">
+      <EntityTypeMapping TypeName="IsTypeOf(AgenceModel.EtatPaiement)">
+        <MappingFragment StoreEntitySet="EtatPaiements">
+          <ScalarProperty Name="codeEP" ColumnName="codeEP" />
+          <ScalarProperty Name="cheminEP" ColumnName="cheminEP" />
+          <ScalarProperty Name="codeOp" ColumnName="codeOp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locals">
+      <EntityTypeMapping TypeName="IsTypeOf(AgenceModel.Local)">
+        <MappingFragment StoreEntitySet="Locals">
+          <ScalarProperty Name="RefCodeLocal" ColumnName="RefCodeLocal" />
+                <ScalarProperty Name="CodeLocal" ColumnName="CodeLocal" />
+          <ScalarProperty Name="NumTypeLocal" ColumnName="NumTypeLocal" />
+          <ScalarProperty Name="NumAdresse" ColumnName="NumAdresse" />
+          <ScalarProperty Name="CodeImmeuble" ColumnName="CodeImmeuble" />
+          <ScalarProperty Name="CodePers" ColumnName="CodePers" />
+          <ScalarProperty Name="CodeSynd" ColumnName="CodeSynd" />
+          <ScalarProperty Name="SuperficieLocal" ColumnName="SuperficieLocal" />
+          <ScalarProperty Name="NbrPieceLocal" ColumnName="NbrPieceLocal" />
+          <ScalarProperty Name="NbrChambreLocal" ColumnName="NbrChambreLocal" />
+          <ScalarProperty Name="TitreLocal" ColumnName="TitreLocal" />
+          <ScalarProperty Name="DescrLocal" ColumnName="DescrLocal" />
+          <ScalarProperty Name="MeubleLocal" ColumnName="MeubleLocal" />
+          <ScalarProperty Name="PrixRefLocationLocal" ColumnName="PrixRefLocationLocal" />
+          <ScalarProperty Name="ServiceLocal" ColumnName="ServiceLocal" />
+          <ScalarProperty Name="Staut" ColumnName="Staut" />
+          <ScalarProperty Name="rezCh" ColumnName="rezCh" />
+          <ScalarProperty Name="Interphone" ColumnName="Interphone" />
+          <ScalarProperty Name="Parking" ColumnName="Parking" />
+          <ScalarProperty Name="Garage" ColumnName="Garage" />
+          <ScalarProperty Name="Jardin" ColumnName="Jardin" />
+          <ScalarProperty Name="DateDDispo" ColumnName="DateDDispo" />
+          <ScalarProperty Name="DateFDispo" ColumnName="DateFDispo" />
+          <ScalarProperty Name="NumLocal" ColumnName="NumLocal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MenuItems">
+      <EntityTypeMapping TypeName="IsTypeOf(AgenceModel.MenuItem)">
+        <MappingFragment StoreEntitySet="MenuItems">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Titre" ColumnName="Titre" />
+          <ScalarProperty Name="HtmlText" ColumnName="HtmlText" />
+          <ScalarProperty Name="RowUrl" ColumnName="RowUrl" />
+          <ScalarProperty Name="CssClass" ColumnName="CssClass" />
+          <ScalarProperty Name="Roles" ColumnName="Roles" />
+          <ScalarProperty Name="Parent_Id" ColumnName="Parent_Id" />
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Operations">
+      <EntityTypeMapping TypeName="IsTypeOf(AgenceModel.Operation)">
+        <MappingFragment StoreEntitySet="Operations">
+          <ScalarProperty Name="codeOp" ColumnName="codeOp" />
+          <ScalarProperty Name="CodePers" ColumnName="CodePers" />
+          <ScalarProperty Name="codeType" ColumnName="codeType" />
+          <ScalarProperty Name="montant" ColumnName="montant" />
+          <ScalarProperty Name="dateOp" ColumnName="dateOp" />
+          <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaiementLoyers">
+      <EntityTypeMapping TypeName="IsTypeOf(AgenceModel.PaiementLoyer)">
+        <MappingFragment StoreEntitySet="PaiementLoyers">
+          <ScalarProperty Name="codeOp" ColumnName="codeOp" />
+          <ScalarProperty Name="CodePers" ColumnName="CodePers" />
+          <ScalarProperty Name="CodeLocal" ColumnName="CodeLocal" />
+          <ScalarProperty Name="CodeContrat" ColumnName="CodeContrat" />
+          <ScalarProperty Name="MoyenPaiement" ColumnName="MoyenPaiement" />
+          <ScalarProperty Name="Reference" ColumnName="Reference" />
+          <ScalarProperty Name="DteDebut" ColumnName="DteDebut" />
+          <ScalarProperty Name="DteFin" ColumnName="DteFin" />
+          <ScalarProperty Name="NbrQuittanceImprime" ColumnName="NbrQuittanceImprime" />
+          <ScalarProperty Name="DateFact" ColumnName="DateFact" />
+          <ScalarProperty Name="DateJuissance" ColumnName="DateJuissance" />
+          <ScalarProperty Name="LoyerDebase" ColumnName="LoyerDebase" />
+          <ScalarProperty Name="Charge" ColumnName="Charge" />
+          <ScalarProperty Name="TaxeDedilite" ColumnName="TaxeDedilite" />
+          <ScalarProperty Name="Garage" ColumnName="Garage" />
+          <ScalarProperty Name="LoyerNet" ColumnName="LoyerNet" />
+          <ScalarProperty Name="DateFinContrat" ColumnName="DateFinContrat" />
+          <ScalarProperty Name="FrequencePaiement" ColumnName="FrequencePaiement" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Personnes">
+      <EntityTypeMapping TypeName="IsTypeOf(AgenceModel.Personne)">
+        <MappingFragment StoreEntitySet="Personnes">
+          <ScalarProperty Name="RefCodePers" ColumnName="RefCodePers" />
+                <!--<ScalarProperty Name="DateNaiss" ColumnName="DateNaiss" />-->
+                <ScalarProperty Name="CodePers" ColumnName="CodePers" />
+          <ScalarProperty Name="CodeTypePersonne" ColumnName="CodeTypePersonne" />
+          <ScalarProperty Name="NumAdresse" ColumnName="NumAdresse" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="nationalite" ColumnName="nationalite" />
+          <ScalarProperty Name="sexe" ColumnName="sexe" />
+          <ScalarProperty Name="situationMatrimonial" ColumnName="situationMatrimonial" />
+          <ScalarProperty Name="numPassport" ColumnName="numPassport" />
+          <ScalarProperty Name="cin" ColumnName="cin" />
+          <ScalarProperty Name="raisonSocial" ColumnName="raisonSocial" />
+          <ScalarProperty Name="employeur" ColumnName="employeur" />
+          <ScalarProperty Name="identifiantFiscale" ColumnName="identifiantFiscale" />
+          <ScalarProperty Name="nPatente" ColumnName="nPatente" />
+          <ScalarProperty Name="rc" ColumnName="rc" />
+          <ScalarProperty Name="activite" ColumnName="activite" />
+          <ScalarProperty Name="fonction" ColumnName="fonction" />
+          <ScalarProperty Name="carteSejour" ColumnName="carteSejour" />
+          <ScalarProperty Name="TelFixPers" ColumnName="TelFixPers" />
+          <ScalarProperty Name="TelMobilPers" ColumnName="TelMobilPers" />
+          <ScalarProperty Name="TelPers3" ColumnName="TelPers3" />
+          <ScalarProperty Name="EmailPers" ColumnName="EmailPers" />
+          <ScalarProperty Name="FaxPers" ColumnName="FaxPers" />
+          <ScalarProperty Name="Solde" ColumnName="Solde" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Syndics">
+      <EntityTypeMapping TypeName="IsTypeOf(AgenceModel.Syndic)">
+        <MappingFragment StoreEntitySet="Syndics">
+          <ScalarProperty Name="CodeSynd" ColumnName="CodeSynd" />
+          <ScalarProperty Name="NumAdresse" ColumnName="NumAdresse" />
+          <ScalarProperty Name="NomSynd" ColumnName="NomSynd" />
+          <ScalarProperty Name="PrenomSynd" ColumnName="PrenomSynd" />
+          <ScalarProperty Name="TelSynd" ColumnName="TelSynd" />
+          <ScalarProperty Name="CinSynd" ColumnName="CinSynd" />
+          <ScalarProperty Name="Salaire" ColumnName="Salaire" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeDesignationDepenses">
+      <EntityTypeMapping TypeName="IsTypeOf(AgenceModel.TypeDesignationDepense)">
+        <MappingFragment StoreEntitySet="TypeDesignationDepenses">
+          <ScalarProperty Name="NumTypeDesignationDespense" ColumnName="NumTypeDesignationDespense" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeLocals">
+      <EntityTypeMapping TypeName="IsTypeOf(AgenceModel.TypeLocal)">
+        <MappingFragment StoreEntitySet="TypeLocals">
+          <ScalarProperty Name="NumTypeLocal" ColumnName="NumTypeLocal" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeOps">
+      <EntityTypeMapping TypeName="IsTypeOf(AgenceModel.TypeOp)">
+        <MappingFragment StoreEntitySet="TypeOps">
+          <ScalarProperty Name="codeType" ColumnName="codeType" />
+          <ScalarProperty Name="libelle" ColumnName="libelle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypePersonnes">
+      <EntityTypeMapping TypeName="IsTypeOf(AgenceModel.TypePersonne)">
+        <MappingFragment StoreEntitySet="TypePersonnes">
+          <ScalarProperty Name="CodeTypePersonne" ColumnName="CodeTypePersonne" />
+          <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Augementations">
+      <EntityTypeMapping TypeName="IsTypeOf(AgenceModel.Augementation)">
+        <MappingFragment StoreEntitySet="Augementations">
+          <ScalarProperty Name="idAug" ColumnName="idAug" />
+          <ScalarProperty Name="dateAug" ColumnName="dateAug" />
+          <ScalarProperty Name="pcAug" ColumnName="pcAug" />
+          <ScalarProperty Name="CodeContrat" ColumnName="CodeContrat" />
+          <ScalarProperty Name="CodePers" ColumnName="CodePers" />
+          <ScalarProperty Name="CodeLocal" ColumnName="CodeLocal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="AgenceModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="AgenceModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="AgenceModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="AgenceModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="AgenceModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AgenceModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="AgenceModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Immeubles">
+            <EntityTypeMapping TypeName="AgenceModel.Immeuble">
+              <MappingFragment StoreEntitySet="Immeubles">
+                <ScalarProperty Name="RefCodeImm" ColumnName="RefCodeImm" />
+                <ScalarProperty Name="Interphone" ColumnName="Interphone" />
+                <ScalarProperty Name="Jardin" ColumnName="Jardin" />
+                <ScalarProperty Name="Parking" ColumnName="Parking" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Lon" ColumnName="Lon" />
+                <ScalarProperty Name="NbrEtage" ColumnName="NbrEtage" />
+                <ScalarProperty Name="CodePers" ColumnName="CodePers" />
+                <ScalarProperty Name="ServiceImmeuble" ColumnName="ServiceImmeuble" />
+                <ScalarProperty Name="NomImmeuble" ColumnName="NomImmeuble" />
+                <ScalarProperty Name="NumConcierge" ColumnName="NumConcierge" />
+                <ScalarProperty Name="NumAdresse" ColumnName="NumAdresse" />
+                <ScalarProperty Name="CodeImmeuble" ColumnName="CodeImmeuble" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

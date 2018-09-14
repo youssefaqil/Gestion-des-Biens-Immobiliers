@@ -1,0 +1,241 @@
+﻿@using Omni.Agence.DAL;
+@model IEnumerable<Omni.Agence.DAL.Operation>
+
+@{
+    ViewBag.Title = "compteProp";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PL2 = "active";
+    ViewBag.PL3 = "selected";
+}
+
+
+<h3 class="page-title">
+    Propriétaires <small>Paiement</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i>
+            <a href="@Url.Action("Index")">Propriétaires</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            @{
+                Personne pers = ViewBag.pers;
+            }
+        <li>
+            @if (string.IsNullOrEmpty(pers.rc))
+            {
+                <a href="@Url.Action("Details", new { id = pers.CodePers })"> @pers.nom @pers.prenom</a>
+            }
+            else
+            {
+                <a href="@Url.Action("Details", new { id = pers.CodePers })"> @pers.employeur</a>
+            }
+            
+        </li>
+    </ul>
+
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box yellow">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-edit"></i>Compte du propriétaire@*: @Html.DisplayFor(model => model.nom) @Html.DisplayFor(model => model.prenom)*@
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                </div>
+            </div>
+            <div class="portlet-body">
+                @*<div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="btn-group">
+                             
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>*@
+                <table class="table table-responsive" id="sample_editable_2">
+                    <thead>
+                        <tr>
+                            <th>
+                                Opération
+                            </th>
+                            <th>
+                                Type
+                            </th>
+                            <th>
+                                Local/Immeuble
+                            </th>
+                            <th>
+                                Date opération
+                            </th>
+                            <th>
+                                Débit
+                            </th>
+                            <th>
+                                Crédit
+                            </th>
+                            <th>Date facturation</th>
+                            <th></th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @{double montant = 0;}
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TypeOp.libelle)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Depense.TypeDesignationDepense.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Depense.Local.TitreLocal)
+                                    @Html.DisplayFor(modelItem => item.Depense.Immeuble.NomImmeuble)
+                                    @Html.DisplayFor(modelItem => item.PaiementLoyer.ContratLocation.Local.TitreLocal)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dateOp)
+                                </td>
+                                <td>
+                                    @{
+                            //montant = item.montant.Value - item.PaiementLoyer.ContratLocation.Local.ServiceLocal.Value;
+                                    }
+                                    @if(item.codeType==1)
+                                    { 
+                                    @Html.DisplayFor(modelItem => item.montant)
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.codeType == 2 || item.codeType==3)
+                                    {
+                                        @Html.DisplayFor(modelItem => item.montant)
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.codeType == 2)
+                                    {
+                                        @Html.DisplayFor(modelItem => item.dateOp)
+                                    }
+                                    @if (item.codeType == 1 )
+                                    {
+                                        @Html.DisplayFor(modelItem => item.PaiementLoyer.DateFact)
+                                    }
+                                    @if (item.codeType == 3)
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Depense.DateFact)
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action( "DetailsOP", new { id = item.codeOp }) " class="btn default btn-xs yellow tooltips" data-placement="bottom" data-original-title="Détails Opération">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot class="task-footer">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><h4><strong>Solde :</strong></h4></td>
+                            <td><h4><strong>## @ViewBag.SoldeProp DH</strong></h4></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                @*@using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="tab-content">
+                        <div class="tab-pane active">
+                            <div class="portlet box yellow">
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form action="#" class="horizontal-form">
+                                        <div class="form-body">
+                                            <h3 class="form-section">Paiement</h3>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        
+                                                        <label class="control-label col-md-3">Montant :</label>
+                                                        <div class="col-md-9">
+                                                            <input type="number" min="0" class="form-control" name="montant" id="montant"/>
+                                                              
+                                                        </div>
+
+                                                    </div>
+
+                                                    <!--/span-->
+                                                    <!--/span-->
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        
+                                                        <label class="control-label col-md-3">Commentaire</label>
+                                                        <div class="col-md-9">
+                                                            
+                                                           @Html.TextArea("Commentaire", "", new { @class = "form-control",cols="60",rows="4" })
+                                                        </div>
+
+                                                    </div>
+
+                                                    <!--/span-->
+                                                    <!--/span-->
+                                                </div>
+                                                <!--/row-->
+                                                <!--/row-->
+                                                
+
+                                            </div>
+                                            <br />
+                                            <div class="form-actions right">
+                                                
+
+                                                <input type="submit" value="Valider" class="btn yellow" />
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }*@
+
+                @*<div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>*@
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }
+
+            </div>
+        </div>
+
+    </div>
+</div>

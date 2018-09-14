@@ -1,0 +1,122 @@
+﻿@model IEnumerable<Omni.Agence.DAL.ContratLocation>
+
+
+<h3 class="page-title">
+    Contrat <small>Liste</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i><a href="@Url.Action("Index")">Contrat</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+
+    </ul>
+
+</div>
+
+<h2>Local</h2>
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-edit"></i>Tous les contrats
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+                        </div>
+
+                    </div>
+                </div>
+                <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                    <thead>
+                        <tr>
+                            <th>
+                                Locataire
+                            </th>
+                            <th>
+                                Local
+                            </th>
+
+                            <th>
+                                Date de jouissance
+                            </th>
+
+
+                            <th>
+                                Date fin
+                            </th>
+
+                            <th>
+                                Loyer de base
+                            </th>
+                            <th>
+                                Loyer net
+                            </th>                         
+
+                            <th></th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Personne.nom) @Html.DisplayFor(modelItem => item.Personne.prenom)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Local.TitreLocal)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateJuissance)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateFinContrat)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LoyerDebase)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LoyerNet)
+                                </td>
+                               
+
+                                <td>
+                                    @Html.ActionLink("Details", "Details", new { id = item.CodeLocal }) |
+                                    @Html.ActionLink("Supprimer", "Delete", new { id = item.CodeLocal })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

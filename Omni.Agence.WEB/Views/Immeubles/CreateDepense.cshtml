@@ -1,0 +1,152 @@
+﻿@model Omni.Agence.DAL.Operation
+
+@{
+    ViewBag.Title = "Nouvelle Dépense";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PLI = "active";
+    ViewBag.PL3 = "selected";
+    
+}
+
+
+
+
+<h3 class="page-title">
+    Immeuble <small>Nouvelle dépense</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i>
+            <a href="@Url.Action("Index")">Immeubles</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Details", new { id = ViewBag.Codeimm })">Réf: @ViewBag.Codeimm</a>
+
+        </li>
+
+    </ul>
+
+</div>
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="tab-content">
+        <div class="tab-pane active">
+            <div class="portlet box red-sunglo">
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="horizontal-form">
+                        <div class="form-body">
+                            <h3 class="form-section">Informations dépense immeuble</h3>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label class="control-label col-md-4">Désignation :</label>
+
+                                        <div>
+
+                                            @Html.DropDownListFor(
+                                                   model => model.Depense.NumTypeDesignationDespense,
+                                                   new SelectList(
+                                                          new List<Object>{
+                                                               new { value = 1 , text = "Réparation"  },
+                                                               new { value = 2 , text = "Salaire" },
+                                                               new { value = 3 , text = "Facture"}
+                                                            },
+                                                          "value",
+                                                            "text"
+                                                            ), new  { @class = "form-control" } 
+                                                               )
+                                                            
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(model => model.numPassport, htmlAttributes: new { @class = "control-label col-md-4" })*@
+                                        <label class="control-label col-md-3">Montant :</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.montant, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.montant, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Date Dépense :</label>
+                                        <div class="col-md-6">
+                                            <input type="date" id="Depense.DateDepense" name="Depense.DateDepense" class="form-control" />
+                                            @*@Html.EditorFor(model => model.Depense.DateDepense, new { htmlAttributes = new { @class = "form-control" } })*@
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.Depense.DateDepense, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Description :</label>
+                                        <div class="col-md-9">
+                                            @Html.TextAreaFor(model => model.Depense.Description, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Depense.Description, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        @*@Html.LabelFor(model => model.situationMatrimonial, htmlAttributes: new { @class = "control-label col-md-4" })*@
+
+                                    </div>
+
+                                </div>
+                                <!--/span-->
+                                <!--/span-->
+                            </div>
+
+                        </div>
+                        <div class="form-actions right">
+                            <button type="reset" class="btn default">Cancel</button>
+
+                            <input type="submit" value="Enregistrer" class="btn red-sunglo" />
+
+                        </div>
+                    </form>
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+

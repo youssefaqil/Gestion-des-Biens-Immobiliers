@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omni.Agence.DAL", "Omni.Agence.DAL\Omni.Agence.DAL.csproj", "{A688EA4A-FBEB-4915-8206-E326CA80450C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omni.Agence.WEB", "Omni.Agence.WEB\Omni.Agence.WEB.csproj", "{541E98F8-14BB-4C4D-ADC9-32A648FB90A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B8380310-11F8-4B03-86DE-AC14F4958D65}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://omnishore.visualstudio.com/defaultcollection
+		SccProjectUniqueName0 = Omni.Agence.DAL\\Omni.Agence.DAL.csproj
+		SccProjectName0 = Omni.Agence.DAL
+		SccLocalPath0 = Omni.Agence.DAL
+		SccProjectUniqueName1 = Omni.Agence.WEB\\Omni.Agence.WEB.csproj
+		SccProjectName1 = Omni.Agence.WEB
+		SccLocalPath1 = Omni.Agence.WEB
+		SccLocalPath2 = .
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A688EA4A-FBEB-4915-8206-E326CA80450C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A688EA4A-FBEB-4915-8206-E326CA80450C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A688EA4A-FBEB-4915-8206-E326CA80450C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A688EA4A-FBEB-4915-8206-E326CA80450C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{541E98F8-14BB-4C4D-ADC9-32A648FB90A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{541E98F8-14BB-4C4D-ADC9-32A648FB90A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{541E98F8-14BB-4C4D-ADC9-32A648FB90A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{541E98F8-14BB-4C4D-ADC9-32A648FB90A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

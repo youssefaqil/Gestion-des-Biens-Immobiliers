@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Omni.Agence.DAL.Augementation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.dateAug)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pcAug)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContratLocation.commentaire)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateAug)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pcAug)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContratLocation.commentaire)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idAug }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idAug }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idAug })
+        </td>
+    </tr>
+}
+
+</table>

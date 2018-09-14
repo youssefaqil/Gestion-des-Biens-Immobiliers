@@ -1,0 +1,97 @@
+﻿
+           @using System.Linq;
+@using System.Data.Entity;
+
+
+@{Layout = "";}
+
+@{
+    Omni.Agence.DAL.AgenceEntities db = new Omni.Agence.DAL.AgenceEntities();
+
+    var locList = db.Personnes.Include(p => p.Adresse).Include(p => p.TypePersonne).Where(p => p.CodeTypePersonne.Equals(2));
+    List<Omni.Agence.DAL.Personne> locataires = locList.ToList();
+}
+
+
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-edit"></i>Table des locataires
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            
+                        </div>
+
+                    </div>
+                </div>
+                <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                    <thead>
+                        <tr>
+                            <th>
+                                Nom Prénom
+                            </th>
+                            <th>
+                                CIN
+                            </th>
+                            
+
+                            <th>
+                                Mobile
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+
+
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in locataires)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.nom) @Html.DisplayFor(modelItem => item.prenom)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.cin)
+                                </td>
+
+                                
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TelMobilPers)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EmailPers)
+                                </td>
+                                <td>
+                                    
+                                    @Html.ActionLink("Selectionner", "IndexLocataire", new { id = item.CodePers })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+
+

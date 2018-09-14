@@ -1,0 +1,74 @@
+﻿@model Omni.Agence.DAL.Operation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Détails</h2>
+
+<div>
+    <h4>Opération</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.montant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.montant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateOp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateOp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commentaire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commentaire)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Depense.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Depense.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Personne.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Personne.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeOp.libelle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeOp.libelle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaiementLoyer.MoyenPaiement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaiementLoyer.MoyenPaiement)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.codeOp }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,421 @@
+﻿@using Omni.Agence.DAL;
+@model Omni.Agence.DAL.Immeuble
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Creation Immeuble";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PL2 = "active";
+    ViewBag.PL3 = "selected";
+}
+@section Styles {
+    @Styles.Render("~/Content/DataTableM")
+}
+<h3 class="page-title">
+    Propriétaires <small>Immeubles</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i>
+            <a href="@Url.Action("Index")">Propriétaires</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        @{
+            Personne pers = ViewBag.pers;
+        }
+        
+            @if (string.IsNullOrEmpty(pers.rc)) { 
+        
+        <li>
+            <a href="@Url.Action("Details", new { id = pers.CodePers })"> @pers.nom @pers.prenom</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+            }
+            else
+            {
+                <li>
+                    <a href="@Url.Action("Details", new { id = pers.CodePers })"> @pers.employeur</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+            }
+        <li>
+            <i class="fa fa-building"></i>
+            <a href="@Url.Action("CreateImmeublesProp", new { id = pers.CodePers })"> Immeubles</a>
+        </li>
+    </ul>
+
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box purple-intense">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-building"></i>Immeubles
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        @*<div class="col-md-6">
+
+                            <div class="btn-group">
+                                <a href="@Url.Action("CreateImmeublesProp", new { id = @ViewBag.codeprp })" class="btn purple-intense tooltips" data-placement="bottom" data-original-title="Nouvel immeuble">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+
+
+                            </div>
+                        </div>*@
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered table-hover" id="sample_2">
+                    <thead>
+                        <tr>
+                            <th>
+                                Nom
+                            </th>
+                            <th>
+                                Service
+                            </th>
+
+                            <th>
+                                Ville
+                            </th>
+                            <th>
+                                Quartier
+                            </th>
+
+                            <th>
+                                Etages
+                            </th>
+
+                            <th></th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @using Omni.Agence.DAL;
+                        @{
+
+                            List<Immeuble> listImm = ViewBag.listImm;
+                        }
+                        @foreach (var item in listImm)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NomImmeuble)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ServiceImmeuble)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Adresse.Ville)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Adresse.quartier)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NbrEtage)
+                                </td>
+
+                                <td>
+                                    @*@Html.ActionLink("Details", "DetailsImmeuble", new { id = item.CodeImmeuble }) |
+                            @Html.ActionLink("Supprimer", "DeleteImm", new { id = item.CodeImmeuble })*@
+
+                                    <a href="@Url.Action("DetailsImmeuble", new { id = item.CodeImmeuble }) " class="btn default btn-xs purple-intense tooltips" data-placement="bottom" data-original-title="Détails Immeuble">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    @*<a href="@Url.Action("DeleteImm", new { id = item.CodeImmeuble })" class="btn default btn-xs black">
+                                <i class="fa fa-trash-o"></i>
+                            </a>*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="tab-content">
+        <div class="tab-pane active">
+            <div class="portlet light bg-inverse">
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="horizontal-form">
+                        <div class="form-body">
+                            <h3 class="form-section">Nouvel Immeuble</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.HiddenFor(model => model.CodePers)
+                                        @*@Html.LabelFor(model => model.NomImmeuble, htmlAttributes: new { @class = "control-label col-md-4" })*@
+                                        <label class="control-label col-md-3">Nom</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.NomImmeuble, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.NomImmeuble, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="CodePers" value="@ViewBag.codeprp" />
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(model => model.ServiceImmeuble, htmlAttributes: new { @class = "control-label col-md-4" })*@
+                                        <label class="control-label col-md-3"></label>
+                                        <div class="col-md-9">
+                                            @*@Html.EditorFor(model => model.ServiceImmeuble, new { htmlAttributes = new { @class = "form-control" } })*@
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.ServiceImmeuble, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <div class="row">
+
+
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        @*@Html.LabelFor(model => model.NbrEtage, htmlAttributes: new { @class = "control-label col-md-4" })*@
+                                        <label class="control-label col-md-3">Etages</label>
+
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.NbrEtage, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.NbrEtage, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+
+
+                                    <div class="form-group">
+                                        <div class="checkbox-list">
+                                            <label class="checkbox-inline">Autres:</label>
+                                            <label class="checkbox-inline">
+                                                @Html.CheckBoxFor(model => model.Parking)  Parking
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                @Html.CheckBoxFor(model => model.Jardin)  Jardin
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                @Html.CheckBoxFor(model => model.Interphone)  Interphone
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="form-section">Concierge</h3>
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Nom:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Concierge.NomConci, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.Concierge.NomConci, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Prenom:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Concierge.PrenomConci, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.Concierge.PrenomConci, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">CIN:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Concierge.CinConci, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.Concierge.CinConci, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Salaire:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Concierge.SalaireConci, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.Concierge.SalaireConci, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Téléphone:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Concierge.TelConci, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.Concierge.TelConci, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="form-section">Adresse</h3>
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Code Postale</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Adresse.CPadress, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.Adresse.CPadress, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Adresse:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Adresse.descAdresse, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.Adresse.descAdresse, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Quartier:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Adresse.quartier, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.Adresse.quartier, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Ville:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Adresse.Ville, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.Adresse.Ville, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(model => model.Adresse.descAdresse, htmlAttributes: new { @class = "control-label col-md-4" })*@
+                                        <label class="control-label col-md-3">Pays:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Adresse.Pays, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.Adresse.Pays, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+
+                        </div>
+                        <div class="form-actions right">
+                            <div class="row">
+                                <div class="col-md-6"></div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <a class="btn purple-intense" data-toggle="modal" href="#basic">
+                                                    Enregistrer
+                                                </a>
+                                                <button type="reset" class="btn default">Annuler</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                        </div>
+                        <div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                        <h4 class="modal-title">Confirmation</h4>
+                                    </div>
+                                    <div class="modal-body">
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                                        <input type="submit" class="btn purple-intense" value="Valider" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/DataTableM")
+<script>
+    jQuery(document).ready(function () {
+        TableManaged.init();
+    });
+</script>
+
+}
+    

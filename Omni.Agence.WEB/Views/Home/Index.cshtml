@@ -1,0 +1,572 @@
+﻿@{
+    ViewBag.Title = "Bienvenue";
+    ViewBag.DB = "start active open";
+    ViewBag.DBQ = "active";
+}
+@section Styles {
+    @Styles.Render("~/admin/pages/css/tasks.css")
+}
+
+
+<h3 class="page-title">
+    Bienvenue <small>MADAGASCAR</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+
+    </ul>
+</div>
+        <div class="tiles">
+
+            <a href="@Url.Action("Index","Proprietaires")">
+                <div class="tile  bg-blue">
+                    <div class="corner">
+                    </div>
+                    <div class="tile-body">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div class="tile-object">
+                        <div class="name">
+                            Propriétaires &nbsp;
+                        </div>
+                        <div class="number">
+                            (@ViewBag.nbrprpCount)
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="@Url.Action("Index","Locataires")">
+                <div class="tile double bg-blue-madison">
+                    <div class="tile-body">
+                        <i class="fa icon-users"></i>
+
+                    </div>
+                    <div class="tile-object">
+                        <div class="name">
+                            Locataires
+                        </div>
+                        <div class="number">
+                            (@ViewBag.nbrlocCount)
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="@Url.Action("Index","Immeubles/")">
+                <div class="tile bg-purple-studio">
+                    <div class="tile-body">
+                        <i class="fa fa-building"></i>
+                    </div>
+                    <div class="tile-object">
+                        <div class="name">
+                            Immeubles
+                        </div>
+                        <div class="number">
+                            (@ViewBag.nbrImmCount)
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <div class="tile bg-green-meadow">
+                    <div class="tile-body">
+                        <i class="fa icon-home"></i>
+                    </div>
+                    <div class="tile-object">
+                        <div class="name">
+                            Locaux
+                        </div>
+                        <div class="number">
+                            (@ViewBag.nbrLocalCount)
+                        </div>
+                    </div>
+                </div>
+            <a href="@Url.Action("Index","DepensesLocal")">
+                <div class="tile bg-red-intense">
+                    <div class="tile-body">
+                        <i class="fa fa-legal"></i>
+                    </div>
+                    <div class="tile-object">
+                        <div class="name">
+                            Dépenses
+                        </div>
+                        <div class="number">
+                            @*12 Jan*@
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="@Url.Action("Index","Locals")">
+                <div class="tile double  bg-green">
+                    <div class="tile-body">
+                        <i class="fa icon-home"></i>
+                    </div>
+                    <div class="tile-object">
+                        <div class="name">
+                            Locaux
+                        </div>
+                        <div class="number">
+                            (@ViewBag.nbrLocCount)
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="@Url.Action("Index","Contrat")">
+                <div class="tile double bg-green-haze">
+                    <div class="tile-body">
+                        <i class="fa fa-key"></i>
+                    </div>
+                    <div class="tile-object">
+                        <div class="name">
+                            Contrats
+                        </div>
+                        <div class="number">
+                            (@ViewBag.nbrContratCount)
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="@Url.Action("ManageUserRoles","Roles")">
+                <div class="tile  bg-yellow-lemon ">
+                    <div class="corner">
+                    </div>
+                    <div class="check">
+                    </div>
+                    <div class="tile-body">
+                        <i class="fa fa-cogs"></i>
+                    </div>
+                    <div class="tile-object">
+                        <div class="name">
+                            Administration
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <div class="tile bg-red-sunglo">
+                <div class="tile-body">
+                    <i class="fa fa-clock-o"></i>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                        Heure :
+                    </div>
+                    <div class="number">
+                        <span class="clock-val" id="heur"></span>:<span class="clock-val" id="min"></span>:<span class="clock-val" id="sec"></span>
+                    </div>
+                </div>
+            </div>
+        
+</div>
+<br /><br />
+<div class="row">
+    
+        <!-- END PORTLET-->
+   
+   <div class="col-md-6 col-sm-6">
+    <!-- BEGIN PORTLET-->
+    <div class="portlet paddingless">
+        <div class="portlet-title line">
+            <div class="caption">
+                <i class="fa fa-bell-o"></i>Revenu & Dépenses
+            </div>
+            <div class="tools">
+                <a href="" class="collapse">
+                </a>
+               
+                <a href="" class="remove">
+                </a>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <!--BEGIN TABS-->
+            <div class="tabbable tabbable-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#tab_1_1" data-toggle="tab">
+                            Mois dernier
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#tab_1_2" data-toggle="tab">
+                            Année en cours
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#tab_1_3" data-toggle="tab">
+                            12 mois
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1_1">
+                        <div class="scroller" style="height: 290px;" data-always-visible="1" data-rail-visible="0">
+
+                            <br />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <div class="label label-sm label-success circle">
+                                            <i class="fa">@ViewBag.PaiementDernierMois</i>
+                                        </div>
+                                        Paiement(s) reçu(s) mois dernier
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <div class="label label-sm label-danger circle">
+                                            <i class="fa">@ViewBag.DepensesDernierMois</i>
+                                        </div>
+                                        Dépenses mois dernier
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>
+                                        <strong>Revenu brut du mois</strong>
+                                    </h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <h4>
+                                            <strong>Dépenses du mois</strong>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h1>
+                                        <center>
+                                            @ViewBag.RevenuePaiementDernierMois DH
+                                        </center>
+                                    </h1>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <h1>
+                                        <center>
+                                            @ViewBag.RevenueDepensesDernierMois DH
+                                        </center>
+                                    </h1>
+
+                                </div>
+                            </div>
+                            <br />
+                            <ul class="feeds">
+                                <li>
+                                    <h2>
+                                        <span class="item-box">
+                                            <span class="item">
+                                                <span aria-hidden="true" class="large icon-graph"></span>
+                                                Résultat net du mois
+                                            </span>
+                                        </span><strong>@ViewBag.TotalDernierMois DH</strong>
+                                    </h2>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab_1_2">
+                        <div class="scroller" style="height: 290px;" data-always-visible="1" data-rail-visible="0">
+                            <br />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <div class="label label-sm label-success circle">
+                                            <i class="fa">@ViewBag.PaiementAnnee</i>
+                                        </div>
+                                        Paiement(s) reçu(s) de l'année
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <div class="label label-sm label-danger circle">
+                                            <i class="fa">@ViewBag.DepensesAnnee</i>
+                                        </div>
+                                        Dépenses de l'année
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>
+                                        <strong>REVENU BRUT DE L'ANNEE</strong>
+                                    </h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <h4>
+                                            <strong>DEPENSES DE L'ANNEE</strong>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h1>
+                                        <center>
+                                            @ViewBag.RevenuePaiementAnnee DH
+                                        </center>
+                                    </h1>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <h1>
+                                        <center>
+                                            @ViewBag.RevenueDepensesAnnee DH
+                                        </center>
+                                    </h1>
+
+                                </div>
+                            </div>
+                            <br />
+                            <ul class="feeds">
+                                <li>
+                                    <h2>
+                                        <span class="item-box">
+                                            <span class="item">
+                                                <span aria-hidden="true" class="large icon-graph"></span>
+                                                Résultat net de l'année
+                                            </span>
+                                        </span><strong>@ViewBag.TotalAnnee DH</strong>
+                                    </h2>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab_1_3">
+                        <div class="scroller" style="height: 290px;" data-always-visible="1" data-rail-visible="0">
+
+                            <br />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <div class="label label-sm label-success circle">
+                                            <i class="fa">@ViewBag.Paiement12</i>
+                                        </div>
+                                        Paiement(s) reçu(s) de 12 mois
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <div class="label label-sm label-danger circle">
+                                            <i class="fa">@ViewBag.Depenses12</i>
+                                        </div>
+                                        Dépenses de 12 mois
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>
+                                        <strong>REVENU BRUT DE 12 MOIS</strong>
+                                    </h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <h4>
+                                            <strong>DEPENSES DE 12 MOIS</strong>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h1>
+                                        <center>
+                                            @ViewBag.RevenuePaiement12 DH
+                                        </center>
+                                    </h1>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <h1>
+                                        <center>
+                                            @ViewBag.RevenueDepenses12 DH
+                                        </center>
+                                    </h1>
+
+                                </div>
+                            </div>
+                            <br />
+                            <ul class="feeds">
+                                <li>
+                                    <h2>
+                                        <span class="item-box">
+                                            <span class="item">
+                                                <span aria-hidden="true" class="large icon-graph"></span>
+                                                Résultat net du 12 mois
+                                            </span>
+                                        </span><strong>@ViewBag.Total12 DH</strong>
+                                    </h2>
+
+                                </li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <!--END TABS-->
+        </div>
+    </div>
+    <!-- END PORTLET-->
+</div>
+    <div class="col-md-6 col-sm-6">
+        <div class="portlet box red-flamingo tasks-widget">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bell-o"></i>Alertes & Notifications
+                </div>
+                <div class="tools">
+                    <a href="#portlet-config" data-toggle="modal" class="config">
+                    </a>
+                    <a href="" class="reload">
+                    </a>
+                </div>
+                <div class="actions">
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="task-content">
+                    <div class="scroller" style="height: 305px;" data-always-visible="1" data-rail-visible1="1">
+                        <!-- START TASK LIST -->
+                        <ul class="task-list">
+                            @{
+                                List<Omni.Agence.DAL.ContratLocation> ListContrat = ViewBag.ListOP;
+                            }
+                            @{ 
+                                List<Omni.Agence.DAL.ContratLocation> listC = ViewBag.ListContrat;
+                                
+                            }
+                            @foreach (Omni.Agence.DAL.ContratLocation item in listC)
+                            {
+                                //if (item.DateJuissance.Value != null && item.Local.DateDDispo.Value != null && item.DateFinContrat.Value != null && item.Local.DateFDispo.Value != null)
+                                if (item.DateFinContrat.HasValue)
+                                {
+                                    if (item.DateJuissance.Value.Date < item.Local.DateDDispo.Value.Date || item.DateFinContrat.Value.Date > item.Local.DateFDispo.Value.Date)
+                                    {
+                                        <li>
+                                            <div class="task-checkbox">
+                                                @*<input type="hidden" value="1" name="test" />
+                                                    <input type="checkbox" class="liChild" value="2" name="test" />*@
+                                            </div>
+                                            <div class="task-title">
+                                                <span class="task-title-sp">
+                                                    La durée de jouissance du Contrat Réf:
+                                                    <a href="@Url.Action("Details", "Contrat", new { id = @item.CodeContrat })">   @item.CodeContrat</a>
+                                                    ne correspond pas à la durée de la diponiblité du local
+                                                    <a href="@Url.Action("Details", "Locals", new { id = @item.CodeLocal })">
+                                                        @item.CodeLocal
+                                                    </a>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    }
+                                }                                
+                            }
+                            
+
+                            @foreach (Omni.Agence.DAL.ContratLocation item in ListContrat)
+                            {
+                                <li>
+                                    <div class="task-checkbox">
+                                        <input type="hidden" value="1" name="test" />
+                                        <input type="checkbox" class="liChild" value="2" name="test" />
+                                    </div>
+                                    <div class="task-title">
+                                        <span class="task-title-sp">
+                                            @item.CodeContrat
+                                        </span>
+                                        <span class="label label-sm label-success">Company</span>
+                                        <span class="task-bell">
+                                            <i class="fa fa-bell-o"></i>
+                                        </span>
+                                    </div>
+                                    <div class="task-config">
+                                        <div class="task-config-btn btn-group">
+                                            <a class="btn btn-xs default" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                                <i class="fa fa-cog"></i><i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-check"></i> Complete
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-pencil"></i> Edit
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-trash-o"></i> Cancel
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+
+
+                            }
+                        </ul>
+
+                        <!-- END START TASK LIST -->
+                    </div>
+                </div>
+                <div class="task-footer">
+                    <div class="btn-arrow-link pull-right">
+                        @*<a href="#">See All Records</a>*@
+                        <i class="icon-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>      
+    </div>
+<div class="row">
+    </div>
+<script language=JavaScript>
+
+    function date() {
+
+        var today = new Date();
+        var date_heure = "";
+
+        h = today.getHours();
+        m = today.getMinutes();
+        s = today.getSeconds();
+
+
+        if (h < 10)
+        { h = '0' + h; }
+        if (m < 10)
+        { m = '0' + m; }
+        if (s < 10)
+        { s = '0' + s; }
+        //date_heure = ''+h+'h'+m+'m'+s+'';
+        date_heure = h;
+        date_min = m;
+        date_sec = s;
+
+        document.getElementById('heur').innerHTML = date_heure;
+        document.getElementById('min').innerHTML = date_min;
+        document.getElementById('sec').innerHTML = date_sec;
+    }
+    setInterval("date()", 1000);
+
+</script>

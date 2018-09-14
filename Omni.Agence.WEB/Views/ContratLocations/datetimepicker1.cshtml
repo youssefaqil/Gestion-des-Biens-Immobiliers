@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Metronic | UI Components - Pickers</title>
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/components.css" rel="stylesheet" type="text/css" />
+
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+
+<body>
+    <div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="dd/MM/yyyy">
+        <input type="text" class="form-control" name="from">
+        <span class="input-group-addon">
+            Jusqu'a
+        </span>
+        <input type="text" class="form-control" name="to">
+    </div>
+    
+    <script src="~/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="~/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="~/scripts/metronic.js" type="text/javascript"></script>
+    <script src="~/admin/layout/scripts/layout.js" type="text/javascript"></script>
+    <script src="~/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
+    <script src="~/admin/layout/scripts/demo.js" type="text/javascript"></script>
+    <script src="~/admin/pages/scripts/components-pickers.js"></script>
+
+
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <script>
+        jQuery(document).ready(function() {
+           // initiate layout and plugins
+           Metronic.init(); // init metronic core components
+Layout.init(); // init current layout
+QuickSidebar.init(); // init quick sidebar
+Demo.init(); // init demo features
+           ComponentsPickers.init();
+        });
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

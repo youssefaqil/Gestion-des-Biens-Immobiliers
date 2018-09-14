@@ -1,0 +1,408 @@
+﻿@model Omni.Agence.DAL.Operation
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Depense Local";
+    ViewBag.PD = "start active open";
+    ViewBag.PDP = "active";
+    ViewBag.PDPL = "active";
+    ViewBag.PDCS = "selected";
+}
+@section Styles {
+    @Styles.Render("~/bundles/DatePicker")
+    @Styles.Render("~/Content/DataTableM")
+}
+<h3 class="page-title">
+    Depense <small>Local</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+    </ul>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box red-sunglo">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-edit"></i>Tous les locaux
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    @using (Html.BeginForm("Index", "DepensesLocal"))
+                    {
+                        <div class="note note-success">
+                            <h4 class="block">Recherche avancée</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3"></label>
+                                        <div class="col-md-8">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control input-circle-left" id="lieuxlocal" name="lieuxlocal" placeholder="Lieux:   Ville,Quartier" value="@ViewBag.lieux">
+                                                <span class="input-group-addon input-circle-right">
+                                                    <i class="fa fa-map-marker"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @*<label class="control-label col-md-3"></label>*@
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <input type="number" min="0" class="form-control input-circle-left" id="minprix" name="minprix" placeholder="Min" value="@ViewBag.minprix">
+                                                <span class="input-group-addon input-circle-right">
+                                                    <i class="fa">DH</i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+
+                                                <input type="number" min="0" class="form-control input-circle-left" id="maxprix" name="maxprix" placeholder="Max" value="@ViewBag.maxprix">
+                                                <span class="input-group-addon input-circle-right">
+                                                    <i class="fa">DH</i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3"></label>
+                                        @*<div class="col-md-4">
+                                                <select class="form-control" id="typelocal" name="typelocal">
+                                                    <option value="CIN">Appartement</option>
+                                                    <option value="Carte Séjour">Villa</option>
+                                                    <option value="Passport">Maison</option>
+                                                    <option value="Passport">Boutique</option>
+                                                    <option value="Passport">Bureau</option>
+                                                </select>
+                                            </div>*@
+                                        <div class="col-md-4">
+                                            <input type="number" class="form-control input-circle" id="nbrchambre" min="0" max="20" name="nbrchambre" placeholder="Pieces" value="@ViewBag.pieces" />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="submit" class="btn btn-circle red-sunglo" value="Rechercher" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @*<label class="control-label col-md-3"></label>*@
+
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <input type="number" min="0" class="form-control input-circle-left" id="minsurface" name="minsurface" placeholder="Min" value="@ViewBag.minsurface">
+                                                <span class="input-group-addon input-circle-right">
+                                                    <i class="fa">M²</i>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <input type="number" min="0" class="form-control input-circle-left" id="maxsurface" name="maxsurface" placeholder="Max" value="@ViewBag.maxsurface">
+                                                <span class="input-group-addon input-circle-right">
+                                                    <i class="fa">M²</i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <table class="table table-striped table-bordered table-hover" id="sample_2">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>
+                                m²
+                            </th>
+                            <th>
+                                Pièces
+                            </th>
+                            <th>
+                                Titre
+                            </th>
+                            <th>
+                                Prix
+                            </th>
+                            <th>
+                                Quartier
+                            </th>
+                            <th>
+                                Ville
+                            </th>
+                            <th>
+                                Immeuble
+                            </th>
+                            <th>
+                                Propriétaire
+                            </th>
+                            <th>
+                                Type
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div class="radio-list">
+                            @{
+                                List<Omni.Agence.DAL.Local> Listlocals = new List<Omni.Agence.DAL.Local>();
+                                Listlocals = ViewBag.ListLoc;
+                            }
+                            @foreach (var item in Listlocals)
+                            {
+                                <tr>
+                                    <td>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1" onclick="affText(@item.CodeLocal);">
+                                            @Html.DisplayFor(modelItem => item.CodeLocal)
+                                        </label>
+                                        @*<input type="radio" class="btn red-sunglo" id="SelectLoc" value="@Html.DisplayFor(modelItem => item.CodeLocal)" onclick="affText(@item.CodeLocal);" />*@
+
+
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SuperficieLocal)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NbrPieceLocal)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TitreLocal)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PrixRefLocationLocal)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Adresse.quartier)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Adresse.Ville)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Immeuble.NomImmeuble)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Personne.nom) @Html.DisplayFor(modelItem => item.Personne.prenom)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TypeLocal.Description)
+                                    </td>
+                                </tr>
+                            }
+                        </div>
+                    </tbody>
+                </table>
+
+                <br />
+                @using (Html.BeginForm("CreateDepense", "DepensesLocal"))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="tab-content">
+                        <div class="tab-pane active">
+                            <div class="portlet box">
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form action="#" class="horizontal-form">
+                                        <div class="form-body">
+                                            <hr />
+                                            <h3>Informations dépense local</h3>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label class="control-label col-md-3">Code local</label>
+                                                    <div class="col-md-9">
+                                                        @*<input type="text" class="form-control" readonly="readonly" id="CodeLocal" name="CodeLocal" />*@
+                                                        @Html.EditorFor(model => model.Depense.CodeLocal, new { htmlAttributes = new { @id = "CodeLocal", @class = "form-control", @readonly = "readonly", required = "true", requiredmessage = "Sélectionnez le local!!" } })
+                                                        @*@Html.ValidationMessageFor(model => model.Depense.CodeLocal, "", new { @class = "text-danger" })*@
+                                                        @*<label class="control-label" name="CodeLocalHidden" id="CodeLocalHidden" />*@
+                                                        @*<input type="hidden" id="CodeLocal" name="CodeLocal" />*@
+                                                        @*@Html.EditorFor(model => model.montant, new { @class = "form-control", value = 232 })*@<!-- /input-group -->
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Date Dépense</label>
+                                                        <div class="col-md-9  date-picker input-daterange" data-date="10/11/2012" data-date-format="dd/mm/yyyy">
+                                                            <input type="text" id="DateDepense" name="Depense.DateDepense" class="form-control" required />
+                                                            @*@Html.EditorFor(model => model.Depense.DateDepense, new { htmlAttributes = new { @class = "form-control" } })*@
+                                                            @*<span class="help-block">
+                                                                    @Html.ValidationMessageFor(model => model.Depense.DateDepense, "", new { @class = "text-danger" })
+                                                                </span>*@
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div><br />
+                                            <div class="row">
+                                                <div class="col-md-6">
+
+                                                    <label class="control-label col-md-3">Désignation</label>
+                                                    <div class="col-md-9">
+                                                        @{
+                    List<SelectListItem> listItemsId = new List<SelectListItem>();
+                    listItemsId.Add(new SelectListItem
+                         {
+                             Text = "Réparation",
+                             Value = "1",
+                         });
+                    listItemsId.Add(new SelectListItem
+                         {
+                             Text = "Salaire",
+                             Value = "2",
+
+                         });
+                    listItemsId.Add(new SelectListItem
+                    {
+                        Text = "Facture",
+                        Value = "3",
+
+                    });
+                    listItemsId.Add(new SelectListItem
+                        {
+                            Text = "Caution",
+                            Value = "4",
+                        });
+
+                                                        }
+                                                        @Html.DropDownListFor(model => model.Depense.NumTypeDesignationDespense, listItemsId, new { @class = "form-control btn red-sunglo-stripe" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Montant</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-group">
+                                                                @*<input type="text" name="montant" id="montant" class="form-control">*@
+                                                                @Html.EditorFor(model => model.montant, new { htmlAttributes = new { @class = "form-control" } })
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa">DH</i>
+                                                                </span>
+
+                                                            </div>
+                                                            @Html.ValidationMessageFor(model => model.montant, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/span-->
+
+                                            <br />
+                                            <!--/row-->
+                                            <!--/row-->
+                                            <div class="row">
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Description</label>
+                                                        <div class="col-md-9">
+                                                            @*@Html.TextArea("Description", new { @class = "form-control" })*@
+                                                            @Html.TextAreaFor(model => model.Depense.Description, new { @class = "form-control" })
+                                                            <span class="help-block">
+                                                                @Html.ValidationMessageFor(model => model.Depense.Description, "", new { @class = "text-danger" })
+                                                            </span>
+                                                        </div>
+                                                        @*@Html.LabelFor(model => model.situationMatrimonial, htmlAttributes: new { @class = "control-label col-md-4" })*@
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="col-md-3"></div>
+                                                    <div class="col-md-3">
+                                                        @*<input type="submit" value="Enregistrer" class="btn red-sunglo" />*@
+                                                        <a class="btn red-sunglo" data-toggle="modal" href="#basic">
+                                                            Enregistrer
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <!--/span-->
+                                            </div>
+                                            <div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                            <h4 class="modal-title">Confirmation</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                                                            <input type="submit" class="btn red-sunglo" value="Valider" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="~/admin/pages/scripts/table-managed.js"></script>
+<script src="~/plugins/select2/select2.min.js"></script>
+<script src="~/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="~/plugins/datatables/media/js/dataTables.bootstrap.js"></script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/DatePicker")
+
+    
+    <script type="text/javascript">
+        // When the document is ready
+        $(document).ready(function () {
+            $('.input-daterange').datepicker({
+                todayBtn: "linked"
+            });
+        });
+    </script>
+    <script>
+        jQuery(document).ready(function () {
+            TableManaged.init();
+        });
+    </script>
+    <script type="text/javascript">
+        // When the document is ready
+
+        function affText(i) {
+
+
+            document.getElementById('CodeLocal').value = i;
+        }
+    </script>
+
+}

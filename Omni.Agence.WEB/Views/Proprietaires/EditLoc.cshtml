@@ -1,0 +1,393 @@
+﻿@model Omni.Agence.DAL.Local
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Modifier Local";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PL2 = "active";
+    ViewBag.PL3 = "selected";
+}
+@section Styles {
+    @Styles.Render("~/bundles/DatePicker")
+}
+<h3 class="page-title">
+    Local <small>Modifier</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i>
+            <a href="@Url.Action("Index")">Propriétaires</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Details", new { id = Model.CodePers })"> @Html.DisplayFor(model => model.Personne.nom) @Html.DisplayFor(model => model.Personne.prenom)</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("CreateLocalProp", new { id = Model.CodePers })"> Locaux</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("DetailsLocal", new { id = Model.CodeLocal })"> @Html.DisplayFor(model => model.TitreLocal)</a>
+        </li>
+    </ul>
+
+</div>
+
+@*<h2>@Html.DisplayFor(model => model.nom) @Html.DisplayFor(model => model.prenom) </h2>*@
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @*<h4>Personne</h4>*@
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Adresse.NumAdresse)
+
+
+
+        @Html.HiddenFor(model => model.CodeLocal)
+        @Html.HiddenFor(model => model.CodeImmeuble)
+        @Html.HiddenFor(model => model.CodePers)
+        @Html.HiddenFor(model => model.CodeSynd)
+        @Html.HiddenFor(model => model.Staut)
+
+        <div class="tab-pane" id="tab_2">
+            <div class="portlet box green">
+                <div class="portlet-title">
+                    <div class="caption">
+                        Local
+                    </div>
+                    <div class="actions">
+                        <input type="submit" value="Valider" class="btn btn-default btn-sm" />
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="form-horizontal">
+                        <div class="form-body">
+                            <h3 class="form-section">Informations</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Superficie:</label>
+                                        <div class="col-md-9">
+                                            @Html.HiddenFor(model => model.NumAdresse)
+                                            @Html.EditorFor(model => model.SuperficieLocal, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.SuperficieLocal, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Pièces:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.NbrPieceLocal, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.NbrPieceLocal, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Type:</label>
+                                        <div class="col-md-9">
+                                            @Html.DropDownList("NumTypeLocal", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.NumTypeLocal, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Nom:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.TitreLocal, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.TitreLocal, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+
+                            <div class="row">
+                              
+                                <div class="col-md-6">
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Prix:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.PrixRefLocationLocal, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.PrixRefLocationLocal, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">N° Etage</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.MeubleLocal, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.MeubleLocal, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Description</label>
+                                        <div class="col-md-9">
+                                            @Html.TextAreaFor(model => model.DescrLocal,new { @class = "form-control" } )
+                                            @Html.ValidationMessageFor(model => model.DescrLocal, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Service %:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.ServiceLocal, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ServiceLocal, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+
+                            <h3 class="form-section">Autres informations</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-1"></label>
+                                        <div class="checkbox-list">
+                                            @*<label class="checkbox-inline">
+                                                @Html.CheckBoxFor(model => model.rezCh.Value)  Rez de chaussée
+                                            </label>*@
+                                            <label class="checkbox-inline">
+                                                @Html.CheckBoxFor(model => model.rezCh) Rez de chaussée
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                @Html.CheckBoxFor(model => model.Interphone)  Interphone
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="checkbox-list">
+                                            <label class="checkbox-inline">
+                                                @Html.CheckBoxFor(model => model.Parking)  Parking
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                @Html.CheckBoxFor(model => model.Jardin)  Jardin
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <h3 class="form-section">Disponibilité</h3>
+                            <div class="row">
+                                <div class=" date-picker input-daterange" data-date="10/11/2012" data-date-format="dd/mm/yyyy">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 ">Depuis:</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="DateDDispo" name="DateDDispo" class="form-control" value="@Model.DateDDispo.Value.Date.ToString("dd/MM/yyyy")"  />
+
+                                                @*@Html.EditorFor(model => model.DateDDispo, new { htmlAttributes = new { @class = "form-control" } })
+                            <span class="help-block">
+                                @Html.ValidationMessageFor(model => model.DateDDispo, "", new { @class = "text-danger" })
+                            </span>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Jusqu'à:</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="DateFDispo" name="DateFDispo" class="form-control" value="@Model.DateFDispo.Value.Date.ToString("dd/MM/yyyy")"  />
+                                                @Html.EditorFor(model => model.DateFDispo, new { htmlAttributes = new { @class = "form-control" } })
+                            <span class="help-block">
+                                @Html.ValidationMessageFor(model => model.DateFDispo, "", new { @class = "text-danger" })
+                            </span>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                    <!--/span-->
+                                    <!--/span-->
+                                </div>
+                            </div>
+
+
+                            
+
+                            
+
+
+
+                            <h3 class="form-section">Adresse</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Code Postale:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Adresse.CPadress, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Adresse.CPadress, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Adresse:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Adresse.descAdresse, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Adresse.descAdresse, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Quartier:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Adresse.quartier, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Adresse.quartier, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Ville:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Adresse.Ville, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Adresse.Ville, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Pays:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Adresse.Pays, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Adresse.Pays, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                        </div>
+                        @*<div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button type="submit" class="btn green">Valider</button>
+                                            <a href="@Url.Action("Details", new { id = Html.DisplayFor(m=>m.CodeLocal).ToString() })" class="btn default">
+                                                Retour
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                        </div>*@
+
+
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <a class="btn green" data-toggle="modal" href="#basic">
+                                                Enregistrer
+                                            </a>
+                                            <button type="reset" class="btn red">Annuler</button>
+                                            <a href="@Url.Action("Details", new { id = Html.DisplayFor(m=>m.CodeLocal).ToString() })" class="btn default">
+                                                Retour
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                        <h4 class="modal-title">Confirmation</h4>
+                                    </div>
+                                    <div class="modal-body">
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                                        <input type="submit" class="btn green" value="Valider" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </form>
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/DatePicker")
+    <script type="text/javascript">
+        // When the document is ready
+        $(document).ready(function () {
+            $('.input-daterange').datepicker({
+                todayBtn: "linked"
+            });
+        });
+    </script>
+ 
+ 
+
+}

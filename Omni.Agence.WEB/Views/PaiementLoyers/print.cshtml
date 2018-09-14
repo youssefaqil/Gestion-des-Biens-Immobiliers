@@ -1,0 +1,319 @@
+﻿@model Omni.Agence.DAL.Operation
+
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "MADAGASCAR-Réf:" + Model.CodePers;
+
+    ViewBag.PD = "start active open";
+    ViewBag.PLS = "active";
+    ViewBag.PDCS = "selected";
+}
+@section Styles {
+    <link href="~/admin/pages/css/invoice.css" rel="stylesheet" type="text/css" />
+}
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+
+    </ul>
+
+</div>
+<div class="invoice">
+    <div class="row invoice-logo">
+        <div class="col-xs-6 invoice-logo-space">
+            <img src="~/img/logo2.png" class="img-responsive" alt="" />
+
+        </div>
+
+        <div class="col-xs-6">
+            <p class="page-title">
+                RELEVE DE COMPTE
+            </p>
+            @*<p>
+                    Omnidata <span class="muted">
+                        Omnidata
+                    </span>
+                </p>*@
+        </div>
+    </div>
+    @*<hr />*@
+    <div class="row">
+        <div class="col-xs-4">
+            <h3>Locataire:</h3>
+            <ul class="list-unstyled">
+                @if (string.IsNullOrEmpty(Model.Personne.rc))
+                {
+                    <li>
+                        <strong>Réf :</strong>@Html.DisplayFor(model => model.Personne.CodePers)
+                    </li>
+                    <li>
+                        <strong>Nom/Prénom :</strong>@Html.DisplayFor(model => model.Personne.nom) @Html.DisplayFor(model => model.Personne.prenom)
+                    </li>
+                    <li>
+                        <strong>@Html.DisplayFor(model => model.Personne.cin) :</strong>@Html.DisplayFor(model => model.Personne.carteSejour)
+                    </li>
+                    <li>
+                        <strong>Adresse :</strong>@Html.DisplayFor(model => model.Personne.Adresse.descAdresse) @Html.DisplayFor(model => model.Personne.Adresse.quartier)
+                    </li>
+                    <li>
+                        @Html.DisplayFor(model => model.Personne.Adresse.Ville) @Html.DisplayFor(model => model.Personne.Adresse.Pays)
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <strong>Réf :</strong>@Html.DisplayFor(model => model.Personne.CodePers)
+                    </li>
+                    <li>
+                        <strong>Entreprise :</strong>@Html.DisplayFor(model => model.Personne.employeur)
+                    </li>
+                    <li>
+                        <strong>RC</strong>@Html.DisplayFor(model => model.Personne.rc)
+                    </li>
+                    <li>
+                        <strong>Adresse :</strong>@Html.DisplayFor(model => model.Personne.Adresse.descAdresse) @Html.DisplayFor(model => model.Personne.Adresse.quartier)
+                    </li>
+                    <li>
+                        @Html.DisplayFor(model => model.Personne.Adresse.Ville) @Html.DisplayFor(model => model.Personne.Adresse.Pays)
+                    </li>
+                }
+
+
+
+
+
+
+            </ul>
+        </div>
+        <div class="col-xs-4">
+            <h3>Contrat:</h3>
+            <ul class="list-unstyled">
+                <li>
+                    <strong>Réf:</strong> @Html.DisplayFor(model => model.PaiementLoyer.CodeContrat)
+                </li>
+
+                <li>
+                    <strong>Date de jouissance:</strong> @Model.PaiementLoyer.ContratLocation.DateJuissance.Value.Date.ToString("dd/MM/yyyy")
+                </li>
+                <li>
+                    <strong>Date fin contrat :</strong>
+                    @if (Model.PaiementLoyer.ContratLocation.DateFinContrat.HasValue)
+                    {
+                        @Model.PaiementLoyer.ContratLocation.DateFinContrat.Value.Date.ToString("dd/MM/yyyy")
+                    }
+
+
+
+                </li>
+                <li>
+                    <strong>Loyer net :</strong>@Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.LoyerNet)
+                </li>
+                <li>
+                    @{
+                        String fpC = "";
+                        if (Model.PaiementLoyer.ContratLocation.FrequencePaiement == 0)
+                        {
+                            fpC = "Mensuel";
+                        }
+                        else
+                        {
+                            fpC = "Trimestriel";
+                        }
+                    }
+
+                    <strong>Fréquence de paiement :</strong>@fpC
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-4 invoice-payment">
+            <h3>Local:</h3>
+            <ul class="list-unstyled">
+                <li>
+                    <strong>Réf :</strong> @Html.DisplayFor(model => model.PaiementLoyer.CodeLocal)
+                </li>
+                <li>
+                    <strong>Titre Local: </strong> @Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.Local.TitreLocal)
+                </li>
+                <li>
+                    <strong>Usage :</strong>
+                    @{
+
+
+                        //var loc = Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.Usage).ToString();
+                        if (Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.Usage).ToString() == "0")
+                        {
+                            ViewBag.UsagePrint = "Habitation";
+                        }
+                        else if (Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.Usage).ToString() == "1")
+                        {
+                            ViewBag.UsagePrint = "Commercial";
+                        }
+                        else
+                        {
+                            ViewBag.UsagePrint = "";
+                        }
+                    }
+
+                    @ViewBag.UsagePrint
+
+
+
+                    @*@Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.Usage)*@
+                </li>
+                <li>
+                    <strong>Adresse :</strong>
+                    @Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.Local.Adresse.descAdresse) @Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.Local.Adresse.quartier)
+                </li>
+                <li>
+                    @Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.Local.Adresse.Ville) @Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.Local.Adresse.Pays)
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        @*<th>
+                                #
+                            </th>*@
+                        @*<th class="hidden-480">
+                                Date paiement
+                            </th>*@
+                        <th class="hidden-480">
+                            Locataires
+                        </th>
+                        <th>
+                            Période
+                            
+                        </th>
+                        <th>
+                            Dirhams
+                        </th>
+                        <th>
+                            Dépenses
+                        </th>
+                      
+                        <th>
+                          
+                        </th>
+                        <th>
+                            Dirhams
+                        </th>
+                        @*<th>
+                               Moyen Paiement
+                            </th>*@
+                        @*<th class="hidden-480">
+                                Moyen paiement
+                            </th>
+                            <th class="hidden-480">
+                                Réference
+                            </th>*@
+                        @*<th>
+                                Date début
+                            </th>
+                            <th>
+                                Date fin
+                            </th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @*<td>
+                                1
+                            </td>*@
+                        <td class="hidden-480">
+                            @Html.DisplayFor(model => model.Personne.nom) @Html.DisplayFor(model => model.Personne.prenom)
+                        </td>
+                        
+                        <td class="hidden-480">
+                           
+                            <strong>Date de jouissance:</strong> @Model.PaiementLoyer.ContratLocation.DateJuissance.Value.Date.ToString("dd/MM/yyyy")
+                            <br />
+                                <strong>Date fin contrat :</strong>
+                                @if (Model.PaiementLoyer.ContratLocation.DateFinContrat.HasValue)
+                                {
+                                    @Model.PaiementLoyer.ContratLocation.DateFinContrat.Value.Date.ToString("dd/MM/yyyy")
+                                }
+
+                            </td>
+                        <td class="hidden-480">
+                            @Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.LoyerDebase.Value) "DH"
+                        </td>
+</td>
+                        <td class="hidden-480">
+                            @Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.TaxeDedilite.Value)
+                        </td>
+                        
+                        <td class="hidden-480">
+                            @Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.LoyerNet.Value)
+                        </td>
+                        @*<td class="hidden-480">
+                                @Html.DisplayFor(model => model.PaiementLoyer.MoyenPaiement)
+                            </td>
+                            <td class="hidden-480">
+                                @Html.DisplayFor(model => model.PaiementLoyer.Reference)
+                            </td>*@
+                        @*<td>
+                                @Model.PaiementLoyer.DteDebut.Value.Date.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                @Model.PaiementLoyer.DteFin.Value.Date.ToString("dd/MM/yyyy")
+                            </td>*@
+
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="well">
+                <address>
+                    <ul class="list-unstyled">
+                        <li>
+                            <strong>Coordonnées :</strong>
+                        </li>
+                        <li>70, av. Allal BenAbdellah</li>
+                        <li>10000</li>
+                        <li>Rabat</li>
+                        <li>Agence immobilière</li>
+                        <li>Tel.: +212 5 37 70 82 75</li>
+                        <li>Fax: +212 5 37 70 82 62</li>
+                    </ul>
+                </address>
+                <address>
+                    <strong>first.last@email.com</strong>
+
+                </address>
+            </div>
+        </div>
+        <div class="col-xs-8 invoice-block">
+            <ul class="list-unstyled amounts">
+                <li>
+                    <strong>Signature</strong>
+                </li>
+
+            </ul>
+            @*<br />*@
+            <a class="btn btn-lg blue hidden-print margin-bottom-5" onclick="javascript:window.print();">
+                Imprimer <i class="fa fa-print"></i>
+            </a>
+            @*<a class="btn btn-lg green hidden-print margin-bottom-5">
+                    Submit Your Invoice <i class="fa fa-check"></i>
+                </a>*@
+        </div>
+    </div>
+</div>

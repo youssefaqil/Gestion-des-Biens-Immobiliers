@@ -1,0 +1,101 @@
+﻿@model Omni.Agence.DAL.Operation
+
+@{
+    ViewBag.Title = "ModifierDepense";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PLI = "active";
+    ViewBag.PL3 = "selected";
+}
+
+<h3 class="page-title">
+    Immeuble <small>Dépense</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Acceuil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-home"></i><a href="@Url.Action("Index")">Local</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Details", new {id=Model.Depense.CodeImmeuble })">Réf: @Model.Depense.CodeImmeuble</a>
+
+        </li>
+
+    </ul>
+
+</div>
+
+
+
+<h2>Modofier Dépense immeuble</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.codeOp)
+        @Html.HiddenFor(model => model.Depense.codeOp)
+        @Html.HiddenFor(model => model.codeType)
+        @Html.HiddenFor(model => model.CodePers)
+        @Html.HiddenFor(model => model.dateOp)
+        @Html.HiddenFor(model => model.Depense.NumTypeDesignationDespense)
+        @Html.HiddenFor(model => model.Depense.CodeLocal)
+        @Html.HiddenFor(model => model.Depense.CodeImmeuble)
+        
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Désignation</label>
+            <div class="col-md-10">
+                @Html.DropDownList("NumTypeDesignationDespense", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Depense.NumTypeDesignationDespense, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.montant, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.montant, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.montant, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            
+            <label class="control-label col-md-2">Date Dépense </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Depense.DateDepense, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Depense.DateDepense, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Depense.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Depense.Description, new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.Depense.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Enregistrer" class="btn red-sunglo" />
+                <a href="@Url.Action("Details", new {id=Model.Depense.CodeImmeuble })" class="btn default">
+                    Retour
+                </a> 
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

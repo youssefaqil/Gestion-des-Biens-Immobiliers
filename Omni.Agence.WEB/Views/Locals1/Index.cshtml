@@ -1,0 +1,159 @@
+﻿@model IEnumerable<Omni.Agence.DAL.Local>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SuperficieLocal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NbrPieceLocal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NbrChambreLocal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TitreLocal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescrLocal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MeubleLocal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrixRefLocationLocal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceLocal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Staut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rezCh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Interphone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Parking)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Garage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jardin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateDDispo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateFDispo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumLocal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adresse.Pays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Immeuble.NomImmeuble)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Personne.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Syndic.NomSynd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeLocal.Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SuperficieLocal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NbrPieceLocal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NbrChambreLocal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TitreLocal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DescrLocal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MeubleLocal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrixRefLocationLocal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServiceLocal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Staut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rezCh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Interphone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Parking)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Garage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jardin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateDDispo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateFDispo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumLocal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adresse.Pays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Immeuble.NomImmeuble)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Personne.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Syndic.NomSynd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeLocal.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CodeLocal }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CodeLocal }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CodeLocal })
+        </td>
+    </tr>
+}
+
+</table>

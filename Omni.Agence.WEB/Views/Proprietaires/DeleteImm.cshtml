@@ -1,0 +1,135 @@
+﻿@model Omni.Agence.DAL.Immeuble
+
+@{
+    ViewBag.Title = "DeleteImm";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PL2 = "active";
+    ViewBag.PL3 = "selected";
+}
+
+
+<h3 class="page-title">
+    Propriétaires <small>Suppression Immeuble</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i>
+            <a href="@Url.Action("Index")">Propriétaires</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+
+    </ul>
+
+</div>
+
+
+
+
+
+
+@*<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Immeuble</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomImmeuble)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomImmeuble)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceImmeuble)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceImmeuble)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NbrEtage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NbrEtage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adresse.Pays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adresse.Pays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Concierge.NomConci)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Concierge.NomConci)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Personne.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Personne.nom)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>*@
+
+
+
+<h3>Voulez vous vraiment supprimer l'immeuble @Html.DisplayFor(model => model.NomImmeuble) ?!</h3>
+<div>
+    
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-lg red" />
+
+            <a href="@Url.Action("Index")" class="btn btn-lg default">
+                Retour
+            </a>
+        </div>
+    }
+</div>

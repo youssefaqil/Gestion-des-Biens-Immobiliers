@@ -1,0 +1,80 @@
+﻿@model Omni.Agence.DAL.PaiementLoyer
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>PaiementLoyer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MoyenPaiement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoyenPaiement)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reference)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reference)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DteDebut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DteDebut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DteFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DteFin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NbrQuittanceImprime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NbrQuittanceImprime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContratLocation.CodePers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContratLocation.CodePers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Operation.codeOp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Operation.codeOp)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,247 @@
+﻿@model Omni.Agence.DAL.Operation
+
+@{
+    ViewBag.Title = "Détails Operation";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PL2 = "active";
+    ViewBag.PL3 = "selected";
+}
+
+<h3 class="page-title">
+    Opération <small>Détails</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i>
+            <a href="@Url.Action("Index")">Propriétaires</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+        <li><a href="@Url.Action("Details", new { id = Model.CodePers })"> @ViewBag.nomproprietaire @ViewBag.prenomproprietaire</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-money"></i>
+            <a href="@Url.Action("compteProp", new { id = Model.CodePers })"> Compte</a>
+        </li>
+    </ul>
+
+</div>
+<br />
+<div class="tab-pane" id="tab_3">
+
+    <div class="portlet light bordered">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-equalizer"></i>
+                <span class="caption-subject bold uppercase">@Html.DisplayFor(model => model.TypeOp.libelle)</span>
+                <span class="caption-helper"> info...</span>
+            </div>
+            <div class="tools">
+                <a href="" class="collapse">
+
+                </a>
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <!-- BEGIN FORM-->
+            <form class="form-horizontal" role="form">
+                <div class="form-body">
+                    <h2 class="margin-bottom-20"> Détails de @Html.DisplayFor(model => model.TypeOp.libelle)</h2>
+                    <h3 class="form-section">Informations</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Montant:</label>
+                                <div class="col-md-9">
+                                    <p class="form-control-static">
+                                        @Html.DisplayFor(model => model.montant)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Date :</label>
+                                <div class="col-md-9">
+                                    <p class="form-control-static">
+                                        @Html.DisplayFor(model => model.dateOp)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                    </div>
+                    @if (Model.codeType == 1) {
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Local:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">
+                                            @Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.Local.TitreLocal)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Locataire:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">
+                                            @Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.Personne.nom) @Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.Personne.prenom)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date début:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">
+                                            @Html.DisplayFor(model => model.PaiementLoyer.DteDebut)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date fin:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">
+                                            @Html.DisplayFor(model => model.PaiementLoyer.DteFin)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date de jouissance:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">
+                                            @Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.DateJuissance)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date fin contrat:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">
+                                            @Html.DisplayFor(model => model.PaiementLoyer.ContratLocation.DateFinContrat)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                    }
+                    else if (Model.codeType == 3)
+                    {
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Local/Immeuble:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">
+                                            @Html.DisplayFor(model => model.Depense.Local.TitreLocal)@Html.DisplayFor(model => model.Depense.Immeuble.NomImmeuble)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Propriétaire:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">
+                                            @Html.DisplayFor(model => model.Depense.Local.Personne.nom) @Html.DisplayFor(model => model.Depense.Local.Personne.prenom)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Désignation:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">
+                                            @Html.DisplayFor(model => model.Depense.TypeDesignationDepense.Description)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Description:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">
+                                            
+                                            @Html.DisplayFor(model => model.Depense.Description)
+                                            
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Date dépense:</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">
+                                            @Html.DisplayFor(model => model.Depense.DateDepense)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    }
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Commentaire:</label>
+                                <div class="col-md-9">
+                                    <p class="form-control-static">
+                                        @Html.DisplayFor(model => model.Commentaire)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                        </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <a href="@Url.Action("Index")" class="btn default">
+                                        Retour
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- END FORM-->
+        </div>
+    </div>
+
+</div>

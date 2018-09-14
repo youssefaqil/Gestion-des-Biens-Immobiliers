@@ -1,0 +1,54 @@
+﻿@model Omni.Agence.DAL.ContratLocation
+
+@{
+    ViewBag.Title = "Create";
+    ViewBag.C = "start active open";
+    ViewBag.CGL = "active";
+    ViewBag.CC = "selected";
+}
+
+
+
+<h3 class="page-title">
+    Contrat <small>Confirmation de suppression</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Acceuil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i>
+            <a href="@Url.Action("Index")">Contrat</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+
+    </ul>
+
+</div>
+
+
+
+
+<h4>Contrat de location</h4>
+
+<h3>Voulez vous fermer ce contrat ?!</h3>
+<div>
+
+    <hr />
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Fermer" class="btn btn-lg red" />
+            <a href="@Url.Action("Index")" class="btn btn-lg default">
+                Retour
+            </a>
+        </div>
+    }
+</div>

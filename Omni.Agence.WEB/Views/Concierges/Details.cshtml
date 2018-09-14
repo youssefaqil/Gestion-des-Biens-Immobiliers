@@ -1,0 +1,173 @@
+﻿@model Omni.Agence.DAL.Concierge
+
+@{
+    ViewBag.Title = "Details";
+    ViewBag.PD = "start active open";
+    ViewBag.PDC = "active";
+    ViewBag.PDCS = "selected";
+}
+
+<h3 class="page-title">
+    Concierge <small>Détails</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i><a href="@Url.Action("Index")">Concierges</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+
+    </ul>
+
+</div>
+
+<h2>@Html.DisplayFor(model => model.NomConci) @Html.DisplayFor(model => model.PrenomConci) </h2>
+
+
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-equalizer font-red-sunglo"></i>
+            <span class="caption-subject font-red-sunglo bold uppercase">Infos</span>
+            <span class="caption-helper">Concierge</span>
+        </div>
+        <div class="tools">
+            <a href="" class="collapse">
+            </a>
+
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <form action="#" class="form-horizontal">
+            <div class="form-body">
+                <h3 class="form-section">Salaire :@Html.DisplayFor(model => model.SalaireConci) DH</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Nom :</label>
+                            <label class="control-label col-md-3">@Html.DisplayFor(model => model.NomConci)</label>
+
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Prénom :</label>
+                            <label class="control-label col-md-3">@Html.DisplayFor(model => model.PrenomConci)</label>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">CIN :</label>
+                            <label class="control-label col-md-3">@Html.DisplayFor(model => model.CinConci)</label>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Salaire :</label>
+                            <label class="control-label col-md-3">@Html.DisplayFor(model => model.SalaireConci)</label>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Téléphone :</label>
+                            <label class="control-label col-md-3">@Html.DisplayFor(model => model.TelConci)</label>
+                        </div>
+                    </div>
+                   </div>
+   
+                <h3 class="form-section">Adresse</h3>
+                <!--/row-->
+
+                @*<div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                Adresse :
+                            </label><label class="control-label col-md-3">
+                                @Html.DisplayFor(model => model.Adresse.descAdresse)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                Quartier :
+                            </label><label class="control-label col-md-3">
+                                @Html.DisplayFor(model => model.Adresse.quartier)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                Ville :
+                            </label><label class="control-label col-md-3">
+                                @Html.DisplayFor(model => model.Adresse.Ville)
+                            </label>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                Pays :
+                            </label><label class="control-label col-md-3">
+                                @Html.DisplayFor(model => model.Adresse.Pays)
+                            </label>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>*@
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="form-actions right">
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <div class="form-actions right">
+                                <a href="@Url.Action("Index")" class="btn btn-lg default">
+                                    Retour <i class="fa fa-step-backward"></i>
+                                </a>
+                                <a href="@Url.Action("Edit", new { id = Model.NumConcierge })" class="btn btn-lg red">
+                                    Modifier <i class="fa fa-edit"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+
+                <!--/row-->
+                <!--/row-->
+            </div>
+
+        </form>
+        <!-- END FORM-->
+    </div>
+</div>
+

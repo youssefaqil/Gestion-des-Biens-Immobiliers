@@ -1,0 +1,81 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right dropdown-toggle" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @*<ul class="nav navbar-nav">
+            <li>
+                @Html.ActionLink("Bonjour " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a></li>
+        </ul>*@
+    <a href="" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+
+        <span class="username username-hide-on-mobile">
+            <strong>Bonjour @User.Identity.GetUserName()</strong>
+        </span>
+        <i class="fa fa-angle-down"></i>
+    </a>
+                    <ul class="dropdown-menu">
+                <li>
+                    <a href="@Url.Action(  "Index", "Manage", routeValues: null  )">
+                        <i class="icon-user"></i>Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:document.getElementById('logoutForm').submit()">
+                        <i class="icon-key"></i>se déconnecter
+                    </a>
+                </li>
+            </ul>
+    }
+}
+else
+{
+    <a href="@Url.Action( "Login", "Account", routeValues: null)" class="dropdown-toggle"  data-hover="dropdown" data-close-others="true">
+
+        <span class="username username-hide-on-mobile">
+            <strong>se connecter</strong>
+        </span>
+        @*<i class="fa fa-angle-down"></i>*@
+    </a>
+
+
+    @*<ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("S’inscrire", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>*@
+}
+
+@*@if (Request.IsAuthenticated)
+{
+    //using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "dropdown-toggle" }))
+    //{
+
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+
+            <span class="username username-hide-on-mobile">
+                <strong>User</strong>
+            </span>
+            <i class="fa fa-angle-down"></i>
+        </a>
+    <ul class="dropdown-menu">
+        <li>
+            <a href="extra_profile.html">
+                <i class="icon-user"></i>Profile
+            </a>
+        </li>
+
+
+
+
+
+        <li>
+            <a href="login.html">
+                <i class="icon-key"></i>se déconnecter
+            </a>
+        </li>
+    </ul>
+    }*@

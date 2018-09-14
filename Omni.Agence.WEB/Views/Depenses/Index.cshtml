@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Omni.Agence.DAL.Depense>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Immeuble.NomImmeuble)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Local.TitreLocal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeDesignationDepense.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Operation.codeOp)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Immeuble.NomImmeuble)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Local.TitreLocal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeDesignationDepense.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Operation.codeOp)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.codeOp }) |
+                @Html.ActionLink("Details", "Details", new { id=item.codeOp }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.codeOp })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

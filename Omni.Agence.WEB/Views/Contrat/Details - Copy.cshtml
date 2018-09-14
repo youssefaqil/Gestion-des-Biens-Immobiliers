@@ -1,0 +1,463 @@
+﻿@model Omni.Agence.DAL.ContratLocation
+
+@{
+    ViewBag.Title = "Details";
+    ViewBag.C = "start active open";
+    ViewBag.CC2 = "active";
+    ViewBag.PL3 = "selected";
+}
+@section Styles {
+    @Styles.Render("~/bundles/DatePicker")
+
+}
+<h3 class="page-title">
+    Contrat <small>Détails</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i><a href="@Url.Action("Index")">Contrat</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+    </ul>
+</div>
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-equalizer font-green-haze"></i>
+            <span class="caption-subject font-green-haze bold uppercase">Infos</span>
+            <span class="caption-helper">Contrat</span>
+        </div>
+        <div class="tools">
+            <a href="" class="collapse">
+            </a>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <form action="#" class="form-horizontal">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                @if (Model.isClosed == 1)
+                                {
+                                    <a href="@Url.Action("Edit", new { id = Model.CodeContrat })" class="btn green-haze">
+                                        <i class="fa fa-pencil"></i>Modifier
+                                    </a>
+                                    <a href="@Url.Action("Delete", new { id = Model.CodeContrat })" class="btn red">
+                                        <i class="fa fa-trash-o"></i>Fermer
+                                    </a>
+                                }
+                                <a href="@Url.Action("Index")" class="btn default">
+                                    Retour
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Locataire:</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @if (string.IsNullOrEmpty(Model.Personne.rc))
+                                    {
+                                        @Html.DisplayFor(model => model.Personne.nom) @Html.DisplayFor(model => model.Personne.prenom)
+
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(model => model.Personne.employeur)
+
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Usage:</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @ViewBag.us
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <!--/span-->
+                </div>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Titre Local</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">@Html.DisplayFor(model => model.Local.TitreLocal)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Propriétaire</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">@Html.DisplayFor(model => model.Local.Personne.nom) @Html.DisplayFor(model => model.Local.Personne.prenom)</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Date de jouissane</label>
+                            <div class="col-md-9"><p class="form-control-static">@Html.DisplayFor(model => model.DateJuissance)</p></div>
+
+
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Date fin contrat</label>
+                            <div class="col-md-9"><p class="form-control-static">@Html.DisplayFor(model => model.DateFinContrat)</p></div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Loyer de base</label>
+                            <div class="col-md-9"><p class="form-control-static">@Html.DisplayFor(model => model.LoyerDebase)</p></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Charge</label>
+                            <div class="col-md-9"><p class="form-control-static">@Html.DisplayFor(model => model.Charge)%</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <!--/span-->
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Taxe</label>
+                            <div class="col-md-9"><p class="form-control-static">@Html.DisplayFor(model => model.TaxeDedilite)%</p></div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Garage</label>
+                            <div class="col-md-9"><p class="form-control-static">@Html.DisplayFor(model => model.Garage)</p></div>
+
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Caution</label>
+                            <div class="col-md-9"><p class="form-control-static">@Html.DisplayFor(model => model.Caution)</p></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Loyer net</label>
+                            <div class="col-md-9"><p class="form-control-static">@Html.DisplayFor(model => model.LoyerNet)</p></div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <!--/span-->
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Fréq. de paiement</label>
+                            <div class="col-md-9"><p class="form-control-static">@ViewBag.fp</p></div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Adultes</label>
+                            <div class="col-md-9"><p class="form-control-static">@Html.DisplayFor(model => model.adults)</p></div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <!--/span-->
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Enfants</label>
+                            <div class="col-md-9"><p class="form-control-static">@Html.DisplayFor(model => model.enfants)</p></div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Animaux</label>
+                            <div class="col-md-9"><p class="form-control-static">@Html.CheckBoxFor(model => model.animaux.Value, new { @disabled = "disabled" })</p></div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <!--/span-->
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Commentaire</label>
+                            <div class="col-md-9"><p class="form-control-static">@Html.DisplayFor(model => model.commentaire)</p></div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Statut</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+
+                                    @{
+                                        if (Html.DisplayFor(model => model.isClosed).ToString() == "1")
+                                        {
+                                            ViewBag.dispo = "success";
+                                            ViewBag.ico = "fa-check-square";
+                                            ViewBag.chaine = "En cours";
+                                            //ViewBag.SuppLocal = Html.ActionLink("Supprimer", "Delete", new { id = item.CodeLocal });
+                                            //ViewBag.SuppLocal = Url.Action("Delete", new { id = item.CodePers });
+
+                                        }
+                                        else if (Html.DisplayFor(model => model.isClosed).ToString() == "0")
+                                        {
+                                            ViewBag.dispo = "danger";
+                                            ViewBag.ico = "fa-minus-square";
+                                            ViewBag.chaine = "Fermé";
+                                            //ViewBag.SuppLocal = "";
+
+                                        }
+
+                                    }
+                                    <span class="label label-sm label-@ViewBag.dispo">
+                                        @ViewBag.chaine @Model.dateClose
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+            </div>
+
+        </form>
+        <!-- END FORM-->
+    </div>
+</div>
+
+<div class="col-md-6 ">
+    <!-- BEGIN SAMPLE FORM PORTLET-->
+    <div class="portlet light bg-inverse">
+        @if (Model.isClosed == 1)
+        {
+            <div class="portlet-title">
+                <div class="caption">
+                    <strong>Ajouter une augmentation</strong>
+                </div>
+
+            </div>
+            <div class="portlet-body form">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-body">
+                        <div class="form-horizontal">
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <input type="hidden" name="CodeContrat" id="CodeContrat" value="@Model.CodeContrat" />
+                            <input type="hidden" name="CodeLocal" id="CodeLocal" value="@Model.CodeLocal" />
+                            <input type="hidden" name="CodePers" id="CodePers" value="@Model.CodePers" />
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Date</label>
+
+
+                                <div class="col-md-9 date-picker input-daterange" data-date="10/11/2012" data-date-format="dd/mm/yyyy">
+                                    @*<input type="text" id="DateDDispo" name="DateDDispo" class="form-control" />*@
+                                    <input type="text" name="dateAug" id="dateAug" class="form-control" min="@Model.DateJuissance" max="@Model.DateFinContrat" required />
+                                    @*@Html.EditorFor(model => model.DateDDispo, new { htmlAttributes = new { @class = "form-control" } })
+                                        <span class="help-block">
+                                            @Html.ValidationMessageFor(model => model.DateDDispo, "", new { @class = "text-danger" })
+                                        </span>*@
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Pourcentage</label>
+                                <div class="col-md-7">
+                                    <div class="input-group">
+                                        <input type="number" name="pcAug" id="pcAug" class="form-control" min="0" max="50" required />
+                                        <span class="input-group-addon">
+                                            <i class="fa">%</i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+
+                                                <div class="col-md-offset-3 col-md-9">
+                                                    <a class="btn btn-default" data-toggle="modal" href="#basic">
+                                                        Ajouter
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">Confirmation</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                                    <input type="submit" class="btn blue" value="Valider" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="portlet box green-haze">
+
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-edit"></i>Augmentations
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            @*<div class="btn-group">
+                                    @Html.ActionLink("Créer Nouveau", "Create")
+
+                                </div>*@
+                        </div>
+
+                    </div>
+                </div>
+                <table class="table table-striped table-hover table-bordered" id="sample_editable_2">
+                    <thead>
+                        <tr>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                %
+                            </th>
+                            <th></th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+
+                        @using Omni.Agence.DAL;
+                        @{
+                            List<Augementation> listAug = ViewBag.ListAug;
+                        }
+
+                        @foreach (var item in listAug)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dateAug)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.pcAug)
+                                </td>
+
+
+                                <td>
+                                    @*@Html.ActionLink("Details", "Details", new { id = item.CodeContrat }) |*@
+                                    <a href="@Url.Action("DeleteAug", new { id = item.idAug })" class="btn default btn-xs  tooltips" data-placement="bottom" data-original-title="Supprimer">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/DatePicker")
+    <script type="text/javascript">
+        // When the document is ready
+        $(document).ready(function () {
+
+            $('.input-daterange').datepicker({
+                todayBtn: "linked"
+            });
+
+        });
+    </script>
+}

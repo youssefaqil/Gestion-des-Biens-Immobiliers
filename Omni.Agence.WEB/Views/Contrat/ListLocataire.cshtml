@@ -1,0 +1,90 @@
+﻿@using System.Linq;
+@using System.Data.Entity;
+
+
+@{Layout = "";}
+
+@{
+    Omni.Agence.DAL.AgenceEntities db = new Omni.Agence.DAL.AgenceEntities();
+
+    var locList = db.Personnes.Include(p => p.Adresse).Include(p => p.TypePersonne).Where(p => p.CodeTypePersonne.Equals(2));
+    List<Omni.Agence.DAL.Personne> locataires = locList.ToList();
+}
+
+
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-edit"></i>Table des locataires
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                </div>
+                <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>
+                                Nom Prénom
+                            </th>
+                            <th>
+                                Identifiant
+                            </th>
+                            
+
+                            <th>
+                                Mobile
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div class="radio-list">
+                            @foreach (var item in locataires)
+                            {
+                                <tr>
+                                    <td>
+                                        @*<a href="@Url.Action("SelectLocataire", new { id = item.CodePers })">
+                            @Html.DisplayFor(modelItem => item.CodePers)
+                        </a>*@
+                                        <label class="radio-inline">
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1" onclick="affPers(@item.CodePers);">
+                                        </label>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.nom) @Html.DisplayFor(modelItem => item.prenom)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.carteSejour)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TelMobilPers)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmailPers)
+                                    </td>
+                                </tr>
+                            }
+                        </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+
+

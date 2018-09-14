@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Omni.Agence.DAL.ContratLocation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DateJuissance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoyerDebase)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Augementation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateAugmentation)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Charge)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxeDedilite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Garage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoyerNet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Caution)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateFinContrat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FrequencePaiement)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Local.TitreLocal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Personne.nom)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.DateJuissance)*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoyerDebase)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.Augementation)*@
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.dateAugmentation)*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Charge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxeDedilite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Garage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoyerNet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Caution)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.DateFinContrat)*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FrequencePaiement)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Local.TitreLocal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Personne.nom)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.CodeContrat  }) |
+            @Html.ActionLink("Details", "Details", new { id = item.CodeContrat }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.CodeContrat })
+        </td>
+    </tr>
+}
+
+</table>

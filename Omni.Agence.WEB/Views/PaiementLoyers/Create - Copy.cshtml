@@ -1,0 +1,1091 @@
+﻿@using Omni.Agence.DAL;
+@model Omni.Agence.DAL.Operation
+
+@{
+    Layout = "";
+    ViewBag.Title = "Nouveau Paiement";
+    ViewBag.C = "start active open";
+    ViewBag.CGL = "active";
+    ViewBag.CC = "selected";
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>MADAGASCAR @ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link rel="stylesheet" type="text/css" href="~/plugins/clockface/css/clockface.css" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/bootstrap-datepicker/css/datepicker3.css" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/bootstrap-colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/bootstrap-datetimepicker/css/datetimepicker.css" />
+
+    <link rel="stylesheet" type="text/css" href="~/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/select2/select2.css" />
+    <link rel="stylesheet" type="text/css" href="~/admin/layout/css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/uniform/css/uniform.default.css" />
+    <link rel="stylesheet" type="text/css" href="~/admin/layout/css/themes/default.css" />
+    <link rel="stylesheet" type="text/css" href="~/admin/layout/css/custom.css" />
+
+
+
+
+
+    <!-- END PAGE LEVEL STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link href="~/Content/components.css" rel="stylesheet" />
+    <link href="~/Content/plugins.css" rel="stylesheet" />
+
+    <link href="~/admin/layout/css/layout.css" rel="stylesheet" type="text/css" />
+    <link id="style_color" href="~/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" />
+    <link href="~/admin/layout/css/custom.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<!-- DOC: Apply "page-header-fixed-mobile" and "page-footer-fixed-mobile" class to body element to force fixed header or footer in mobile devices -->
+<!-- DOC: Apply "page-sidebar-closed" class to the body and "page-sidebar-menu-closed" class to the sidebar menu element to hide the sidebar by default -->
+<!-- DOC: Apply "page-sidebar-hide" class to the body to make the sidebar completely hidden on toggle -->
+<!-- DOC: Apply "page-sidebar-closed-hide-logo" class to the body element to make the logo hidden on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-hide" class to body element to completely hide the sidebar on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-fixed" class to have fixed sidebar -->
+<!-- DOC: Apply "page-footer-fixed" class to the body element to have fixed footer -->
+<!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
+<!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
+<body class="page-header-fixed page-quick-sidebar-over-content ">
+    <!-- BEGIN HEADER -->
+    <div class="page-header navbar navbar-fixed-top">
+        <!-- BEGIN HEADER INNER -->
+        <div class="page-header-inner">
+            <!-- BEGIN LOGO -->
+            <div class="page-logo">
+                <a href="@Url.Action("Index","Home")" class="logo" style="font-family:Segoe Marker;color:white">
+
+
+                    <h4>MADAGASCAR</h4>
+
+                </a>
+                <div class="menu-toggler sidebar-toggler hide">
+
+                </div>
+            </div>
+
+            <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+            </a>
+
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+
+                    <li class="dropdown dropdown-user">
+
+                        @Html.Partial("_LoginPartial")
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- END HEADER -->
+    <div class="clearfix">
+    </div>
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar-wrapper">
+
+            <div class="page-sidebar navbar-collapse collapse">
+                <!-- BEGIN SIDEBAR MENU -->
+                <ul class="page-sidebar-menu " data-auto-scroll="true" data-slide-speed="200">
+                    <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+                    <li class="sidebar-toggler-wrapper">
+                        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                        <div class="sidebar-toggler">
+                        </div>
+                        <!-- END SIDEBAR TOGGLER BUTTON -->
+                    </li>
+                    <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+
+                    <li class="@ViewBag.C">
+                        <a href="javascript:;">
+                            <i class="fa fa-money"></i>
+                            <span class="title">Paiement et Dépense</span>
+                            <span class="@ViewBag.CC"></span>
+                            <span class="arrow open"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="@ViewBag.CGL">
+                                <a href="index.html">
+                                    <i class="icon-bar-chart"></i>
+                                    Paiement Loyer
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index_2.html">
+                                    <i class="icon-bulb"></i>
+                                    Paiement Propriétaire
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index_3.html">
+                                    <i class="icon-graph"></i>
+                                    Dépense
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index_3.html">
+                                    <i class="icon-user"></i>
+                                    Concierge
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="@ViewBag.PL1">
+                        <a href="javascript:;">
+                            <i class="icon-list"></i>
+                            <span class="title">Propriétaire et Local</span>
+                            <span class="@ViewBag.PL3"></span>
+                            <span class="arrow "></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="@ViewBag.PL2">
+                                <a href="@Url.Action("Index", "Proprietaires")">
+                                    <i class="icon-user"></i>
+                                    Propriétaires
+                                </a>
+                            </li>
+                            <li class="@ViewBag.PLL">
+                                <a href="@Url.Action("Index", "Locals")">
+                                    <i class="icon-home"></i>
+                                    Local
+                                </a>
+                            </li>
+                            <li class="@ViewBag.PLI">
+                                <a href="@Url.Action("Index", "Immeubles")">
+                                    <i class="fa fa-building"></i>
+                                    Immeuble
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="icon-rocket"></i>
+                            <span class="title">Contrat</span>
+
+                            <span class="arrow "></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="@ViewBag.CC1">
+                                <a href="@Url.Action("CreateContrat", "Contrat")">
+                                    <i class="fa fa-paperclip"></i>
+                                    Création Contrat
+                                </a>
+                            </li>
+                            <li>
+
+                                <a href="@Url.Action("Index", "Contrat")">
+                                    <i class="fa fa-paper-plane"></i>
+                                    Gestion Contrat
+                                </a>
+                            </li>
+
+
+                            <li>
+                                <a href="@Url.Action("Index", "Locataires")">
+                                    <i class="icon-user"></i>
+                                    Gestion Locataire
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="heading">
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <div class="modal fade" id="portlet-config" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title">Modal title</h4>
+                            </div>
+                            <div class="modal-body">
+                                Widget settings form goes here
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn blue">Save changes</button>
+                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                <!-- BEGIN STYLE CUSTOMIZER -->
+                <!-- END STYLE CUSTOMIZER -->
+                <!-- BEGIN PAGE HEADER-->
+                <h3 class="page-title">
+                    Paiement <small>Loyer</small>
+                </h3>
+                <div class="page-bar">
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="@Url.Action("Index","Home")">Acceuil</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+
+
+                    </ul>
+
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- BEGIN PORTLET-->
+                        <div class="portlet box blue-chambray">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-gift"></i>Paiement Loyer
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse">
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div class="portlet-body form">
+                                <!-- BEGIN FORM-->
+                                @using (Html.BeginForm())
+                                {
+                                    @*@Html.AntiForgeryToken()*@
+                                    @Html.ValidationSummary(true)
+
+                                    <div class="form-horizontal">
+
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                                        <div class="form-body">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Code Locataire</label>
+                                                <div class="col-md-3">
+                                                    <input type="text" name="CodePers" id="CodePers" value="@ViewBag.codePersLocataire" readonly="readonly" />
+                                                    @*@Html.EditorFor(model => model.CodePers)*@
+                                                    <span class="help-block">
+
+                                                    </span>
+                                                    <a class="btn default" data-toggle="modal" href="#form_modal2">
+                                                        Charger Locataire
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <h3 class="form-section">Contrats en cours</h3>
+                                            <div class="table-toolbar">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        @using System.Linq;
+                                                        @using System.Data.Entity;
+
+
+                                                        @{
+                                    Omni.Agence.DAL.AgenceEntities db = new Omni.Agence.DAL.AgenceEntities();
+                                    int? cp = ViewBag.codePersLocataire;
+                                    var contratLocations = db.ContratLocations.Include(c => c.Local).Include(c => c.Personne).Where(p => p.CodePers == 0);
+                                    if (ViewBag.codePersLocataire != null)
+                                    {
+                                        contratLocations = db.ContratLocations.Include(c => c.Local).Include(c => c.Personne).Where(p => p.CodePers == cp && p.isClosed == 1);
+                                    }
+
+                                    List<Omni.Agence.DAL.ContratLocation> contrats = contratLocations.ToList();
+
+                                                        }
+                                                        <div class="btn-group">
+
+                                                            @*@Html.ActionLink("Afficher", "Create")*@
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <table class="table table-striped table-hover table-bordered" id="sample_editable_2">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Code</th>
+                                                        <th>
+                                                            Usage
+                                                        </th>
+                                                        <th>
+                                                            Local
+                                                        </th>
+
+                                                        <th>
+                                                            Date de jouissance
+                                                        </th>
+                                                        <th>
+                                                            Date Fin
+                                                        </th>
+
+                                                        <th>
+                                                            Loyer de Base
+                                                        </th>
+                                                        <th>
+                                                            Loyer Net
+                                                        </th>
+                                                        @*<th>
+                                                                Date Aug.
+                                                            </th>
+                                                            <th>
+                                                                Aug. %
+                                                            </th>*@
+
+                                                        <th></th>
+                                                    </tr>
+
+                                                </thead>
+                                                <tbody>
+
+                                                    @foreach (var item in contrats)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                <a href="@Url.Action("SelectContrat", new { id = item.CodeContrat })">
+                                                                    @Html.DisplayFor(modelItem => item.CodeContrat)
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                @{
+
+                                                        if (item.Usage == 0)
+                                                        {
+                                                            ViewBag.Usage = "Habitation";
+                                                        }
+                                                        else if (item.Usage == 1)
+                                                        {
+                                                            ViewBag.Usage = "Commercial";
+                                                        }
+                                                        else
+                                                        {
+                                                            ViewBag.Usage = "";
+                                                        }
+                                                                }
+                                                                @ViewBag.Usage
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Local.TitreLocal)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.DateJuissance.Value.Day)/@Html.DisplayFor(modelItem => item.DateJuissance.Value.Month)/@Html.DisplayFor(modelItem => item.DateJuissance.Value.Year)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.DateFinContrat.Value.Day)/@Html.DisplayFor(modelItem => item.DateFinContrat.Value.Month)/@Html.DisplayFor(modelItem => item.DateFinContrat.Value.Year)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.LoyerDebase)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.LoyerNet)
+                                                            </td>
+                                                            @*<td>
+                                                                    @if ((item.Augementations.Count() != 0))
+                                                                    {
+
+                                                                        @Html.DisplayFor(modelItem => item.Augementations.Where(d => d.dateAug > DateTime.Now).OrderBy(d => d.dateAug).First().dateAug.Value)
+
+                                                                    }
+                                                                </td>
+                                                                <td>
+                                                                    @if ((item.Augementations.Count() != 0))
+                                                                    {
+                                                                        @Html.DisplayFor(modelItem => item.Augementations.Where(d => d.dateAug > DateTime.Now).OrderBy(d => d.dateAug).First().pcAug)
+                                                                    }
+                                                                </td>*@
+
+
+                                                            <td>
+                                                                <a href="@Url.Action("DetailsContrat", new { id = item.CodeContrat })" class="btn default btn-xs green-haze tooltips" data-placement="bottom" data-original-title="Détails Contrat">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                </a>
+
+
+
+                                                                @*@Html.ActionLink("Paiement", "PaiementLoc", new { id = item.CodeContrat })*@
+
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+
+
+                                            <div class="portlet-body form">
+                                                <!-- BEGIN FORM-->
+                                                @using (Html.BeginForm())
+                                                {
+                                                    @Html.AntiForgeryToken()
+
+                                                    <div class="form-horizontal">
+
+                                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                        @{
+                                                    int? cc = ViewBag.CodeContrat;
+                                                    ContratLocation contrat;
+                                                    if (cc != null)
+                                                    {
+                                                        contrat = db.ContratLocations.Where(c => c.CodeContrat == cc).First();
+
+
+                                                        <h3 class="form-section">Paiements</h3>
+                                                            <div class="portlet-body">
+                                                                <div class="table-toolbar">
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+
+                                                                            <div class="btn-group">
+
+                                                                                @*<a href="@Url.Action("CreatePL", new { id = ViewBag.CodeContrat })" class="btn blue-chambray  tooltips" data-placement="bottom" data-original-title="Paiement">
+                                                                                        <i class="fa fa-plus"></i>
+                                                                                    </a>*@
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>
+                                                                                Moy. Paiement
+                                                                            </th>
+                                                                            <th>
+                                                                                Montant
+                                                                            </th>
+                                                                            <th>
+                                                                                Réference
+                                                                            </th>
+                                                                            <th>
+                                                                                Date début
+                                                                            </th>
+
+                                                                            <th>
+                                                                                Date Fin
+                                                                            </th>
+                                                                            <th>
+                                                                                Nbr Quittance imprimée
+                                                                            </th>
+
+
+
+                                                                            <th></th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @{
+
+
+                                                        List<PaiementLoyer> ListP = db.PaiementLoyers.Where(p => p.CodeContrat == cc.Value).ToList();
+
+
+                                                                        }
+                                                                        @foreach (var item in ListP)
+                                                                        {
+                                                                            <tr>
+                                                                                <td>
+                                                                                    @Html.DisplayFor(modelItem => item.MoyenPaiement)
+                                                                                </td>
+                                                                                <td>
+                                                                                    @Html.DisplayFor(modelItem => item.Operation.montant)
+                                                                                </td>
+                                                                                <td>
+                                                                                    @Html.DisplayFor(modelItem => item.Reference)
+                                                                                </td>
+
+                                                                                <td>
+                                                                                    @Html.DisplayFor(modelItem => item.DteDebut.Value.Day)/@Html.DisplayFor(modelItem => item.DteDebut.Value.Month)/@Html.DisplayFor(modelItem => item.DteDebut.Value.Year)
+                                                                                </td>
+
+                                                                                <td>
+                                                                                    @Html.DisplayFor(modelItem => item.DteFin.Value.Day)/@Html.DisplayFor(modelItem => item.DteFin.Value.Month)/@Html.DisplayFor(modelItem => item.DteFin.Value.Year)
+                                                                                </td>
+                                                                                <td>
+                                                                                    @Html.DisplayFor(modelItem => item.NbrQuittanceImprime)
+                                                                                </td>
+                                                                                <td>
+
+                                                                                    <a href="@Url.Action("print", new { id = item.Operation.codeOp }) " class="btn default btn-xs blue-chambray tooltips" data-placement="bottom" data-original-title="Details">
+                                                                                        <i class="fa fa-edit"></i>
+                                                                                    </a>
+                                                                                    <a href="@Url.Action("DeletePLoc", new { id = item.Operation.codeOp })" class="btn default btn-xs black tooltips" data-placement="bottom" data-original-title="Supprimer Paiement">
+                                                                                        <i class="fa fa-trash-o"></i>
+                                                                                    </a>
+                                                                                    @*@Html.ActionLink("Details", "print", new { id = item.Operation.codeOp }) |*@
+                                                                                    @*@Html.ActionLink("Supprimer", "DeletePLoc", new { id = item.Operation.codeOp })*@
+                                                                                </td>
+                                                                            </tr>
+                                                                        }
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+
+
+
+                                                            <h3 class="form-section">Nouveau</h3>
+                                                            
+
+
+                                            <div class="form-body">
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-5">Taxe:</label>
+                                                        <div class="col-md-5">
+                                                            <p class="form-control-static">
+                                                                @contrat.TaxeDedilite %
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-5">Charge:</label>
+                                                        <div class="col-md-5">
+                                                            <p class="form-control-static">
+                                                                @contrat.Charge %
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-5">Date Aug:</label>
+                                                        <div class="col-md-5">
+                                                            <p class="form-control-static">
+                                                                @*@ListP.OrderBy(dd => dd.DteFin).Last().DteFin.Value
+                                                                    @ListP.First().ContratLocation.Augementations.Where(c => c.dateAug < ListP.OrderBy(dd => dd.DteFin).Last().DteFin.Value).OrderBy(d => d.dateAug).Last().dateAug.Value*@
+
+
+
+
+
+                                                                @{
+                                        if (contrat.Augementations.Count() > 0)
+                                        {
+
+                                            if (contrat.Augementations.Where(d => d.dateAug.Value < DateTime.Now).Count() > 0)
+                                            {
+                                                @contrat.Augementations.Where(d => d.dateAug.Value < DateTime.Now).OrderBy(d => d.dateAug).Last().dateAug.Value.Date.ToString("dd/MM/yyyy");
+                                            }
+                                        }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-5">Augmentation:</label>
+                                                        <div class="col-md-5">
+                                                            <p class="form-control-static">
+                                                                @{
+                                        if (contrat.Augementations.Count() > 0)
+                                        {
+                                            if (contrat.Augementations.Where(d => d.dateAug.Value < DateTime.Now).Count() > 0)
+                                            {
+                                                @contrat.Augementations.Where(d => d.dateAug.Value < DateTime.Now).OrderBy(d => d.dateAug).Last().pcAug ;
+                                            }
+                                        }}
+                                                                %
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-5">Garage:</label>
+                                                        <div class="col-md-5">
+                                                            <p class="form-control-static">
+                                                                @contrat.Garage
+
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-5">
+                                                                @{
+                                        int fp = contrat.FrequencePaiement.Value;
+                                        String sfp = "";
+                                        if (fp == 0)
+                                        {
+                                            sfp = "mensuel";
+                                        }
+                                        else if (fp == 1)
+                                        {
+                                            sfp = "trimestriel";
+                                        }
+                                                                }
+                                                                Loyer de base mensuel :
+                                                            </label>
+                                                            <div class="col-md-5">
+                                                                <p class="form-control-static">
+                                                                    @contrat.LoyerDebase
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-5">Date fin contrat :</label>
+                                                            <div class="col-md-5">
+                                                                <p class="form-control-static">
+
+                                                                    @if (contrat.DateFinContrat.HasValue)
+                                                                    {
+                                                                        contrat.DateFinContrat.Value.Date.ToString("dd/MM/yyyy");
+                                                                    }                                                                  
+
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                            <div class="form-body">
+
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label col-md-3">Taxe:</label>
+                                                                        <div class="col-md-9">
+                                                                            <p class="form-control-static">
+                                                                                @contrat.TaxeDedilite %
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label col-md-3">Charge:</label>
+                                                                        <div class="col-md-9">
+                                                                            <p class="form-control-static">
+                                                                                @contrat.Charge %
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label col-md-3">Date Aug:</label>
+                                                                        <div class="col-md-9">
+                                                                            <p class="form-control-static">
+
+                                                                                @{
+                                                        if (contrat.Augementations.Count() > 0)
+                                                        {
+
+                                                            if (contrat.Augementations.Where(d => d.dateAug.Value < DateTime.Now).Count() > 0)
+                                                            {
+                                                                @contrat.Augementations.Where(d => d.dateAug.Value < DateTime.Now).OrderBy(d => d.dateAug).First().dateAug.Value;
+                                                            }
+                                                        }}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label col-md-3">Augementation:</label>
+                                                                        <div class="col-md-9">
+                                                                            <p class="form-control-static">
+                                                                                @{
+                                                        if (contrat.Augementations.Count() > 0)
+                                                        {
+                                                            if (contrat.Augementations.Where(d => d.dateAug.Value < DateTime.Now).Count() > 0)
+                                                            {
+                                                                @contrat.Augementations.Where(d => d.dateAug.Value < DateTime.Now).OrderBy(d => d.dateAug).First().pcAug ;
+                                                            }
+                                                        }}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label col-md-3">Garage:</label>
+                                                                        <div class="col-md-9">
+                                                                            <p class="form-control-static">
+                                                                                @contrat.Garage
+
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label col-md-3">
+                                                                                @{
+                                                        int fp = contrat.FrequencePaiement.Value;
+                                                        String sfp = "";
+                                                        if (fp == 0)
+                                                        {
+                                                            sfp = "mensuel";
+                                                        }
+                                                        else if (fp == 1)
+                                                        {
+                                                            sfp = "trimestriel";
+                                                        }
+                                                                                }
+                                                                                Loyer de base Mensuel :
+                                                                            </label>
+                                                                            <div class="col-md-9">
+                                                                                <p class="form-control-static">
+                                                                                    @contrat.LoyerDebase
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            @*<label class="control-label col-md-3">Loyer Net @sfp  :</label>*@
+                                                                            <div class="col-md-9">
+                                                                                <p class="form-control-static">
+                                                                                    @*@ViewBag.loyerNet*@
+
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label col-md-3">Date Fin contrat :</label>
+                                                                            <div class="col-md-9">
+                                                                                <p class="form-control-static">
+                                                                                    @contrat.DateFinContrat
+
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+
+
+                                                                </div>
+
+                                                                <h3 class="form-section"></h3>
+                                                                @{
+                                                        if (contrat.PaiementLoyers.Count() > 0)
+                                                        {
+                                                            ViewBag.dateDP = contrat.PaiementLoyers.OrderBy(d => d.DteFin).Last().DteFin.Value.AddDays(1);
+                                                            if (contrat.FrequencePaiement == 0)
+                                                            {
+                                                                ViewBag.dateFP = contrat.PaiementLoyers.OrderBy(d => d.DteFin).Last().DteFin.Value.AddMonths(1);
+                                                            }
+                                                            else if (contrat.FrequencePaiement == 1)
+                                                            {
+                                                                ViewBag.dateFP = contrat.PaiementLoyers.OrderBy(d => d.DteFin).Last().DteFin.Value.AddMonths(3);
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            ViewBag.dateDP = contrat.DateJuissance.Value;
+
+                                                            if (contrat.FrequencePaiement == 0)
+                                                            {
+                                                                ViewBag.dateFP = contrat.DateJuissance.Value.AddMonths(1).AddDays(-1);
+                                                            }
+                                                            else if (contrat.FrequencePaiement == 1)
+                                                            {
+                                                                ViewBag.dateFP = contrat.DateJuissance.Value.AddMonths(3).AddDays(-1);
+                                                            }
+                                                        }
+
+                                                        int aug;
+
+
+                                                        if (contrat.Augementations.Count() > 0)
+                                                        {
+                                                            if (contrat.Augementations.Where(d => d.dateAug.Value < DateTime.Now).Count() > 0)
+                                                            {
+                                                                aug = contrat.Augementations.Where(d => d.dateAug.Value < DateTime.Now).OrderBy(d => d.dateAug).Last().pcAug.Value;
+                                                            }
+                                                            else
+                                                            {
+                                                                aug = 0;
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            aug = 0;
+                                                        }
+                                                        int taxe = contrat.TaxeDedilite.Value;
+
+                                                        int charge = contrat.Charge.Value;
+                                                        int Garage = contrat.Garage.Value;
+                                                        double loyerBase = contrat.LoyerDebase.Value;
+                                                        double loyerNet = Garage + ((100 + taxe + charge + aug) * loyerBase) / 100;
+                                                        if (contrat.FrequencePaiement == 0)
+                                                        {
+                                                            ViewBag.loyerNet = loyerNet;
+                                                        }
+                                                        else if (contrat.FrequencePaiement == 1)
+                                                        {
+                                                            ViewBag.loyerNet = loyerNet * 3;
+                                                        }
+
+                                                                }
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-md-3">Durée :</label>
+                                                                    <div class="col-md-4">
+                                                                        <div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="dd/mm/yyyy">
+
+                                                                            @*@Html.EditorFor(model => model.PaiementLoyer.DteDebut, new { htmlAttributes = new { @class = "form-control", @name = "from" } })*@
+                                                                            <input type="text" name="PaiementLoyer.DteDebut" id="PaiementLoyer.DteDebut" class="form-control" value="@ViewBag.dateDP.ToString("dd/MM/yyyy")" readonly="readonly" /><span class="input-group-addon">
+                                                                                Jusqu'a
+                                                                            </span>
+                                                                            @*@Html.EditorFor(model => model.PaiementLoyer.DteFin, new { htmlAttributes = new { @class = "form-control"} })*@
+                                                                            <input type="text" name="PaiementLoyer.DteFin" id="PaiementLoyer.DteFin" class="form-control" value="@ViewBag.dateFP.ToString("dd/MM/yyyy")" />
+                                                                        </div>
+                                                                        <!-- /input-group -->
+                                                                        <span class="help-block">
+                                                                            @Html.ValidationMessageFor(model => model.PaiementLoyer.DteDebut, "", new { @class = "text-danger" })
+                                                                        </span>
+                                                                        <span class="help-block">
+                                                                            @Html.ValidationMessageFor(model => model.PaiementLoyer.DteFin, "", new { @class = "text-danger" })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-md-3">Montant</label>
+                                                                    <div class="col-md-3">
+                                                                        <input type="text" name="montant" id="montant" class="form-control" value="@ViewBag.loyerNet" />
+                                                                        @*@Html.EditorFor(model => model.montant, new { @class = "form-control", value = 232 })*@<!-- /input-group -->
+                                                                        <span class="help-block">
+                                                                            @Html.ValidationMessageFor(model => model.montant, "", new { @class = "text-danger" })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-md-3">Mode de paiement:</label>
+                                                                    <div class="col-md-3">
+                                                                        @Html.DropDownListFor(
+                                                   model => model.PaiementLoyer.MoyenPaiement,
+                                                   new SelectList(
+                                                          new List<Object>{
+                                                               new { value = "Espèce" , text = "Espèce"  },
+                                                               new { value = "Chèque" , text = "Chèque" },
+                                                               new { value = "Prélèvement Bancaire" , text = "Prélèvement Bancaire"},
+                                                               new { value = "Virement" , text = "Virement"}
+                                                            },
+                                                          "value",
+                                                            "text"
+
+                                                    ), new { @class = "form-control" }
+                                                            )
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-md-3">Réference:</label>
+                                                                    <div class="col-md-3">
+                                                                        @Html.EditorFor(model => model.PaiementLoyer.Reference, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        <!-- /input-group -->
+                                                                        <span class="help-block">
+                                                                            @Html.ValidationMessageFor(model => model.PaiementLoyer.Reference, "", new { @class = "text-danger" })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-md-3">Commentaire:</label>
+                                                                    <div class="col-md-3">
+                                                                        @Html.TextAreaFor(model => model.Commentaire, new { @class = "form-control", @cols = 290, @rows = 4 })
+                                                                        <!-- /input-group -->
+                                                                        <span class="help-block">
+                                                                            @Html.ValidationMessageFor(model => model.Commentaire, "", new { @class = "text-danger" })
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group last">
+                                                                    <div class="col-md-offset-2 col-md-10">
+                                                                        <input type="submit" value="Valider" class="btn btn-default blue-chambray" />
+                                                                        <input type="reset" value="Annuler" class="btn btn-default" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                    }
+
+                                                        }
+                                                    </div>
+                                                }
+
+
+
+
+
+                                                <!-- END FORM-->
+                                            </div>
+
+
+                                        </div>
+
+
+                                    </div>}
+                                @section Scripts {
+                                    @Scripts.Render("~/bundles/jqueryval")
+                                }
+                                <div id="form_modal2" class="modal fade" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        @*<div class="modal-content">*@
+
+                                        <div class="modal-body" style="width:670px">
+
+                                            @Html.Partial("ListLocataire")
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <!-- END PORTLET-->
+                    </div>
+                </div>
+
+
+
+
+
+                <!-- END PAGE CONTENT-->
+            </div>
+        </div>
+        <!-- END CONTENT -->
+        <!-- BEGIN QUICK SIDEBAR -->
+        <!-- END QUICK SIDEBAR -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    <div class="page-footer">
+        <div class="page-footer-inner">
+            @DateTime.Now.Year &copy; MADAGASCAR.
+        </div>
+        <div class="scroll-to-top">
+            <i class="icon-arrow-up"></i>
+        </div>
+    </div>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->
+    <!--[if lt IE 9]>
+    <script src="~/plugins/respond.min.js"></script>
+    <script src="~/plugins/excanvas.min.js"></script>
+    <![endif]-->
+    <script src="~/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="~/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+    <!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+    <script src="~/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+    <script src="~/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="~/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="~/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+    <script src="~/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+    <script src="~/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script type="text/javascript" src="~/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="~/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script type="text/javascript" src="~/plugins/clockface/js/clockface.js"></script>
+    <script type="text/javascript" src="~/plugins/bootstrap-daterangepicker/moment.min.js"></script>
+    <script type="text/javascript" src="~/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <script src="~/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/admin/pages/scripts/table-editable.js"></script>
+    <script src="~/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script src="~/plugins/select2/select2.min.js"></script>
+
+
+
+
+
+
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="~/scripts/metronic.js" type="text/javascript"></script>
+    <script src="~/admin/layout/scripts/layout.js" type="text/javascript"></script>
+    <script src="~/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
+    <script src="~/admin/layout/scripts/demo.js" type="text/javascript"></script>
+    <script src="~/admin/pages/scripts/components-pickers.js"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <script>
+        jQuery(document).ready(function () {
+            // initiate layout and plugins
+
+            Metronic.init(); // init metronic core components
+            Layout.init(); // init current layout
+            QuickSidebar.init(); // init quick sidebar
+            Demo.init(); // init demo features
+
+
+            TableEditable.init();
+        });
+    </script>
+    <script>
+        jQuery(document).ready(function () {
+            // initiate layout and plugins
+
+            ComponentsPickers.init();
+        });
+    </script>
+
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

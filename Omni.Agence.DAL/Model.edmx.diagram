@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f192890d9e13431b99e644b3a2e6532c" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="AgenceModel.Adresse" Width="1.5" PointX="0.75" PointY="11.25" />
+        <EntityTypeShape EntityType="AgenceModel.Concierge" Width="1.5" PointX="3" PointY="5.375" />
+        <EntityTypeShape EntityType="AgenceModel.ContratLocation" Width="1.5" PointX="9.75" PointY="13.125" />
+        <EntityTypeShape EntityType="AgenceModel.Depense" Width="1.5" PointX="7.5" PointY="11.25" />
+        <EntityTypeShape EntityType="AgenceModel.EtatPaiement" Width="1.5" PointX="10.5" PointY="7.875" />
+        <EntityTypeShape EntityType="AgenceModel.Local" Width="1.5" PointX="7.5" PointY="15.625" />
+        <EntityTypeShape EntityType="AgenceModel.MenuItem" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AgenceModel.Operation" Width="1.5" PointX="8.25" PointY="7.25" />
+        <EntityTypeShape EntityType="AgenceModel.PaiementLoyer" Width="1.5" PointX="12" PointY="10.5" />
+        <EntityTypeShape EntityType="AgenceModel.Personne" Width="1.5" PointX="3" PointY="9.375" />
+        <EntityTypeShape EntityType="AgenceModel.Syndic" Width="1.5" PointX="3" PointY="24" />
+        <EntityTypeShape EntityType="AgenceModel.TypeDesignationDepense" Width="1.5" PointX="5.25" PointY="7.625" />
+        <EntityTypeShape EntityType="AgenceModel.TypeLocal" Width="1.5" PointX="5.25" PointY="18.25" />
+        <EntityTypeShape EntityType="AgenceModel.TypeOp" Width="1.5" PointX="6" PointY="5" />
+        <EntityTypeShape EntityType="AgenceModel.TypePersonne" Width="1.5" PointX="0.75" PointY="8" />
+        <AssociationConnector Association="AgenceModel.FK_LOCAL_ASSOCIATI_ADRESSE" />
+        <AssociationConnector Association="AgenceModel.FK_PERSONNE_ASSOCIATI_ADRESSE" />
+        <AssociationConnector Association="AgenceModel.FK_SYNDIC_ASSOCIATI_ADRESSE" />
+        <AssociationConnector Association="AgenceModel.FK_CONTRATL_ASSOCIATI_LOCAL" />
+        <AssociationConnector Association="AgenceModel.FK_CONTRATL_ASSOCIATI_PERSONNE" />
+        <AssociationConnector Association="AgenceModel.FK_PAIEMENT_ASSOCIATI_CONTRATL" />
+        <AssociationConnector Association="AgenceModel.FK_DEPENSE_ASSOCIATI_LOCAL" />
+        <AssociationConnector Association="AgenceModel.FK_DEPENSE_ASSOCIATI_TYPEDESI" />
+        <AssociationConnector Association="AgenceModel.FK_DEPENSE_GENERALIZ_OPERATIO" />
+        <AssociationConnector Association="AgenceModel.FK_EtatPaiement_Operation" />
+        <AssociationConnector Association="AgenceModel.FK_LOCAL_ASSOCIATI_PERSONNE" />
+        <AssociationConnector Association="AgenceModel.FK_LOCAL_ASSOCIATI_SYNDIC" />
+        <AssociationConnector Association="AgenceModel.FK_LOCAL_ASSOCIATI_TYPELOCA" />
+        <AssociationConnector Association="AgenceModel.FK_OPERATIO_ASSOCIATI_PERSONNE" />
+        <AssociationConnector Association="AgenceModel.FK_OPERATIO_ASSOCIATI_TYPEOP" />
+        <AssociationConnector Association="AgenceModel.FK_PAIEMENT_GENERALIZ_OPERATIO" />
+        <AssociationConnector Association="AgenceModel.FK_PERSONNE_ASSOCIATI_TYPEPERS" />
+        <EntityTypeShape EntityType="AgenceModel.Augementation" Width="1.5" PointX="12" PointY="16.75" />
+        <AssociationConnector Association="AgenceModel.FK_Augementation_ContratLocations" />
+        <AssociationConnector Association="AgenceModel.FK_Menu_Parent" />
+        <EntityTypeShape EntityType="AgenceModel.C__MigrationHistory" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AgenceModel.AspNetRole" Width="1.5" PointX="8.375" PointY="2.5" />
+        <EntityTypeShape EntityType="AgenceModel.AspNetUserClaim" Width="1.5" PointX="12.875" PointY="1" />
+        <EntityTypeShape EntityType="AgenceModel.AspNetUserLogin" Width="1.5" PointX="12.875" PointY="3.75" />
+        <EntityTypeShape EntityType="AgenceModel.AspNetUser" Width="1.5" PointX="10.625" PointY="1.375" />
+        <EntityTypeShape EntityType="AgenceModel.sysdiagram" Width="1.5" PointX="5.375" PointY="0.75" />
+        <AssociationConnector Association="AgenceModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AgenceModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AgenceModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="AgenceModel.Immeuble" Width="1.5" PointX="5.25" PointY="10.75" />
+        <AssociationConnector Association="AgenceModel.FK_Immeubles_Adresses" />
+        <AssociationConnector Association="AgenceModel.FK_IMMEUBLE_ASSOCIATI_CONCIERG" />
+        <AssociationConnector Association="AgenceModel.FK_DEPENSE_ASSOCIATI_IMMEUBLE" />
+        <AssociationConnector Association="AgenceModel.FK_Immeuble_Personne" />
+        <AssociationConnector Association="AgenceModel.FK_LOCAL_ASSOCIATI_IMMEUBLE" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,68 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Accueil";
+}
+
+<h3 class="page-title">
+    Accueil <small>Contractuel</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+    </ul>
+</div>
+<div class="tiles">
+    <a href="@Url.Action("Index","Contrat")">
+        <div class="tile double double-down bg-green-haze">
+            <div class="tile-body">
+                <i class="fa fa-pencil"></i>
+            </div>
+            <div class="tile-object">
+                <div class="name">
+                    Nouveau Contrat
+                </div>
+                <div class="number">
+                    @*(@ViewBag.nbrContratCount)*@
+                </div>
+            </div>
+        </div>
+    </a>
+    <a href="@Url.Action("Index","Contrat")">
+        <div class="tile double double-down bg-green-turquoise">
+            <div class="tile-body">
+                <i class="fa fa-key"></i>
+            </div>
+            <div class="tile-object">
+                <div class="name">
+                    Contrats
+                </div>
+                <div class="number">
+                    (@ViewBag.nbrContratCount)
+                </div>
+            </div>
+        </div>
+    </a>
+    <a href="@Url.Action("Index","Locataires")">
+        <div class="tile double double-down bg-blue-madison">
+            <div class="tile-body">
+                <i class="fa icon-users"></i>
+
+            </div>
+            <div class="tile-object">
+                <div class="name">
+                    Locataires
+                </div>
+                <div class="number">
+                    (@ViewBag.nbrlocCount)
+                </div>
+            </div>
+        </div>
+    </a>
+    
+
+</div>

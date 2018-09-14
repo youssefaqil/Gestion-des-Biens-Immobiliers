@@ -1,0 +1,66 @@
+﻿@model Omni.Agence.DAL.Depense
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Détails</title>
+</head>
+<body>
+    <div>
+        <h4>Dépense</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Immeuble.NomImmeuble)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Immeuble.NomImmeuble)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Local.TitreLocal)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Local.TitreLocal)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TypeDesignationDepense.Description)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TypeDesignationDepense.Description)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Operation.codeOp)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Operation.codeOp)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.codeOp }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

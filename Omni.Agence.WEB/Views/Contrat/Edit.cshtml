@@ -1,0 +1,319 @@
+﻿@model Omni.Agence.DAL.ContratLocation
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Modifier Contrat";
+    ViewBag.C = "start active open";
+    ViewBag.CC2 = "active";
+    ViewBag.PL3 = "selected";
+}
+
+@section Styles {
+    @Styles.Render("~/bundles/DatePicker")
+}
+<h3 class="page-title">
+    Contrat <small>Modifier</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i><a href="@Url.Action("Index")">Contrat</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Details", new {id=Model.CodeContrat })">
+            Réf : @Html.DisplayFor(model=>model.CodeContrat)</a>
+        </li>
+
+    </ul>
+
+</div>
+
+@using (Html.BeginForm())
+{    
+    @*@Html.AntiForgeryToken()*@
+
+    <div class="form-horizontal">
+        @*<h4>Personne</h4>*@
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.isClosed)
+        @Html.HiddenFor(model => model.dateClose)
+        @Html.HiddenFor(model => model.CodePers)
+        @Html.HiddenFor(model => model.CodeLocal)
+        @Html.HiddenFor(model => model.LoyerNet)
+        @*@Html.HiddenFor(model => model.LoyerNet)*@
+        @Html.HiddenFor(model => model.CodeContrat)
+        @Html.HiddenFor(model => model.dateModification)
+        @*@Html.HiddenFor(model => model.dateClose)*@
+        <div class="tab-pane" id="tab_2">
+            <div class="portlet box green-haze">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Modifier
+                    </div>
+                    <div class="actions">
+                        <input type="submit" value="Valider" class="btn btn-default btn-sm" />
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="form-horizontal">
+                        <div class="form-body">
+                            <h3 class="form-section">Informations</h3>
+                            <div class="row">
+                                <div class=" date-picker input-daterange" data-date="10/11/2012" data-date-format="dd/mm/yyyy">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Date début <span class="required">
+                                                    *
+                                                </span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="" id="DateJuissance" name="DateJuissance" class="form-control" value="@Model.DateJuissance.Value.Date.ToString("dd/MM/yyyy")" />
+                                                @*@Html.EditorFor(model => model.DateJuissance, new { htmlAttributes = new { @class = "form-control" } })*@
+                                                <!-- /input-group -->
+                                                <span class="help-block">
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Date fin <span class="required">
+                                                    *
+                                                </span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                @*<input type="" id="DateFinContrat" name="DateFinContrat" class="form-control" value="@Model.DateFinContrat.Value.Date.ToString("dd/MM/yyyy")" />*@
+                                                @Html.EditorFor(model => model.DateFinContrat, new { htmlAttributes = new { @class = "form-control" } })
+                                                <!-- /input-group -->
+                                                <span class="help-block">
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Usage :</label>
+                                            <div class="col-md-9">
+                                                <div class="radio-list">
+                                                    <label class="radio-inline">
+                                                        @Html.RadioButtonFor(m => m.Usage, "0") Habitation
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        @Html.RadioButtonFor(m => m.Usage, "1") Commercial
+                                                    </label>
+                                                </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label class="control-label col-md-3">Loyer de base:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.LoyerDebase, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.LoyerDebase, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+
+                            
+                            <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+
+
+                                    <label class="control-label col-md-3">Charge:</label>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Charge, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Charge, "", new { @class = "text-danger" })
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+
+                                    <label class="control-label col-md-3">Taxe:</label>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.TaxeDedilite, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.TaxeDedilite, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Garage :</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Garage, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Garage, "", new { @class = "text-danger" })
+                                        </div>
+                                        </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label class="control-label col-md-3">Caution:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Caution, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Caution, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Fréq. de paiement :</label>
+                                            <div class="col-md-9">
+                                                <div class="radio-list">
+                                                    <label class="radio-inline">
+                                                        @Html.RadioButtonFor(m => m.FrequencePaiement, "0") Mensuelle
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        @Html.RadioButtonFor(m => m.FrequencePaiement, "1") Trimestrielle
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Adultes :</label>
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.adults, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.adults, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--/span-->
+                                </div>
+                                @*<div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Enfants :</label>
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.enfants, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.enfants, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                    @*Commentée pour debug !!!!
+                                        <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 checkbox">Autres&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                <div class="col-md-9">
+                                                    @Html.CheckBoxFor(model => model.animaux.Value) Animaux
+                                                </div>
+                                            </div>
+                                    </div>*@
+                                @*</div>*@
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Commentaire:</label>
+                                            <div class="col-md-9">
+                                                @Html.TextAreaFor(model => model.commentaire, new { @class = "form-control", cols = 150, rows = 4 })
+                                                @Html.ValidationMessageFor(model => model.commentaire, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+
+
+                                    <!--/row-->
+                                </div>
+                      
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <a class="btn green-haze" data-toggle="modal" href="#basic">
+                                                Enregistrer
+                                            </a>
+                                            <button type="reset" class="btn default">Annuler</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                        <h4 class="modal-title">Confirmation</h4>
+                                    </div>
+                                    <div class="modal-body">
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                                        <input type="submit" class="btn green-haze" value="Valider" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+
+    </div>}
+
+@*<div>
+        @Html.ActionLink("Retour", "Index")
+    </div>*@
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/DatePicker")
+   
+
+    <script type="text/javascript">
+    // When the document is ready
+    $(document).ready(function () {
+
+        $('.input-daterange').datepicker({
+            todayBtn: "linked"
+        });
+
+    });
+    </script>
+
+}
+

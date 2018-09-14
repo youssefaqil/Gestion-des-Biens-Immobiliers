@@ -1,0 +1,42 @@
+﻿@model Omni.Agence.DAL.Augementation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Augmentation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dateAug)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateAug)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pcAug)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pcAug)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContratLocation.commentaire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContratLocation.commentaire)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idAug }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

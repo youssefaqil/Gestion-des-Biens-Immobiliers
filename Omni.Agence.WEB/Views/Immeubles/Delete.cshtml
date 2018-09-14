@@ -1,0 +1,44 @@
+﻿@model Omni.Agence.DAL.Immeuble
+
+@{
+    ViewBag.Title = "Delete";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PLI = "active";
+    ViewBag.PL3 = "selected";
+}
+
+<h3 class="page-title">
+    Immeuble <small>Liste</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-building"></i><a href="@Url.Action("Index")">Immeuble</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+
+    </ul>
+
+</div>
+<h3>Voulez vous vraiment supprimer l'immeuble @Html.DisplayFor(model => model.NomImmeuble) ?!</h3>
+<div>
+
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-lg red" />
+
+            <a href="@Url.Action("Index")" class="btn btn-lg default">
+                Retour
+            </a>
+        </div>
+    }
+</div>

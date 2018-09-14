@@ -1,0 +1,283 @@
+﻿@model Omni.Agence.DAL.ContratLocation
+
+@{
+    ViewBag.Title = "Modifier contrat";
+    ViewBag.C = "start active open";
+    ViewBag.CC2 = "active";
+    ViewBag.PL3 = "selected";
+}
+
+<h3 class="page-title">
+    Contrat <small>Modifier</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i><a href="@Url.Action("Index")">Contrat</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Details", new {id=Model.CodeContrat })">
+                Réf : @Html.DisplayFor(model => model.CodeContrat)
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+
+
+
+
+@using (Html.BeginForm())
+{    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @*<h4>Personne</h4>*@
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.CodePers)
+
+        @Html.HiddenFor(model => model.CodeLocal)
+        @Html.HiddenFor(model => model.LoyerNet)
+
+        @Html.HiddenFor(model => model.CodeContrat)
+
+
+        <div class="tab-pane" id="tab_2">
+            <div class="portlet box green-haze">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Modifier
+                    </div>
+                    <div class="actions">
+                        <input type="submit" value="Valider" class="btn btn-default btn-sm" />
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="form-horizontal">
+                        <div class="form-body">
+                            <h3 class="form-section">Informations</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label class="control-label col-md-3">Date de jouissance:</label>
+                                        <div class="col-md-9">
+                                            <div data-date="10/11/2012" data-date-format="dd/mm/yyyy">
+                                                @Html.EditorFor(model => model.DateJuissance, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.DateJuissance, "", new { @class = "text-danger" })
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label class="control-label col-md-3">Date fin contrat:</label>
+                                        <div class="col-md-9">
+                                            <div data-date="10/11/2012" data-date-format="dd/mm/yyyy">
+                                                @Html.EditorFor(model => model.DateFinContrat, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.DateFinContrat, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Usage :</label>
+                                        @{
+
+    String usage = Html.DisplayFor(model => model.Usage).ToString();
+
+    //ViewBag.selected = "";
+    if (usage == "0")
+    {
+        ViewBag.usageh = "selected";
+    }
+    else if (usage == "1")
+    {
+        ViewBag.usagec = "selected";
+    }
+
+                                        }
+                                        <div class="col-md-9">
+                                            <select id="Usage" name="Usage" class="form-control">
+                                                <option value="0" selected="@ViewBag.usageh">Habitation</option>
+                                                <option value="1" selected="@ViewBag.usagec">Commercial</option>
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label class="control-label col-md-3">Loyer de Base:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.LoyerDebase, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.LoyerDebase, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Charge:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Charge, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Charge, "", new { @class = "text-danger" })
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label class="control-label col-md-3">Taxe:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.TaxeDedilite, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.TaxeDedilite, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Garage :</label>
+
+
+                                        @{
+
+    String gar = Html.DisplayFor(model => model.Garage).ToString();
+
+    //ViewBag.selected = "";
+    if (gar == "0")
+    {
+        ViewBag.garagen = "selected";
+    }
+    else if (gar == "1")
+    {
+        ViewBag.garageo = "selected";
+    }
+
+                                        }
+                                        <div class="col-md-9">
+                                            <select id="Garage" name="Garage" class="form-control">
+                                                <option value="0" selected="@ViewBag.garagen">Non</option>
+                                                <option value="1" selected="@ViewBag.garageo">Oui</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label class="control-label col-md-3">Caution:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.Caution, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Caution, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Fréq. de paiement :</label>
+                                            @{
+
+    String fp = Html.DisplayFor(model => model.FrequencePaiement).ToString();
+
+    //ViewBag.selected = "";
+    if (fp == "0")
+    {
+        ViewBag.fpm = "selected";
+    }
+    else if (fp == "1")
+    {
+        ViewBag.fpt = "selected";
+    }
+
+
+                                            }
+                                            <div class="col-md-9">
+                                                <select id="FrequencePaiement" name="FrequencePaiement" class="form-control">
+                                                    <option value="0" selected="@ViewBag.fpm">Mensuel</option>
+                                                    <option value="1" selected="@ViewBag.fpt">Trimestriel</option>
+                                                </select>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button type="submit" class="btn green-haze">Valider</button>
+                                            <a href="@Url.Action("Index")" class="btn default">
+                                                Retour <i class="fa fa-step-backward"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+}
+
+@*<div>
+        @Html.ActionLink("Retour", "Index")
+    </div>*@
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

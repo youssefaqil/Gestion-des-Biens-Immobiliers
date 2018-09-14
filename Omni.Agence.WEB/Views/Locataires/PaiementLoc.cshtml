@@ -1,0 +1,129 @@
+﻿@model IEnumerable<Omni.Agence.DAL.PaiementLoyer>
+@{
+    ViewBag.Title = "Paiement Loyer";
+    ViewBag.C = "start active open";
+    ViewBag.CGL = "active";
+    ViewBag.CC = "selected";
+}
+
+
+
+
+<h3 class="page-title">
+    Locataires <small>Paiement Loyer</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i><a href="@Url.Action("Index")">Locataire</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Details", new {id=Model.First().CodePers })">@ViewBag.NomPre</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+    </ul>
+
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box blue-chambray">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-edit"></i>Paiement loyer
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="btn-group">
+
+                                <a href="@Url.Action("CreatePL", new { id = ViewBag.CodeContrat })" class="btn blue-chambray  tooltips" data-placement="bottom" data-original-title="Paiement">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                    <thead>
+                        <tr>
+                            <th>
+                                Moy. Paiement
+                            </th>
+                            <th>
+                                Réference
+                            </th>
+                            <th>
+                                Date début
+                            </th>
+
+                            <th>
+                                Date fin
+                            </th>
+                            <th>
+                                Nbr quittance imprimée
+                            </th>
+
+
+
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MoyenPaiement)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Reference)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DteDebut.Value.Day)/@Html.DisplayFor(modelItem => item.DteDebut.Value.Month)/@Html.DisplayFor(modelItem => item.DteDebut.Value.Year)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DteFin.Value.Day)/@Html.DisplayFor(modelItem => item.DteFin.Value.Month)/@Html.DisplayFor(modelItem => item.DteFin.Value.Year)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NbrQuittanceImprime)
+                                </td>
+                                <td>
+                                  
+                                    <a href="@Url.Action("print", new { id = item.CodePers }) " class="btn default btn-xs blue-chambray tooltips" data-placement="bottom" data-original-title="Paiement">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="@Url.Action("DeletePLoc", new { id = item.Operation.codeOp })" class="btn default btn-xs black tooltips" data-placement="bottom" data-original-title="Supprimer Paiement">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                    @*@Html.ActionLink("Details", "print", new { id = item.Operation.codeOp }) |*@
+                                    @*@Html.ActionLink("Supprimer", "DeletePLoc", new { id = item.Operation.codeOp })*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>

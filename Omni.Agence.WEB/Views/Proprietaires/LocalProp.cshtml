@@ -1,0 +1,185 @@
+﻿@model IEnumerable<Omni.Agence.DAL.Local>
+
+@{
+    ViewBag.Title = "LocalProp";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PL2 = "active";
+    ViewBag.PL3 = "selected";
+}
+
+<h3 class="page-title">
+    Propriétaires <small>Locaux</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i>
+            <a href="@Url.Action("Index")">Propriétaires</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Details", new { id = ViewBag.codeprp })"> @ViewBag.nomprp @ViewBag.prenomprp</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("LocalProp", new { id = ViewBag.codeprp })"> Locaux</a>
+        </li>
+
+    </ul>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-edit"></i>Tous les locaux
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="btn-group">
+                                <a href="@Url.Action("CreateLocalProp", new { id = @ViewBag.codeprp })" class="btn green tooltips" data-placement="bottom" data-original-title="Nouveau Local">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                    <thead>
+                        <tr>
+                            <th>
+                                m²
+                            </th>
+                            <th>
+                                Pièces
+                            </th>
+
+                            <th>
+                                Titre
+                            </th>
+
+
+                            <th>
+                                Prix
+                            </th>
+
+                            <th>
+                                Quartier
+                            </th>
+                            <th>
+                                Ville
+                            </th>
+                            <th>
+                                immeuble
+                            </th>
+                          
+                            <th>
+                                Type
+                            </th>
+                            <th>Disponibilité</th>
+                            <th></th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SuperficieLocal)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NbrPieceLocal)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TitreLocal)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PrixRefLocationLocal)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Adresse.quartier)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Adresse.Ville)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Immeuble.NomImmeuble)
+                                </td>
+                                
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TypeLocal.Description)
+                                </td>
+                                <td>
+                                    @{
+                            if (Html.DisplayFor(modelItem => item.Staut).ToString() == "0")
+                            {
+                                ViewBag.dispo = "success";
+                                ViewBag.ico = "fa-check-square";
+                                ViewBag.chaine = "Oui ";
+                                //ViewBag.SuppLocal = Html.ActionLink("Supprimer", "Delete", new { id = item.CodeLocal });
+                                ViewBag.SuppLocal = Url.Action("DeleteLoc", new { id = item.CodePers });
+
+                            }
+                            else if (Html.DisplayFor(modelItem => item.Staut).ToString() == "1")
+                            {
+                                ViewBag.dispo = "danger";
+                                ViewBag.ico = "fa-minus-square";
+                                ViewBag.chaine = "Non";
+                                ViewBag.SuppLocal = "";
+
+                            }
+
+                                    }<center>
+                                        <span class="label label-sm label-@ViewBag.dispo">
+                                            <i class="fa @ViewBag.ico"></i> @ViewBag.chaine
+                                        </span>
+                                    </center>
+                                </td>
+                                <td>
+                                    @*@Html.ActionLink("Details", "Details", new { id = item.CodeLocal }) |
+                                        @ViewBag.SuppLocal*@
+
+                                    <a href="@Url.Action("DetailsLocal", new { id = item.CodeLocal }) " class="btn default btn-xs green">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="@ViewBag.SuppLocal" class="btn default btn-xs black">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

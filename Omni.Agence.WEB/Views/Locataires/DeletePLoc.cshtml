@@ -1,0 +1,20 @@
+﻿@model Omni.Agence.DAL.Operation
+
+<h3>Voulez vous vraiment supprimer ce paiement  ?!</h3>
+<div>
+    <h4>Code paiement @Html.DisplayFor(model => model.codeOp)</h4>
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-lg red" />
+
+            <a href="@Url.Action("Index")" class="btn btn-lg default">
+                Retour
+            </a>
+        </div>
+    }
+</div>

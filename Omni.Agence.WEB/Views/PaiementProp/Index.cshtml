@@ -1,0 +1,282 @@
+﻿@model Omni.Agence.DAL.Operation
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Paiement Propriétaire";
+    ViewBag.PD = "start active open";
+    ViewBag.PPrp = "active";
+    ViewBag.PDCS = "selected";
+}
+@section Styles {
+    @Styles.Render("~/Content/DataTableM")
+
+}
+<h3 class="page-title">
+    Paiement <small>Propriétaire</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-globe"></i>Paiement Propriétaire
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                </div>
+            </div>
+            <div class="portlet-body">
+                @using (Html.BeginForm("Print", "PaiementProp"))
+                {
+                    <div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Code propriétaire</label>
+                                    <div class="col-md-3">
+                                        <input type="text" name="CodePers" id="CodePers" value="@ViewBag.refCodeProp" readonly="readonly" />
+
+                                        <a class="btn default" data-toggle="modal" href="#form_modal2">
+                                            Charger un propriétaire
+                                        </a>
+                                    </div>
+                                </div>
+                                @*<div class="btn-group">
+                                        <button id="sample_editable_1_new" class="btn green">
+                                            Add New <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>*@
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    @*@Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+
+                    <table class="table table-striped table-bordered table-hover" id="sample_1">
+                        @*<thead>
+                            <tr>
+                                <th class="table-checkbox">
+                                    <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
+                                </th>
+                                <th>Date</th>
+                                <th>
+                                    Désignation
+                                </th>
+                                <th>
+                                    Montant loyer
+                                </th>
+                                <th>
+                                    Montant dépense
+                                </th>
+                                <th>
+                                    Date paiement
+                                </th>
+                            </tr>
+                        </thead>*@
+                        <thead>
+                            <tr>
+                                <th class="table-checkbox">
+                                    <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
+                                </th>
+                                <th>Locataire</th>
+                                <th>
+                                    Période
+                                </th>
+                                <th>
+                                   Type paiement
+                                </th>
+                                <th>
+                                    Montant loyer
+                                </th>
+                                <th>
+                                    Dépenses
+                                </th>
+                                <th>
+                                    Montant dépenses
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @using Omni.Agence.DAL;
+                            @{
+
+                    if (ViewBag.listProp != null)
+                    {
+                        List<Operation> listOp;
+                        listOp = ViewBag.listProp;
+                        foreach (var item in listOp)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="checkboxes" name="tab[]" value="@item.codeOp" />
+
+                                    @*@Html.CheckBoxFor(modelItem => item.ifSelected, new { @class = "checkboxes" })*@
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dateOp)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Depense.Description)
+                                    @Html.DisplayFor(modelItem => item.PaiementLoyer.ContratLocation.Local.TitreLocal)
+                                </td>
+                                <td>
+                                    @if (item.codeType == 1)
+                                    {
+                                        @*@Html.DisplayFor(modelItem => item.montant * (100 - (item.PaiementLoyer.ContratLocation.TaxeDedilite +
+                                            item.PaiementLoyer.ContratLocation.Charge +
+                                            item.PaiementLoyer.ContratLocation.Local.ServiceLocal)) / 100)*@
+                                        @Html.DisplayFor(modelItem => item.montant)
+                                    }
+                                </td>
+                                <td>
+
+                                    @if (item.codeType == 3)
+                                    {
+                                        @Html.DisplayFor(modelItem => item.montant)
+                                    }
+
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Depense.DateFact)
+                                    @Html.DisplayFor(modelItem => item.PaiementLoyer.DateFact)
+                                </td>
+
+                            </tr>
+                        }
+                    }
+
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align:center">
+                                    <strong>
+                                        Total
+                                    </strong>
+                                </td>
+                                <td style="text-align:center">
+                                    <strong>
+                                        @if (ViewBag.totalPL != null)
+                                        {
+                                            @ViewBag.totalPL
+
+                                        }
+                                    </strong>
+                                </td>
+                                <td style="text-align:center">
+                                    <strong>
+                                        @if (ViewBag.totalD != null)
+                                        {
+                                            @ViewBag.totalD
+
+                                        }
+                                    </strong>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-6">
+
+                        </div>
+                        <div class="col-md-6">
+                            <h2>
+                                Total :
+                                @if (ViewBag.Total != null)
+                                {
+
+                                    @ViewBag.Total
+
+                                }
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-offset-6">
+
+                                        <a class="btn blue" data-toggle="modal" href="#basic">
+                                            Valider le paiement
+                                        </a>
+                                        @*<button type="reset" class="btn default">Annuler</button>*@
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">Confirmation</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                                    <input type="submit" class="btn blue" value="Valider" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>
+
+<div id="form_modal2" class="modal fade" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        @*<div class="modal-content">*@
+
+        <div class="modal-body" style="width:670px">
+
+            @Html.Partial("ListLocataire")
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/DataTableM")
+
+    <script>
+        jQuery(document).ready(function () {
+            TableManaged.init();
+        });
+    </script>
+
+}
+

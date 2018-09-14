@@ -1,0 +1,177 @@
+﻿
+           @using System.Linq;
+@using System.Data.Entity;
+
+
+@{Layout = "";}
+
+@{
+    Omni.Agence.DAL.AgenceEntities db = new Omni.Agence.DAL.AgenceEntities();
+
+    var locList = db.Personnes.Include(p => p.Adresse).Include(p => p.TypePersonne).Where(p => p.CodeTypePersonne.Equals(1));
+    List<Omni.Agence.DAL.Personne> locataires = locList.ToList();
+}
+
+
+<div class="col-md-12">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-gift"></i>Propriétaires
+            </div>
+            <ul class="nav nav-tabs">
+
+                <li>
+                    <a href="#portlet_tab2" data-toggle="tab">
+                        Entreprise
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="#portlet_tab1" data-toggle="tab">
+                        Personne
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="portlet-body">
+            <div class="tab-content">
+                <div class="tab-pane active" id="portlet_tab1">
+                   
+                    <table class="table table-striped table-bordered table-hover" id="sample_2">
+                        <thead>
+                            <tr>
+                                <th>Code propriétaire</th>
+                                <th>
+                                    Nom Prénom
+                                </th>
+                                <th>
+                                    Identifiant
+                                </th>
+                                <th>
+                                    Employeur
+                                </th>
+
+                               
+                                <th>
+                                    Fonction
+                                </th>
+
+                                <th>
+                                    Mobile
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in locataires)
+                            {
+                                if (string.IsNullOrEmpty(item.rc))
+                                {
+                                    <tr>
+                                        <td>
+                                            @*<a href="@Url.Action("SelectProp", new { id = item.CodePers })">
+                                                @Html.DisplayFor(modelItem => item.CodePers)
+                                            </a>*@
+                                            <a href="@Url.Action("SelectProp", new { id = item.CodePers })">
+                                                @Html.DisplayFor(modelItem => item.RefCodePers)
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.nom) @Html.DisplayFor(modelItem => item.prenom)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.cin): @Html.DisplayFor(modelItem => item.carteSejour)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.employeur)
+                                        </td>
+
+                                    
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.fonction)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TelMobilPers)
+                                        </td>
+
+                                    
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane" id="portlet_tab2">
+                    
+                    <table class="table table-striped table-bordered table-hover" id="sample_3">
+                        <thead>
+                            <tr>
+                                <th>Code propriétaire</th>
+                                <th>
+                                    Nom
+                                </th>
+                                <th>
+                                    RC
+                                </th>
+                                <th>
+                                    Activité
+                                </th>
+
+                                <th>
+                                    Fixe
+                                </th>
+                                <th>
+                                    Conseiller(e)
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in locataires)
+                            {
+                                if (!string.IsNullOrEmpty(item.rc))
+                                {
+                                    <tr>
+                                        <td>
+                                            @*<a href="@Url.Action("SelectProp", new { id = item.CodePers })">
+                                                @Html.DisplayFor(modelItem => item.CodePers)
+                                            </a>*@
+                                            <a href="@Url.Action("SelectProp", new { id = item.RefCodePers })">
+                                                @Html.DisplayFor(modelItem => item.RefCodePers)
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.employeur)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.rc)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.activite)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TelFixPers)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.nom) @Html.DisplayFor(modelItem => item.prenom)
+                                        </td>
+
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END EXAMPLE TABLE PORTLET-->
+</div>

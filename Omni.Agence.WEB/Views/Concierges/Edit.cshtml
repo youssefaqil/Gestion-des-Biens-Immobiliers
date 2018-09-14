@@ -1,0 +1,137 @@
+﻿@model Omni.Agence.DAL.Concierge
+
+@{
+    ViewBag.Title = "Edit";
+    ViewBag.PD = "start active open";
+    ViewBag.PDC = "active";
+    ViewBag.PDCS = "selected";
+}
+
+
+<h3 class="page-title">
+    Concierge <small>Modifier</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i><a href="@Url.Action("Index")">Concierges</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+
+    </ul>
+
+</div>
+
+<h2>@Html.DisplayFor(model => model.NomConci) @Html.DisplayFor(model => model.PrenomConci) </h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="tab-content">
+        <div class="tab-pane active">
+            <div class="portlet box blue-madison">
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="horizontal-form">
+                        <div class="form-body">
+                            <h3 class="form-section">Informations concierge</h3>
+                          @Html.HiddenFor(model => Model.NumConcierge)
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Nom:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.NomConci, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.NomConci, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Prénom:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.PrenomConci, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.PrenomConci, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">CIN:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.CinConci, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.CinConci, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Salaire:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.SalaireConci, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.SalaireConci, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Téléphone:</label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.TelConci, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.TelConci, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                           
+                           
+                           
+                            <!--/row-->
+
+                        </div>
+                        <div class="form-actions right">
+                            <button type="reset" class="btn default">Cancel</button>
+
+
+
+                            <input type="submit" value="Enregistrer" class="btn blue-madison" />
+
+                        </div>
+                    </form>
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@*<div>
+        @Html.ActionLink("Retour", "Index")
+    </div>*@
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

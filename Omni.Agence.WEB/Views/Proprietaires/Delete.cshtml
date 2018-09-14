@@ -1,0 +1,66 @@
+﻿@using Omni.Agence.DAL;
+@model Omni.Agence.DAL.Personne
+
+@{
+    ViewBag.Title = "Delete";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PL2 = "active";
+    ViewBag.PL3 = "selected";
+}
+<h3 class="page-title">
+    Propriétaires <small>Confirmation de suppression</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i>
+            <a href="@Url.Action("Index")">Propriétaires</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+    </ul>
+</div>
+
+
+<div>
+    <h4>@Html.DisplayFor(model => model.cin) @Html.DisplayFor(model => model.carteSejour) </h4>
+    <hr />
+    
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        bool tr = false;
+        List<Local> listLocal= Model.Locals.ToList();
+        for (int i = 0; i < Model.Locals.Count(); i++) { 
+            if (listLocal[i].ContratLocations.Count() > 0)
+            {
+                tr = true;
+            }
+          
+        }
+        if (tr == true)
+        {
+            <h3>Vous ne pouvez pas supprimer le propriétaire @Html.DisplayFor(model => model.nom) @Html.DisplayFor(model => model.prenom) .</h3>
+            <br />
+            <h4>Veuillez supprimer tous les contrats de location relatifs à ses locaux. </h4>
+
+        }
+        else if (tr == false)
+        {
+            <h3>Voulez vous vraiment supprimer @Html.DisplayFor(model => model.nom) @Html.DisplayFor(model => model.prenom) ?!</h3>
+        <div class="form-actions no-color">
+
+            <input type="submit" value="Confirmer" class="btn btn-lg red" /> 
+            
+            <a href="@Url.Action("Index")" class="btn btn-lg default">
+                Retour 
+            </a>
+        </div>
+    }}
+</div>

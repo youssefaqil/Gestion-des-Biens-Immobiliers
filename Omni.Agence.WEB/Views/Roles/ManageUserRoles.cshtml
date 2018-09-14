@@ -1,0 +1,185 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Gestion des utilisateurs";
+     ViewBag.RU = "start active open";
+    ViewBag.RUS = "active";
+}
+<h3 class="page-title">
+    Administration <small></small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+    </ul>
+</div>
+<h2>Gestion des utilisateurs</h2>
+@Html.ActionLink("Créer un rôle", "Create") | @Html.ActionLink("Gestion des utilisateurs et ses rôles", "ManageUserRoles") | 
+    @Html.ActionLink("Nouveau utilisateur", "Register", "Account")
+
+<hr />
+
+<h2>Ajouter un rôle</h2>
+
+@using (Html.BeginForm("RoleAddToUser", "Roles"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                
+                <label class="control-label col-md-3">Utilisateur :</label>
+                <div class="col-md-9">
+                    @Html.DropDownList("UserName", (IEnumerable<SelectListItem>)ViewBag.userList, "Sélectionner ...", new {@class="form-control" })
+                </div>
+            </div>
+        </div>
+        <!--/span-->
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">Rôle :</label>
+                <div class="col-md-9">
+                    @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Sélectionner ...", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <!--/span-->
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                
+                <div class="col-md-9">
+                    <input type="submit" value="Enregistrer" class="btn default " />
+                </div>
+            </div>
+        </div>
+    </div>
+   
+}
+<hr />
+<h3>Les rôles dun utilisateur</h3>
+@using (Html.BeginForm("GetRoles", "Roles"))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+
+                <label class="control-label col-md-3">Utilisateur :</label>
+                <div class="col-md-9">
+                   @Html.DropDownList("UserName", (IEnumerable<SelectListItem>)ViewBag.userList, "Sélectionner ...", new {@class="form-control" })
+                </div>
+            </div>
+        </div>
+        </div>
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                
+                <div class="col-md-9">
+                    <input type="submit" value="Afficher les rôles" class="btn default " />
+                </div>
+            </div>
+        </div>
+    </div>
+        }
+
+        @if (ViewBag.RolesForThisUser != null)
+{
+            <div style="background-color:lightgrey;">
+                <h3>Rôles pour cet utilisateur </h3>
+                <ol>
+                    @foreach (string s in ViewBag.RolesForThisUser)
+            {
+                        <li>@s</li>
+            }
+                </ol>
+            </div>
+}
+
+        <hr />
+        <h3>Retirer un rôle</h3>
+
+        @using (Html.BeginForm("DeleteRoleForUser", "Roles"))
+{
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+
+                <label class="control-label col-md-3">Utilisateur :</label>
+                <div class="col-md-9">
+                    @Html.DropDownList("UserName", (IEnumerable<SelectListItem>)ViewBag.userList, "Sélectionner ...", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <!--/span-->
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">Rôle :</label>
+                <div class="col-md-9">
+                    @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Sélectionner ...", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <!--/span-->
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+
+                <div class="col-md-9">
+                    <input type="submit" value="Retirer le rôle" class="btn default " />
+                </div>
+            </div>
+        </div>
+    </div>
+           
+}
+        <hr />
+        <h3>Supprimer utilisateur</h3>
+
+        @using (Html.BeginForm("DeleteUser", "Roles"))
+{
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+
+                <label class="control-label col-md-3">Utilisateur :</label>
+                <div class="col-md-9">
+                    @Html.DropDownList("UserName", (IEnumerable<SelectListItem>)ViewBag.userList, "Sélectionner ...", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <!--/span-->
+        
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+
+                <div class="col-md-9">
+                    <input type="submit" value="Supprimer cet utilisateur" class="btn default " />
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

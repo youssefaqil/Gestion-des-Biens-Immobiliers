@@ -1,0 +1,635 @@
+﻿@model Omni.Agence.DAL.Personne
+
+@{
+    ViewBag.Title = "Nouveau Propriétaire";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PL2 = "active";
+    ViewBag.PL3 = "selected";
+}
+
+
+
+
+<h3 class="page-title">
+    Propriétaires <small>Création</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i>
+            <a href="@Url.Action("Index")">Propriétaires</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+
+    </ul>
+
+</div>
+<br />
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-user"></i>Propriétaire
+        </div>
+        <div class="tools">
+            <a href="javascript:;" class="collapse">
+            </a>
+
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <div class="tabbable">
+            <ul class="nav nav-tabs nav-tabs-lg">
+                <li class="active col-md-6">
+                    <a href="#tab_1" data-toggle="tab">
+                        <h3><center>Propriétaire personne</center></h3>
+                    </a>
+                </li>
+                <li class="col-md-6">
+                    <a href="#tab_2" data-toggle="tab">
+                        <h3><center>Entreprise</center></h3>
+                        @*<span class="badge badge-success">
+                                4
+                            </span>*@
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_1">
+                    @using (Html.BeginForm("Create", "Proprietaires", FormMethod.Post, new {  @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+            <!-- BEGIN FORM-->
+                        <div class="form-body">
+                            @*<div class="alert alert-danger display-hide">
+                                    <button class="close" data-close="alert"></button>
+                                    Attention___ Veuillez vérifier les champs
+                                </div>*@
+                            @*<div class="alert alert-success display-hide">
+                                    <button class="close" data-close="alert"></button>
+                                    Your form validation is successful!
+                                </div>*@
+                            <h3 class="form-section">Informations</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-9">
+                                        <select class="form-control btn blue-sharp-stripe" id="CIN" name="CIN">
+                                            <option value="CIN">CIN</option>
+                                            <option value="Carte Séjour">Carte séjour</option>
+                                            <option value="Passport">Passeport</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.carteSejour, new { htmlAttributes = new { @class = "form-control", title = "Veuillez saisir l'identifiant du propriétaire" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.carteSejour, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                        <div class="col-md-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Nom<span class="required">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.nom, new { htmlAttributes = new { @class = "form-control", title = "Veuillez saisir l'identifiant du propriétaire" } })
+                                            @*<input type="text" name="nom" class="form-control" title="Veuillez saisir le nom du propriétaire" />*@
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.nom, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Prénom<span class="required">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.prenom, new { htmlAttributes = new { @class = "form-control", title = "Veuillez saisir l'identifiant du propriétaire" } })
+                                            @*<input type="text" name="prenom" class="form-control" title="Veuillez saisir le prénom du propriétaire" />*@
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.prenom, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 ">Sexe</label>
+                                        <div class="col-md-9">
+                                            <select id="sexe" name="sexe" class="form-control btn blue-sharp-stripe">
+                                                <option value="1">Homme</option>
+                                                <option value="0">Femme</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Situation</label>
+                                        <div class="col-md-9">
+                                            <select id="situationMatrimonial" name="situationMatrimonial" class="select2_category form-control btn blue-sharp-stripe" data-placeholder="Choisisser une situation" tabindex="1">
+                                                <option value="0">Sélectionner...</option>
+                                                <option value="Célibataire">Célibataire</option>
+                                                <option value="Marié">Marié(e)</option>
+                                                <option value="Divorcé">Divorcé(e)</option>
+                                                <option value="Veuf">Veuf(ve)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label class="control-label col-md-3">Nationalité </label>
+                                        <div class="col-md-9">
+                                            @*<input type="text" name="nationalite" class="form-control" title="Veuillez saisir le nationalité du propriétaire" />*@
+                                            @Html.EditorFor(model => model.nationalite, new { htmlAttributes = new { @class = "form-control", title = "Veuillez saisir l'identifiant du propriétaire" } })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label class="control-label col-md-3">
+                                            Mobile
+                                            <span class="required">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.TelMobilPers, new { htmlAttributes = new { @class = "form-control", title = "Veuillez saisir l'identifiant du propriétaire" } })
+                                            @*<input type="text" name="TelMobilPers" class="form-control" title="Veuillez saisir le numero mobile du propriétaire" />*@
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.TelMobilPers, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="form-section">Informations professionnelles</h3>
+
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <label class="control-label col-md-3">Email </label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.EmailPers, new { htmlAttributes = new { @class = "form-control", title = "Veuillez saisir l'identifiant du propriétaire" } })
+                                            @*<input type="text" name="EmailPers" class="form-control" title="Veuillez saisir l'adresse mail du propriétaire" />*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Fix </label>
+                                        <div class="col-md-9">
+                                            @*<input type="text" name="TelFixPers" class="form-control" title="Veuillez saisir le numero Fix du propriétaire" />*@
+                                            @Html.EditorFor(model => model.TelFixPers, new { htmlAttributes = new { @class = "form-control", title = "Veuillez saisir l'identifiant du propriétaire" } })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Activité </label>
+                                        <div class="col-md-9">
+                                            @Html.EditorFor(model => model.activite, new { htmlAttributes = new { @class = "form-control", title = "Veuillez saisir l'identifiant du propriétaire" } })
+                                            @*<input type="text" name="activite" class="form-control" title="Veuillez saisir le code Postale du propriétaire" />*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Fonction </label>
+                                        <div class="col-md-9">
+                                            @*<input type="text" name="fonction" class="form-control" title="Veuillez saisir la fonction du propriétaire" />*@
+                                            @Html.EditorFor(model => model.fonction, new { htmlAttributes = new { @class = "form-control", title = "Veuillez saisir l'identifiant du propriétaire" } })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Employeur </label>
+                                        <div class="col-md-9">
+                                            @*<input type="text" name="employeur" class="form-control" title="Veuillez saisir l'employeur du propriétaire" />*@
+                                            @Html.EditorFor(model => model.employeur, new { htmlAttributes = new { @class = "form-control", title = "Veuillez saisir l'identifiant du propriétaire" } })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="form-section">Adresse</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Code postal</label>
+                                        <div class="col-md-9">
+                                            @*<input type="text" name="CPadress" class="form-control" title="Veuillez saisir le code postale du propriétaire" />*@
+                                            @Html.EditorFor(model => model.Adresse.CPadress, new { htmlAttributes = new { @class = "form-control", title = "Veuillez saisir l'identifiant du propriétaire" } })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Adresse
+                                            <span class="required">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-9">
+                                            @*<input type="text" name="descAdresse" class="form-control" title="Veuillez saisir l'adresse du propriétaire" />*@
+                                            @Html.EditorFor(model => model.Adresse.descAdresse, new { htmlAttributes = new { @class = "form-control", title = "Veuillez saisir l'identifiant du propriétaire" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.Adresse.descAdresse, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Quartier
+                                            <span class="required">
+                                                *
+                                            </span>
+                                        </label>
+                                        <div class="col-md-9">
+                                            @*<input type="text" name="quartier" class="form-control" title="Veuillez saisir le quartier du propriétaire" />*@
+                                            @Html.EditorFor(model => model.Adresse.quartier, new { htmlAttributes = new { @class = "form-control", title = "Veuillez saisir l'identifiant du propriétaire" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.Adresse.quartier, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><br />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Ville</label>
+                                        <div class="col-md-9">
+                                            @*<input type="text" name="Ville" class="form-control" title="Veuillez saisir le Ville du propriétaire" />*@
+                                            @Html.EditorFor(model => model.Adresse.Ville, new { htmlAttributes = new { @class = "form-control", title = "Veuillez saisir l'identifiant du propriétaire" } })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Pays</label>
+                                        <div class="col-md-9">
+                                            @*<input type="text" name="Pays" class="form-control" title="Veuillez saisir le Pays du propriétaire" />*@
+                                            @Html.EditorFor(model => model.Adresse.Pays, new { htmlAttributes = new { @class = "form-control", title = "Veuillez saisir l'identifiant du propriétaire" } })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <input type="submit" class="btn blue" value="Enregistrer" />
+                                                @*<button type="submit" class="btn blue">Enregistrer</button>*@
+                                                <button type="reset" class="btn default">Annuler</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            <!-- END FORM-->
+
+                    }
+                   
+                    </div>
+                <div class="tab-pane" id="tab_2">
+                    @using (Html.BeginForm("Create", "Proprietaires", FormMethod.Post, new { id = "form_sample_2", @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                         <div class="form-body">
+                            <h3 class="form-section">Informations</h3>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Nom 
+                                                <span class="required">
+                                                    *
+                                                </span></label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="employeurM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Activité 
+                                                <span class="required">
+                                                    *
+                                                </span></label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="activiteM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+                                                <span class="help-block">
+                                                    
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                RC
+                                                <span class="required">
+                                                    *
+                                                </span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="rcM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Id. Fiscale
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="idFiscaleM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Raison sociale
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="rsM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Patente
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="patenteM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Fixe
+                                                <span class="required">
+                                                    *
+                                                </span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="fixM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Fax
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="faxM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="form-section">Conseiller(e)</h3>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Nom<span class="required">
+                                                    *
+                                                </span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="nomM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Prénom<span class="required">
+                                                    *
+                                                </span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="prenomM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Fonction </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="fonctionM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+
+                                            <label class="control-label col-md-3">
+                                                Mobile
+                                                <span class="required">
+                                                    *
+                                                </span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="mobileM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Email
+
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="emailM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="form-section">Adresse</h3>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Code postal</label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="cpM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Adresse
+                                                <span class="required">
+                                                    *
+                                                </span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="adresseM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                Quartier
+                                                <span class="required">
+                                                    *
+                                                </span>
+                                            </label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="quartierM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><br />
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Ville</label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="villeM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Pays</label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="paysM" class="form-control" title="Veuillez saisir le nom du propriétaire" />
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-offset-3 col-md-9">
+                                                    <input type="submit" class="btn blue" value="Enregistrer" />
+                                                    <button type="reset" class="btn default">Annuler</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+                <script src="~/admin/pages/scripts/form-validationProp.js"></script>
+
+                <script>
+                    jQuery(document).ready(function () {
+                        FormValidation.init();
+                    });
+                </script>
+            }

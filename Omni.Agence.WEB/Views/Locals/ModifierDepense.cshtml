@@ -1,0 +1,132 @@
+﻿@model Omni.Agence.DAL.Operation
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Modifier Depense";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PLL = "active";
+    ViewBag.PL3 = "selected";
+}
+@section Styles {
+    @Styles.Render("~/bundles/DatePicker")
+}
+
+
+<h3 class="page-title">
+    Local <small>Modifier dépense</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-home"></i><a href="@Url.Action("Index")">Local</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Details", new { id = ViewBag.CodeLoc })">Réf: @ViewBag.CodeLoc</a>
+            
+        </li>
+        
+
+    </ul>
+
+</div>
+
+
+<h2>Modifier Dépense</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*@Html.HiddenFor(model => model.codeOp)
+            @Html.HiddenFor(model => model.CodePers)
+            @Html.HiddenFor(model => model.dateOp)
+            @Html.HiddenFor(model => model.Depense.NumTypeDesignationDespense)*@
+
+        @Html.HiddenFor(model => model.codeOp)
+        @Html.HiddenFor(model => model.Depense.codeOp)
+        @Html.HiddenFor(model => model.codeType)
+        @Html.HiddenFor(model => model.CodePers)
+        @Html.HiddenFor(model => model.dateOp)
+        @Html.HiddenFor(model => model.Depense.NumTypeDesignationDespense)
+        @Html.HiddenFor(model => model.Depense.CodeLocal)
+        @Html.HiddenFor(model => model.Depense.CodeImmeuble)
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Désignation</label>
+                   
+            <div class="col-md-5">
+                @Html.DropDownList("NumTypeDesignationDespense", null, htmlAttributes: new { @class = "form-control btn red-sunglo-stripe" })
+                @Html.ValidationMessageFor(model => model.codeType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.montant, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.montant, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.montant, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            
+            <label class="control-label col-md-2">Date dépense </label>
+
+                <div class="col-md-5  date-picker input-daterange" data-date="10/11/2012" data-date-format="dd/mm/yyyy">
+                    <input type="text" id="DateDepense" name="Depense.DateDepense" class="form-control" value="@Model.Depense.DateDepense.Value.ToString("dd/MM/yyyy")" required />
+                    @*@Html.EditorFor(model => model.Depense.DateDepense, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @*<span class="help-block">
+                @Html.ValidationMessageFor(model => model.Depense.DateDepense, "", new { @class = "text-danger" })
+            </span>*@
+                </div>
+
+
+                @*@Html.EditorFor(model => model.Depense.DateDepense, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Depense.DateDepense, "", new { @class = "text-danger" })*@
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Depense.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.TextAreaFor(model => model.Depense.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Depense.Description, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Enregistrer" class="btn btn-default red-sunglo" />
+                <a href="@Url.Action("Details", new {id=Model.Depense.CodeLocal })" class="btn default">
+                    Retour
+                </a> 
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/DatePicker")
+    <script type="text/javascript">
+    // When the document is ready
+    $(document).ready(function () {
+
+        $('.input-daterange').datepicker({
+            todayBtn: "linked"
+        });
+
+    });
+    </script>
+
+}

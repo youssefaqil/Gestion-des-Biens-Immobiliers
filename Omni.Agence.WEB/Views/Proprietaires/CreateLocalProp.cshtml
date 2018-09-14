@@ -1,0 +1,543 @@
+﻿@model Omni.Agence.DAL.Local
+@{
+    ViewBag.Title = "CreateLocalProp";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PL2 = "active";
+    ViewBag.PL3 = "selected";
+}
+@section Styles {
+    @Styles.Render("~/bundles/DatePicker")
+}
+@{
+Personne pers=ViewBag.pers; 
+}
+<h3 class="page-title">
+    Propriétaires <small>Création Local</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i>
+            <a href="@Url.Action("Index")">Propriétaires</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            @*<a href="@Url.Action("Details", new { id = ViewBag.codeprp })"> @ViewBag.nomprp @ViewBag.prenomprp</a>*@
+            @if (string.IsNullOrEmpty(pers.rc))
+            {
+                <a href="@Url.Action("Details", new { id = pers.CodePers })"> @pers.nom @pers.prenom</a>
+            }
+            else
+            {
+                <a href="@Url.Action("Details", new { id = pers.CodePers })"> @pers.employeur </a>
+            }
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-home"></i>
+            
+            <a href="@Url.Action("CreateLocalProp", new { id = pers.CodePers })"> Locaux</a>
+        </li>
+
+    </ul>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-edit"></i>Tous les locaux
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        @*<div class="col-md-6">
+
+                            <div class="btn-group">
+                                <a href="@Url.Action("CreateLocalProp", new { id = @ViewBag.codeprp })" class="btn green tooltips" data-placement="bottom" data-original-title="Nouveau Local">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+
+
+                            </div>
+                        </div>*@
+                    </div>
+                </div>
+                @*<div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                @*<div class="btn-group">
+                                    @Html.ActionLink("Créer Nouveau", "Create")
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>*@
+                <table class="table table-striped table-hover table-bordered" id="sample_editable_2">
+                    <thead>
+                        <tr>
+                            <th>
+                                m²
+                            </th>
+                            <th>
+                                Pièces
+                            </th>
+
+                            <th>
+                                Titre
+                            </th>
+
+
+                            <th>
+                                Prix
+                            </th>
+
+                            <th>
+                                Quartier
+                            </th>
+                            <th>
+                                Ville
+                            </th>
+                            <th>
+                                Immeuble
+                            </th>
+
+                            <th>
+                                Type
+                            </th>
+                            <th>Disponibilité</th>
+                            <th></th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @using Omni.Agence.DAL;
+                        @{
+                            List<Local> listLoc=ViewBag.listLocals;
+                        }
+                        @foreach (var item in listLoc)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SuperficieLocal)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NbrPieceLocal)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TitreLocal)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PrixRefLocationLocal)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Adresse.quartier)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Adresse.Ville)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Immeuble.NomImmeuble)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TypeLocal.Description)
+                                </td>
+                                <td>
+                                    @{
+                            if (Html.DisplayFor(modelItem => item.Staut).ToString() == "0")
+                            {
+                                ViewBag.dispo = "success";
+                                ViewBag.ico = "fa-check-square";
+                                ViewBag.chaine = "Oui ";
+                                //ViewBag.SuppLocal = Html.ActionLink("Supprimer", "Delete", new { id = item.CodeLocal });
+                                ViewBag.SuppLocal = Url.Action("DeleteLoc", new { id = item.CodePers });
+
+                            }
+                            else if (Html.DisplayFor(modelItem => item.Staut).ToString() == "1")
+                            {
+                                ViewBag.dispo = "danger";
+                                ViewBag.ico = "fa-minus-square";
+                                ViewBag.chaine = "Non";
+                                ViewBag.SuppLocal = "";
+
+                            }
+
+                                    }<center>
+                                        <span class="label label-sm label-@ViewBag.dispo">
+                                            <i class="fa @ViewBag.ico"></i> @ViewBag.chaine
+                                        </span>
+                                    </center>
+                                </td>
+                                <td>
+                                    @*@Html.ActionLink("Details", "Details", new { id = item.CodeLocal }) |
+                                        @ViewBag.SuppLocal*@
+
+                                    <a href="@Url.Action("DetailsLocal", new { id = item.CodeLocal }) " class="btn default btn-xs green">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    @*<a href="@ViewBag.SuppLocal" class="btn default btn-xs black">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="tab-content">
+        <div class="tab-pane active">
+            <div class="portlet light bg-inverse">
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="horizontal-form">
+                        <div class="form-body">
+                            <h3 class="form-section">Nouveau Local</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Type :</label>
+
+                                        <div class="col-md-9">
+                                            @Html.DropDownList("NumTypeLocal", null, htmlAttributes: new { @class = "form-control " })
+                                            @Html.ValidationMessageFor(model => model.NumTypeLocal, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4">Prix de réference:</label>
+                                        <div class="col-md-6">
+                                            @*@Html.EditorFor(model => model.PrixRefLocationLocal, new { htmlAttributes = new { @class = "form-control" } })*@
+                                            <div class="input-group">
+                                                @Html.EditorFor(model => model.PrixRefLocationLocal, new { htmlAttributes = new { @class = "form-control" } })
+                                                <span class="input-group-addon">
+                                                    <i class="fa">DH</i>
+                                                </span>
+                                                </div>
+                                                <span class="help-block">
+                                                    @Html.ValidationMessageFor(model => model.PrixRefLocationLocal, "", new { @class = "text-danger" })
+                                                </span>
+                                            </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div><br />
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Superficie:</label>
+                                        <div class="col-md-7">
+                                            <div class="input-group">
+                                                @Html.EditorFor(model => model.SuperficieLocal, new { htmlAttributes = new { @class = "form-control" } })
+                                                <span class="input-group-addon">
+                                                    <i class="fa">M²</i>
+                                                </span>
+                                            </div>
+                                                <span class="help-block">
+                                                    @Html.ValidationMessageFor(model => model.SuperficieLocal, "", new { @class = "text-danger" })
+                                                </span>
+                                            </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Pièces:</label>
+                                        <div class="col-md-9">
+
+                                            @Html.EditorFor(model => model.NbrPieceLocal, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.NbrPieceLocal, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Service:</label>
+                                        <div class="col-md-7">
+                                            <div class="input-group">
+                                                @Html.EditorFor(model => model.ServiceLocal, new { htmlAttributes = new { @class = "form-control",min=0,max=100 } })
+                                                
+                                                <span class="input-group-addon">
+                                                    <i class="fa">%</i>
+                                                </span>
+                                            </div>
+                                                <span class="help-block">
+                                                    @Html.ValidationMessageFor(model => model.ServiceLocal, "", new { @class = "text-danger" })
+                                                </span>
+                                            </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Titre:</label>
+                                        <div class="col-md-9">
+
+                                            @Html.EditorFor(model => model.TitreLocal, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.TitreLocal, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+
+                            <div class="row">
+                                
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Description:</label>
+                                        <div class="col-md-9">
+
+                                            
+                                            @Html.TextAreaFor(model => model.DescrLocal, new { cols = 60, rows = 3, @class = "form-control" })
+
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.DescrLocal, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <input type="hidden" name="CodePers" value="@ViewBag.codeprp" />
+                                    <!--/span-->
+                                </div><!--/row-->
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        
+                                    </div>
+                                </div>
+                                <!--/span-->
+                              
+
+
+
+
+                               
+                                    <!--/span-->
+                                </div>
+                            <h3 class="form-section">Autres informations</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        
+                                        <div class="checkbox-list">
+                                            <label class="checkbox-inline">
+                                                @Html.CheckBoxFor(model => model.rezCh.Value)  Rez de chaussée
+                                                @*@Html.CheckBoxFor(model => model.rezCh.Value)  Rez de chaussée*@
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                @Html.CheckBoxFor(model => model.Interphone.Value)  Interphone
+                                                @*@Html.CheckBoxFor(model => model.Interphone.Value)  Interphone*@
+                                            </label>
+                                        </div>
+                                    </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="checkbox-list">
+                                                <label class="checkbox-inline">
+                                                    @Html.CheckBoxFor(model => model.Parking.Value)  Parking
+                                                    @*@Html.CheckBoxFor(model => model.Parking.Value)  Parking*@
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    @Html.CheckBoxFor(model => model.Jardin.Value)  Jardin
+                                                    @*@Html.CheckBoxFor(model => model.Jardin.Value)  Jardin*@
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <br />
+                            <h3 class="form-section">Disponibilité</h3>
+                            <div class="row" >
+                                <div class=" date-picker input-daterange" data-date="10/11/2012" data-date-format="dd/mm/yyyy">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 ">Depuis:</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="DateDDispo" name="DateDDispo" class="form-control" required/>
+
+                                                @*@Html.EditorFor(model => model.DateDDispo, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">
+                            @Html.ValidationMessageFor(model => model.DateDDispo, "", new { @class = "text-danger" })
+                        </span>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Jusqu'à:</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="DateFDispo" name="DateFDispo" class="form-control" required />
+                                                @*@Html.EditorFor(model => model.DateFDispo, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="help-block">
+                            @Html.ValidationMessageFor(model => model.DateFDispo, "", new { @class = "text-danger" })
+                        </span>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <!--/span-->
+                                </div>
+                                </div>
+
+
+                            <br />
+                            
+                            <br />
+                            
+
+                            <h3 class="form-section">Adresse</h3>
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Code postal</label>
+                                        <div class="col-md-9">
+
+                                            @Html.EditorFor(model => model.Adresse.CPadress, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block">
+                                                @Html.ValidationMessageFor(model => model.Adresse.CPadress, "", new { @class = "text-danger" })
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="row">
+                                    <div class="col-md-6 ">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Adresse:</label>
+                                            <div class="col-md-9">
+
+                                                @Html.EditorFor(model => model.Adresse.descAdresse, new { htmlAttributes = new { @class = "form-control" } })
+                                                <span class="help-block">
+                                                    @Html.ValidationMessageFor(model => model.Adresse.descAdresse, "", new { @class = "text-danger" })
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Quartier:</label>
+                                            <div class="col-md-9">
+
+                                                @Html.EditorFor(model => model.Adresse.quartier, new { htmlAttributes = new { @class = "form-control" } })
+                                                <span class="help-block">
+                                                    @Html.ValidationMessageFor(model => model.Adresse.quartier, "", new { @class = "text-danger" })
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Ville:</label>
+                                            <div class="col-md-9">
+
+                                                @Html.EditorFor(model => model.Adresse.Ville, new { htmlAttributes = new { @class = "form-control" } })
+                                                <span class="help-block">
+                                                    @Html.ValidationMessageFor(model => model.Adresse.Ville, "", new { @class = "text-danger" })
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Pays:</label>
+                                            <div class="col-md-9">
+
+                                                @Html.EditorFor(model => model.Adresse.Pays, new { htmlAttributes = new { @class = "form-control" } })
+                                                <span class="help-block">
+                                                    @Html.ValidationMessageFor(model => model.Adresse.Pays, "", new { @class = "text-danger" })
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+
+                            </div>
+                        <div class="form-actions right">
+                            <button type="reset" class="btn default">Cancel</button>
+
+                            <input type="submit" value="Enregistrer" class="btn green" />
+
+                        </div>
+                       
+                    </form>
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/DatePicker")
+<script type="text/javascript">
+    // When the document is ready
+    $(document).ready(function () {
+
+        $('.input-daterange').datepicker({
+            todayBtn: "linked"
+        });
+
+    });
+</script>
+
+}

@@ -1,0 +1,97 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Acceuil";
+}
+
+<h3 class="page-title">
+    Accueil <small>Paiement et dépense</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+    </ul>
+</div>
+<div class="tiles">
+    <a href="@Url.Action("Index","Contrat")">
+        <div class="tile double double-down bg-grey-cascade">
+            <div class="tile-body">
+                <i class="icon-bar-chart"></i>
+            </div>
+            <div class="tile-object">
+                <div class="name">
+                   Paiement Loyer
+                </div>
+                <div class="number">
+                    @*(@ViewBag.nbrContratCount)*@
+                </div>
+            </div>
+        </div>
+    </a>
+    <a href="@Url.Action("Index","Contrat")">
+        <div class="tile double double-down bg-blue">
+            <div class="tile-body">
+                <i class="icon-bulb"></i>
+            </div>
+            <div class="tile-object">
+                <div class="name">
+                    Paiement Proppriétaire
+                </div>
+                <div class="number">
+                    @*(@ViewBag.nbrContratCount)*@
+                </div>
+            </div>
+        </div>
+    </a>
+    <a href="@Url.Action("Index","Contrat")">
+        <div class="tile double double-down bg-red-intense">
+            <div class="tile-body">
+                <i class="fa fa-legal"></i>
+                <i class="fa fa-home"></i>
+            </div>
+            <div class="tile-object">
+                <div class="name">
+                    Dépense Local
+                </div>
+                <div class="number">
+                    @*(@ViewBag.nbrContratCount)*@
+                </div>
+            </div>
+        </div>
+    </a>
+    <a href="@Url.Action("Index","Contrat")">
+        <div class="tile double  bg-red-intense">
+            <div class="tile-body">
+                <i class="fa fa-building"></i>
+            </div>
+            <div class="tile-object">
+                <div class="name">
+                    Dépense Immeuble
+                </div>
+                <div class="number">
+                    @*(@ViewBag.nbrContratCount)*@
+                </div>
+            </div>
+        </div>
+
+    </a>
+
+    <a href="@Url.Action("Index","Contrat")">
+        <div class="tile double  bg-blue-madison">
+            <div class="tile-body">
+                <i class="icon-user"></i>
+            </div>
+            <div class="tile-object">
+                <div class="name">
+                    Concierge
+                </div>
+                <div class="number">
+                    @*(@ViewBag.nbrContratCount)*@
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

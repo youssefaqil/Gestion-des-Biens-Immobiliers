@@ -1,0 +1,53 @@
+﻿@model Omni.Agence.DAL.Operation
+
+@{
+    ViewBag.Title = "Supprimer dépense";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PLL = "active";
+    ViewBag.PL3 = "selected";
+}
+
+
+<h3 class="page-title">
+    Local <small>Dépense</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i>
+            <a href="@Url.Action("Index")">Local</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Details", new { id = Model.Depense.CodeLocal })">Réf: @Model.Depense.CodeLocal</a>
+
+        </li>
+
+    </ul>
+
+</div>
+
+<h2>Dépense local</h2>
+
+<h3>Voulez vous vraiment supprimer cette dépense?!</h3>
+<div>
+    
+    <hr />
+    
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn red-sunglo" />
+            <a href="@Url.Action("Details", new {id=Model.Depense.CodeLocal })" class="btn default">
+                Retour
+            </a>
+        </div>
+    }
+</div>

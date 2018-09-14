@@ -1,0 +1,187 @@
+﻿@model IEnumerable<Omni.Agence.DAL.ContratLocation>
+
+
+@{ ViewBag.Title = "Liste";
+   ViewBag.C = "start active open";
+   ViewBag.CC2 = "active";
+   ViewBag.PL3 = "selected";}
+
+
+
+
+
+<h3 class="page-title">
+    Contrat <small>Liste</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i><a href="@Url.Action("Index")">Contrat</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+    </ul>
+
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box green-haze">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-edit"></i>Tous les contrats
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+                        </div>
+
+                    </div>
+                </div>
+                <table class="table table-striped table-hover table-bordered" id="sample_editable_2">
+                    <thead>
+                        <tr>
+                            <th>
+                                Locataire
+                            </th>
+                            <th>
+                                Local
+                            </th>
+                            <th>
+                                Date de jouissance
+                            </th>
+                            <th>
+                                Date fin
+                            </th>
+                            <th>
+                                Garage
+                            </th>
+                            <th>
+                                Caution
+                            </th>
+                            <th>
+                                Loyer de base
+                            </th>
+                            <th>
+                                Loyer net
+                            </th>
+                            <th>
+                                Statut
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        
+                        @foreach (var item in Model)
+                        {
+                            
+                            <tr>
+                                
+                                    @if (string.IsNullOrEmpty(item.Personne.rc))
+                                    {
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Personne.nom) @Html.DisplayFor(modelItem => item.Personne.prenom)
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td> @Html.DisplayFor(modelItem => item.Personne.employeur)</td>
+                                    }
+
+                                        
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Local.TitreLocal)
+                                </td>
+
+                                <td>
+                                    @item.DateJuissance.Value.ToString("dd/MM/yyyy")
+                                    @*@Html.DisplayFor(modelItem => item.DateJuissance)*@
+                                </td>
+
+                                <td>
+                                    @if (item.DateFinContrat.HasValue) {
+                                    @item.DateFinContrat.Value.ToString("dd/MM/yyyy")
+
+                                    }
+                                    else {  
+                                    }
+                                    
+                                    @*@item.DateFinContrat.Value.ToString("dd/MM/yyyy")*@
+                                    @*@Html.DisplayFor(modelItem => item.DateFinContrat)*@
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Garage)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Caution)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LoyerDebase)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LoyerNet)
+                                </td>
+                                <td>
+                                    @{
+                            if (Html.DisplayFor(modelItem => item.isClosed).ToString() == "1")
+                            {
+                                ViewBag.dispo = "success";
+                                ViewBag.ico = "fa-check-square";
+                                ViewBag.chaine = "En cours";
+                                //ViewBag.SuppLocal = Html.ActionLink("Supprimer", "Delete", new { id = item.CodeLocal });
+                                //ViewBag.SuppLocal = Url.Action("Delete", new { id = item.CodePers });
+
+                            }
+                            else if (Html.DisplayFor(modelItem => item.isClosed).ToString() == "0")
+                            {
+                                ViewBag.dispo = "danger";
+                                ViewBag.ico = "fa-minus-square";
+                                ViewBag.chaine = "Fermé";
+                                //ViewBag.SuppLocal = "";
+
+                            }
+
+                                    }<center>
+                                        <span class="label label-sm label-@ViewBag.dispo">
+                                            @ViewBag.chaine
+                                        </span>
+                                    </center>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Details", new { id = item.CodeContrat })" class="btn default btn-xs green-haze tooltips" data-placement="bottom" data-original-title="Détails Contrat">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,368 @@
+﻿@using Omni.Agence.DAL
+@model Omni.Agence.DAL.Local
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Details Local";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PL2 = "active";
+    ViewBag.PL3 = "selected";
+}
+
+
+<h3 class="page-title">
+    Propriétaires <small>Local</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i>
+            <a href="@Url.Action("Index")">Propriétaires</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+
+        @if (Model.Personne.rc.IsEmpty())
+        {
+            <li>
+                <a href="@Url.Action("Details", new {id=Model.CodePers })">@Html.DisplayFor(model => model.Personne.nom) @Html.DisplayFor(model => model.Personne.prenom)</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a href="@Url.Action("Details", new {id=Model.CodePers })">@Html.DisplayFor(model => model.Personne.employeur)</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+        }
+
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("CreateLocalProp", new { id = Model.CodePers })"> Locaux</a>
+        </li>
+    </ul>
+
+</div>
+<div class="portlet light bordered">
+<div class="portlet-title">
+    <div class="caption">
+        <i class="icon-equalizer font-green"></i>
+        <span class="caption-subject font-green bold uppercase">Infos</span>
+        <span class="caption-helper">Local</span>
+    </div>
+    <div class="tools">
+        <a href="" class="collapse">
+        </a>
+
+    </div>
+</div>
+<div class="portlet-body form">
+    <!-- BEGIN FORM-->
+    <form action="#" class="form-horizontal">
+        <div class="form-body">                      
+            <div class="row">
+                <div class="col-md-6">
+                    
+                    </div>
+                <div class="col-md-6">
+                    
+                        <a href="@Url.Action("EditLoc", new { id=Model.CodeLocal})" class="btn green">
+                            <i class="fa fa-pencil"></i>
+                            Modifier
+                        </a>
+                    <a href="#basic" data-toggle="modal" class="btn red">
+                        <i class="fa fa-trash-o"></i>
+                        Supprimer
+                    </a>
+                        <a href="@Url.Action("Index")" class="btn default">
+                            Retour
+                        </a>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title">Confirmation</h4>
+                            </div>
+                            @using (Html.BeginForm())
+                            {
+                                bool tr = false;
+                                //List<Local> listLocal = Model.Locals.ToList();
+                                
+                                    if (Model.ContratLocations.Count() > 0)
+                                    {
+                                        tr = true;
+                                    }
+                                
+                                if (tr == true)
+                                {
+
+                                    <div class="modal-body">
+                                        Vous ne pouvez pas supprimer ce Local @Html.DisplayFor(model => model.TitreLocal) .
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                                    </div>
+                                }
+                                else if (tr == false)
+                                {
+                                    <div class="modal-body">
+                                        Voulez vous vraiment supprimer ce local @Html.DisplayFor(model => model.TitreLocal)
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                                        @*<input type="submit" value="Confirmer" class="btn red" />*@
+                                        <a href="@Url.Action("DeleteConfirmedLoc", new { id = Model.CodeLocal })" class="btn red">
+                                            Valider
+                                        </a>
+                                    </div>
+                                }
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="form-section">Informations</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Nom:</label>
+                        <div class="col-md-9">
+                            <p class="form-control-static">
+                                @Html.DisplayFor(model => model.TitreLocal)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!--/span-->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Superficie:</label>
+                        <div class="col-md-9">
+                            <p class="form-control-static">
+                                @Html.DisplayFor(model => model.SuperficieLocal)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!--/span-->
+            </div>
+            <!--/row-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Pièces:</label>
+                        <div class="col-md-9">
+                            <p class="form-control-static">
+                                @Html.DisplayFor(model => model.NbrPieceLocal)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Service:</label>
+                        <div class="col-md-9">
+                            <p class="form-control-static">
+                                @Html.DisplayFor(model => model.ServiceLocal)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">N° Etage:</label>
+                        <div class="col-md-9">
+                            <p class="form-control-static">
+                                @Html.DisplayFor(model => model.MeubleLocal)
+                            </p>
+                        </div>
+                    </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Prix:</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => model.PrixRefLocationLocal)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Description:</label>
+                        <div class="col-md-9">
+                            <p class="form-control-static">
+                                @Html.DisplayFor(model => model.DescrLocal)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="form-section">Autres informations</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+
+                        <div class="checkbox-list">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="rezCh" checked="@Model.rezCh" disabled="disabled" /> Rez de chaussée
+
+
+                                @*@Html.CheckBoxFor(model => model.rezCh, new {@disabled="disabled" })*@
+                            </label>
+                            <label class="checkbox-inline">
+                                @*@Html.CheckBoxFor(model => model.Interphone, new { @disabled = "disabled" })  Interphone*@
+                                <input type="checkbox" name="rezCh" checked="@Model.Interphone" disabled="disabled" /> Interphone
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="checkbox-list">
+                            <label class="checkbox-inline">
+                                @*@Html.CheckBoxFor(model => model.Parking, new { @disabled = "disabled" })  Parking*@
+                                <input type="checkbox" name="rezCh" checked="@Model.Parking" disabled="disabled" /> Parking
+
+                            </label>
+                            <label class="checkbox-inline">
+                                @*    @Html.CheckBoxFor(model => model.Jardin, new { @disabled = "disabled" })  Jardin*@
+                                <input type="checkbox" name="rezCh" checked="@Model.Jardin" disabled="disabled" /> Jardin
+
+
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <br />
+            <h3 class="form-section">Disponibilité</h3>
+            <div>
+                <div class="col-md-6">
+                   
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 ">Depuis:</label>
+                        <div class="col-md-9">
+                            <p class="form-control-static">
+                                
+                                @Html.DisplayFor(model => model.DateDDispo, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.EditorFor(model => model.DateDDispo, new { htmlAttributes = new { @class = "form-control" } })*@
+                                </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Jusqu'à:</label>
+                        <div class="col-md-9">
+                            <p class="form-control-static">
+                            @Html.DisplayFor(model => model.DateFDispo, new { htmlAttributes = new { @class = "form-control" } })
+                            @*@Html.EditorFor(model => model.PrixRefLocationLocal, new { htmlAttributes = new { @class = "form-control" } })*@
+                                </p>
+                        </div>
+                    </div>
+                </div>
+                <!--/span-->
+                <!--/span-->
+            </div>
+
+
+            <br />
+
+            
+
+            <h3 class="form-section">Adresse</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Code postal:</label>
+                        <div class="col-md-9">
+                            <p class="form-control-static">
+                                @Html.DisplayFor(model => model.Adresse.CPadress)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Adresse:</label>
+                        <div class="col-md-9">
+                            <p class="form-control-static">
+                                @Html.DisplayFor(model => model.Adresse.descAdresse)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Quartier:</label>
+                        <div class="col-md-9">
+                            <p class="form-control-static">
+                                @Html.DisplayFor(model => model.Adresse.quartier)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <!--/span-->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Ville:</label>
+                        <div class="col-md-9">
+                            <p class="form-control-static">
+                                @Html.DisplayFor(model => model.Adresse.Ville)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Pays:</label>
+                        <div class="col-md-9">
+                            <p class="form-control-static">
+                                @Html.DisplayFor(model => model.Adresse.Pays)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!--/span-->
+            </div>
+            <!--/row-->
+
+        </div>
+       
+    </form>
+    <!-- END FORM-->
+</div>
+
+
+
+</div>

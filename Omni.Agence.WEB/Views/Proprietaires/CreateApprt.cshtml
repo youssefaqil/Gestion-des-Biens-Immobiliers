@@ -1,0 +1,867 @@
+﻿@model Omni.Agence.DAL.Local
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Details Immeuble";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PL2 = "active";
+    ViewBag.PL3 = "selected";
+}
+@section Styles {
+    @Styles.Render("~/Content/DataTableM")
+}
+@{
+    Immeuble immeuble = ViewBag.immeuble;
+}
+<h3 class="page-title">
+    Propriétaires <small>Immeuble</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i>
+            <a href="@Url.Action("Index")">Propriétaires</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            @if (string.IsNullOrEmpty(immeuble.Personne.rc))
+            {
+                <a href="@Url.Action("Details", new { id = immeuble.CodePers })"> @immeuble.Personne.nom @immeuble.Personne.prenom</a>
+            }
+            else
+            {
+                <a href="@Url.Action("Details", new { id = immeuble.CodePers })"> @immeuble.Personne.employeur </a>
+            }
+
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-building"></i>
+            <a href="@Url.Action("CreateImmeublesProp", new { id = immeuble.CodePers })"> Immeubles</a><i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+
+            <a href="@Url.Action("DetailsImmeuble", new { id = immeuble.CodeImmeuble })"> @immeuble.NomImmeuble</a>
+        </li>
+    </ul>
+
+</div>
+
+
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-equalizer font-purple-intense"></i>
+            <span class="caption-subject font-purple-intense bold uppercase">Infos</span>
+            <span class="caption-helper">Immeuble</span>
+        </div>
+        <div class="tools">
+            <a href="" class="collapse">
+            </a>
+
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <form action="#" class="form-horizontal">
+            <div class="form-body">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        @*<h2 class="margin-bottom-20">@Html.DisplayFor(model => model.NomImmeuble)</h2>*@
+                    </div>
+                    <div class="col-md-6">
+                        <a href="@Url.Action("EditImm", new { id = immeuble.CodeImmeuble })" class="btn btn-circle purple-intense">
+                            <i class="fa fa-pencil"></i>Modifier
+                        </a>
+                        <a href="@Url.Action("Delete", new { id = immeuble.CodeImmeuble })" class="btn btn-circle red">
+                            <i class="fa fa-trash-o"></i>Supprimer
+                        </a>
+                        @*<a href="@Url.Action("Index")" class="btn default">
+                            Retour
+                        </a>*@
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+
+                            <label class="control-label col-md-3">Nom:</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @immeuble.NomImmeuble
+
+                                </p>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Service:</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @immeuble.ServiceImmeuble
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Nbr d'étages:</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @immeuble.NbrEtage
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="checkbox-list">
+                                <label class="checkbox-inline">Autres Informations</label>
+                                <label class="checkbox-inline">
+                                    @*@Html.CheckBox(@immeuble.Parking, new { @disabled = "disabled" })  Parking*@
+                                    <input type="checkbox" checked="@immeuble.Parking" disabled="disabled" />Parking
+                                </label>
+                                <label class="checkbox-inline">
+                                    @*@Html.CheckBoxFor(model => model.Jardin, new { @disabled = "disabled" })  Jardin*@
+                                    <input type="checkbox" checked="@immeuble.Jardin" disabled="disabled" />Jardin
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" checked="@immeuble.Interphone" disabled="disabled" />Interphone
+                                    @*@Html.CheckBoxFor(model => model.Interphone, new { @disabled = "disabled" })  Interphone*@
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <!--/span-->
+                </div>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <!--/span-->
+                </div>
+                <h3 class="form-section">Concierge</h3>
+                <!--/row-->
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Nom Prénom:</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => immeuble.Concierge.NomConci) @Html.DisplayFor(model => immeuble.Concierge.PrenomConci)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                CIN
+                            </label><div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => immeuble.Concierge.CinConci)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Salaire:</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => immeuble.Concierge.SalaireConci)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                Télephone
+                            </label><div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => immeuble.Concierge.TelConci)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <h3 class="form-section">Adresse</h3>
+                <!--/row-->
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                Code Postale :
+                            </label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => immeuble.Adresse.CPadress)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                Adresse :
+                            </label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => immeuble.Adresse.descAdresse)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                Quartier :
+                            </label><div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => immeuble.Adresse.quartier)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                Ville :
+                            </label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => immeuble.Adresse.Ville)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                Pays :
+                            </label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">
+                                    @Html.DisplayFor(model => immeuble.Adresse.Pays)
+                                </p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <div class="row">
+                  
+                </div>
+            </div>
+
+        </form>
+        <!-- END FORM-->
+    </div>
+
+
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box purple-intense">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-edit"></i>Appartements
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                </div>
+            </div>
+            <div class="portlet-body">
+
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="btn-group">
+                                @*<a href="@Url.Action("CreateApprt", new { id = immeuble.CodeImmeuble})" class="btn purple-intense tooltips" data-placement="bottom" data-original-title="Ajouter Appartement">
+                                        <i class="fa fa-plus"></i>
+                                    </a>*@
+                                <a class="btn purple-intense tooltips" data-toggle="modal" href="#responsive" data-original-title="Ajouter Appartement">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered table-hover" id="sample_3">
+                    <thead>
+                        <tr>
+                            <th>
+                                Superficie
+                            </th>
+                            <th>
+                                Pièces
+                            </th>
+
+                            <th>
+                                Titre
+                            </th>
+
+
+
+                            <th>
+                                Dérnier contrat
+                            </th>
+                            <th>
+                                Date fin contrat
+                            </th>
+                            <th>
+                                Montant net dernier loyer
+                            </th>
+
+                            <th>
+                                service%
+                            </th>
+                            <th>Disponibilité</th>
+
+                            <th></th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+
+                        @using Omni.Agence.DAL;
+
+                        @foreach (var item in (List<Local>)ViewBag.ListLocalImmeuble)
+                        {
+                            <tr>
+                                <td>
+
+                                    @Html.DisplayFor(modelItem => item.SuperficieLocal)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NbrPieceLocal)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TitreLocal)
+                                </td>
+                                <td>
+                                    @if ((item.ContratLocations.Count() > 0))
+                                    {
+                                        @item.ContratLocations.OrderBy(d => d.DateJuissance).First().DateJuissance.Value.ToString("dd/MM/yyyy");
+                                    }
+                                </td>
+                                <td>
+                                    @if ((item.ContratLocations.Count() > 0))
+                                    {
+
+                                        @item.ContratLocations.OrderBy(d => d.DateJuissance).First().DateFinContrat.Value.ToString("dd/MM/yyyy");
+                                    }
+                                </td>
+
+                                <td>
+                                    @if ((item.ContratLocations.Count() != 0))
+                                    {
+                                        @Html.DisplayFor(modelItem => item.ContratLocations.OrderBy(d => d.DateJuissance).First().PaiementLoyers.OrderBy(d => d.Operation.dateOp).First().Operation.montant.Value);
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ServiceLocal)
+                                </td>
+
+                                <td>
+                                    @{
+                            if (Html.DisplayFor(modelItem => item.Staut).ToString() == "0")
+                            {
+                                ViewBag.dispo = "success";
+                                ViewBag.ico = "fa-check-square";
+                                ViewBag.chaine = "Oui ";
+                                ViewBag.SuppLocal = Url.Action("Delete", new { id = item.CodeLocal });
+
+
+
+                            }
+                            else if (Html.DisplayFor(modelItem => item.Staut).ToString() == "1")
+                            {
+                                ViewBag.dispo = "danger";
+                                ViewBag.ico = "fa-minus-square";
+                                ViewBag.chaine = "Non";
+                                ViewBag.SuppLocal = "";
+
+                            }
+
+                                    }<center>
+                                        <span class="label label-sm label-@ViewBag.dispo">
+                                            <i class="fa @ViewBag.ico"></i> @ViewBag.chaine
+                                        </span>
+                                    </center>
+                                </td>
+                                <td>
+                                    @*<a href="@Url.Action("DetailsApp", new { id = item.CodeLocal })" class="btn default btn-xs purple-intense  tooltips" data-placement="left" data-original-title="Détails Appartement ">
+                <i class="fa fa-edit"></i>
+            </a>*@
+                                    <a href="#@item.CodeLocal" class="btn default btn-xs purple-intense  tooltips" data-toggle="modal" data-placement="left" data-original-title="Détails Appartement ">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    @*<a class="btn purple-intense tooltips" data-toggle="modal" href="#@item.CodeLocal" data-original-title="Ajouter Appartement">
+                <i class="fa fa-plus"></i>
+            </a>*@
+                                    <div id="@item.CodeLocal" class="modal fade" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                    <h4 class="modal-title">Nouvel Appartement</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h3 class="form-section">Informations</h3>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-5">Nom:</label>
+                                                                <div class="col-md-5">
+
+                                                                    @Html.DisplayFor(modelItem => item.TitreLocal)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--/span-->
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-5">Superficie:</label>
+                                                                <div class="col-md-5">
+                                                                    @Html.DisplayFor(modelItem => item.SuperficieLocal)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--/span-->
+                                                    </div>
+                                                    <!--/row-->
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-5">Pièces:</label>
+                                                                <div class="col-md-5">
+                                                                    @Html.DisplayFor(modelItem => item.NbrPieceLocal)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--/span-->
+
+
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-5">Chambres:</label>
+                                                                <div class="col-md-5">
+                                                                    @Html.DisplayFor(modelItem => item.NbrChambreLocal)
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <!--/span-->
+                                                    </div>
+                                                    <!--/row-->
+                                                    <div class="row">
+
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-5">Prix:</label>
+                                                                <div class="col-md-5">
+                                                                    @Html.DisplayFor(modelItem => item.PrixRefLocationLocal)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-5">Service:</label>
+                                                                <div class="col-md-5">
+                                                                    @Html.DisplayFor(modelItem => item.ServiceLocal)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--/span-->
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-5">Déscription:</label>
+                                                                <div class="col-md-5">
+                                                                    @Html.DisplayFor(modelItem => item.DescrLocal)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--/span-->
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-5">lotissement:</label>
+                                                                <div class="col-md-5">
+                                                                    @Html.DisplayFor(model => model.MeubleLocal)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--/span-->
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <!--/span-->
+                                                        <!--/span-->
+                                                    </div>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" data-dismiss="modal" class="btn default">Close</button>
+                                                    @*@if (item.ContratLocations.Count() == 0)
+                                                    {
+                                                <a href="@Url.Action("DeleteConfirmedAppart", new { id = Model.CodePers })" class="btn red">
+                                                    Valider
+                                                </a>
+                                                    }*@
+                                                 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<a href="@ViewBag.SuppLocal" class="btn default btn-xs black  tooltips" data-placement="left" data-original-title=" Supprimer Appartement">
+                <i class="fa fa-trash-o"></i>
+            </a>*@
+
+                                    @*@using (Html.BeginForm())
+                                    {
+                                        bool tr = false;
+
+                                        if (item.ContratLocations.Count() == 0)
+                                        {
+                                            <a class="btn default btn-xs black  tooltips" data-toggle="modal" href="#@item.CodeLocal@item.PrixRefLocationLocal" data-placement="left" data-original-title=" Supprimer Appartement">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                            <div class="modal fade" id="@item.CodeLocal@item.PrixRefLocationLocal" tabindex="-1" role="basic" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                            <h4 class="modal-title">Confirmation</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Voulez vous vraiment supprimer le propriétaire
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                                                            <a href="@Url.Action("DeleteConfirmedAppart", new { id = Model.CodePers })" class="btn red">
+                                                                Valider
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn default btn-xs black  tooltips" data-toggle="modal" href="#@item.CodeLocal@item.PrixRefLocationLocal" data-placement="left" data-original-title=" Supprimer Appartement">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                            <div class="modal fade" id="@item.CodeLocal@item.PrixRefLocationLocal" tabindex="-1" role="basic" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                            <h4 class="modal-title">Confirmation</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Voulez vous vraiment supprimer le propriétaire
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+                                                            <a href="@Url.Action("DeleteConfirmedAppart", new { id = Model.CodePers })" class="btn red">
+                                                                Valider
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+
+
+                                    }*@
+
+
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div id="responsive" class="modal fade" tabindex="-1" aria-hidden="true">
+    @*<div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Nouvel Appartement</h4>
+            </div>*@
+    <div class="modal-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="tab-content">
+                <div class="tab-pane active">
+                    <div class="portlet light bg-inverse">
+                        <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+                            <form action="#" class="horizontal-form">
+                                <div class="form-body">
+                                    <h3 class="form-section">Informations appartement</h3>
+                                    <div class="row">
+                                    </div>
+                                    <!--/row-->
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Superficie:</label>
+                                                <div class="col-md-7">
+                                                    <div class="input-group">
+                                                        @Html.EditorFor(model => model.SuperficieLocal, new { htmlAttributes = new { @class = "form-control" } })
+                                                        <span class="input-group-addon">
+                                                            <i class="fa">M²</i>
+                                                        </span>
+                                                    </div>
+                                                    <span class="help-block">
+                                                        @Html.ValidationMessageFor(model => model.SuperficieLocal, "", new { @class = "text-danger" })
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4">Prix de réference:</label>
+                                                <div class="col-md-6">
+                                                    @*@Html.EditorFor(model => model.PrixRefLocationLocal, new { htmlAttributes = new { @class = "form-control" } })*@
+                                                    <div class="input-group">
+                                                        @Html.EditorFor(model => model.PrixRefLocationLocal, new { htmlAttributes = new { @class = "form-control" } })
+                                                        <span class="input-group-addon">
+                                                            <i class="fa">DH</i>
+                                                        </span>
+                                                    </div>
+                                                    <span class="help-block">
+                                                        @Html.ValidationMessageFor(model => model.PrixRefLocationLocal, "", new { @class = "text-danger" })
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Pièces:</label>
+                                                <div class="col-md-9">
+
+                                                    @Html.EditorFor(model => model.NbrPieceLocal, new { htmlAttributes = new { @class = "form-control" } })
+                                                    <span class="help-block">
+                                                        @Html.ValidationMessageFor(model => model.NbrPieceLocal, "", new { @class = "text-danger" })
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">N° Etage:</label>
+                                                <div class="col-md-9">
+                                                    @Html.EditorFor(model => model.MeubleLocal, new { htmlAttributes = new { @class = "form-control" } })
+                                                    <span class="help-block">
+                                                        @Html.ValidationMessageFor(model => model.MeubleLocal, "", new { @class = "text-danger" })
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Titre:</label>
+                                                <div class="col-md-9">
+
+                                                    @Html.EditorFor(model => model.TitreLocal, new { htmlAttributes = new { @class = "form-control" } })
+                                                    <span class="help-block">
+                                                        @Html.ValidationMessageFor(model => model.TitreLocal, "", new { @class = "text-danger" })
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Numéro:</label>
+                                                <div class="col-md-9">
+
+                                                    @Html.EditorFor(model => model.NumLocal, new { htmlAttributes = new { @class = "form-control" } })
+                                                    <span class="help-block">
+                                                        @Html.ValidationMessageFor(model => model.NumLocal, "", new { @class = "text-danger" })
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <!--/span-->
+                                    </div>
+                                    <!--/row-->
+                                    <div class="row">
+
+
+
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+
+                                                <div class="checkbox-list">
+                                                    <label class="control-label col-md-3">Autres:</label>
+                                                    <label class="checkbox-inline">
+                                                        @Html.CheckBoxFor(model => model.Parking.Value)  Parking
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                        @Html.CheckBoxFor(model => model.Interphone.Value)  Interphone
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Service:</label>
+                                                <div class="col-md-9">
+
+                                                    @Html.EditorFor(model => model.ServiceLocal, new { htmlAttributes = new { @class = "form-control" } })
+                                                    <span class="help-block">
+                                                        @Html.ValidationMessageFor(model => model.ServiceLocal, "", new { @class = "text-danger" })
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Description:</label>
+                                                <div class="col-md-9">
+                                                    @Html.TextAreaFor(model => model.DescrLocal, new { cols = 60, rows = 3, @class = "form-control" })
+                                                    <span class="help-block">
+                                                        @Html.ValidationMessageFor(model => model.DescrLocal, "", new { @class = "text-danger" })
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                                <div class="form-actions right">
+                                    <button type="button" data-dismiss="modal" class="btn default">Fermer</button>
+                                    <button type="reset" class="btn default">Cancel</button>
+
+                                    <input type="submit" value="Enregistrer" class="btn purple-intense" />
+
+                                </div>
+                            </form>
+
+                            <!-- END FORM-->
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    @*<div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn default">Close</button>
+            <button type="button" class="btn green">Save changes</button>
+        </div>*@
+    @*</div>
+        </div>*@
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/DataTableM")
+    <script>
+        jQuery(document).ready(function () {
+            TableManaged.init();
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<p>
+
+        <a href="@Url.Action("Index", "Immeubles", new { idp = Model.CodePers })">
+
+            Immeuble
+        </a> |
+        @Html.ActionLink("ImmeublesProp", "ImmeublesProp", new { id = Model.CodePers })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.CodePers }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

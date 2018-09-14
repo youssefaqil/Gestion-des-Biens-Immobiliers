@@ -1,0 +1,16 @@
+﻿
+@{
+    Layout = "";
+    ViewBag.Title = "testAff";
+}
+
+<h2>testAff</h2>
+
+@{
+    List<String> ListTab = ViewBag.ListTab;
+    
+}
+@foreach(String item in ListTab){
+    @item
+    <br />
+}

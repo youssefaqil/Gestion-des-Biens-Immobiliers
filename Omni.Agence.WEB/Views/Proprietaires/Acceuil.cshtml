@@ -1,0 +1,67 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Acceuil";
+}
+
+<h3 class="page-title">
+    Accueil <small>Propriétaire et Local</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+    </ul>
+</div>
+<div class="tiles">
+    <a href="@Url.Action("Index","Proprietaires")">
+        <div class="tile double double-down bg-blue">
+            <div class="corner">
+            </div>
+            <div class="tile-body">
+                <i class="fa fa-user"></i>
+            </div>
+            <div class="tile-object">
+                <div class="name">
+                    Propriétaires &nbsp;
+                </div>
+                <div class="number">
+                    (@ViewBag.nbrprpCount)
+                </div>
+            </div>
+        </div>
+    </a>
+    <a href="@Url.Action("Index","Immeubles/")">
+        <div class="tile double double-down bg-purple-studio">
+            <div class="tile-body">
+                <i class="fa fa-building"></i>
+            </div>
+            <div class="tile-object">
+                <div class="name">
+                    Immeubles
+                </div>
+                <div class="number">
+                    (@ViewBag.nbrImmCount)
+                </div>
+            </div>
+        </div>
+    </a>
+    <a href="@Url.Action("Index","Locals")">
+        <div class="tile double double-down   bg-green">
+            <div class="tile-body">
+                <i class="fa icon-home"></i>
+            </div>
+            <div class="tile-object">
+                <div class="name">
+                    Locaux
+                </div>
+                <div class="number">
+                    (@ViewBag.nbrLocCount)
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

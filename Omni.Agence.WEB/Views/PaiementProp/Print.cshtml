@@ -1,0 +1,201 @@
+﻿@model IEnumerable<Omni.Agence.DAL.Operation>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Paiement Propriétaire";
+    ViewBag.PD = "start active open";
+    ViewBag.PPrp = "active";
+    ViewBag.PDCS = "selected";
+}
+@section Styles {
+    <link href="~/admin/pages/css/invoice.css" rel="stylesheet" type="text/css" />
+}
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Accueil</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-user"></i>
+            <a href="@Url.Action("Index")">Propriétaire</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        @using Omni.Agence.DAL;
+        @{
+            Personne pers = ViewBag.pers;
+        }
+
+        
+        @if (string.IsNullOrEmpty(pers.rc)) { 
+        <li>
+            <a href="@Url.Action("Details", new { id = pers.CodePers })"> @pers.nom @pers.prenom</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        }
+        else
+        {
+            <li>
+                <a href="@Url.Action("Details", new { id = pers.CodePers })"> @pers.employeur</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+        }
+        <li>
+            <i class="fa fa-money"></i>
+            <a href="@Url.Action("compteProp", new { id = pers.CodePers })"> Compte</a>
+        </li>
+    </ul>
+</div>
+<div class="invoice">
+    <div class="row invoice-logo">
+        <div class="col-xs-6 invoice-logo-space">
+            <img src="~/img/logo2.png" class="img-responsive" alt="" />
+        </div>
+        <div class="col-xs-6">
+            <p>
+                <span class="muted">
+                    Paiement Propriétaire
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            <h3>Propriétaire:</h3>
+            
+            <ul class="list-unstyled">
+                <li>
+                    <strong>Réf :</strong>@pers.CodePers
+                </li>
+                <li>
+                    <strong>Nom/Prénom :</strong>@pers.nom @pers.prenom
+                </li>
+                <li>
+                    <strong>@pers.cin :</strong>@pers.carteSejour
+                </li>
+                <li>
+                    <strong>Adresse :</strong>@pers.Adresse.descAdresse @pers.Adresse.quartier
+                </li>
+                <li>
+                    @pers.Adresse.Ville @pers.Adresse.Pays
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="table-checkbox">
+                            @*<input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />*@
+                        </th>
+                        <th>Date</th>
+                        <th>
+                            Désignation
+                        </th>
+                        <th>
+                            Montant loyer
+                        </th>
+                        <th>
+                            Montant dépense
+                        </th>
+                        <th>
+                            Date génération quittance
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @*<input type="checkbox" class="checkboxes" name="selectedObjects" value="@item.codeOp" />*@
+
+                                @*@Html.CheckBoxFor(modelItem => item.ifSelected, new { @class = "checkboxes" })*@
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.dateOp)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Depense.Description)
+                                @Html.DisplayFor(modelItem => item.PaiementLoyer.ContratLocation.Local.TitreLocal)
+                            </td>
+                            <td>
+                                @if (item.codeType == 1)
+                                {
+                                    @(item.montant * (100 - (item.PaiementLoyer.ContratLocation.TaxeDedilite + item.PaiementLoyer.ContratLocation.Charge + item.PaiementLoyer.ContratLocation.Local.ServiceLocal)) / 100)
+                                }
+                            </td>
+                            <td>
+
+                                @if (item.codeType == 3)
+                                {
+                                    @Html.DisplayFor(modelItem => item.montant)
+                                }
+
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Depense.DateFact)
+                                @Html.DisplayFor(modelItem => item.PaiementLoyer.DateFact)
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Total:</td>
+                        <td>@ViewBag.montant</td>
+                        @*<td>@ViewBag.montant</td>*@
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="well">
+                <address>
+                    <ul class="list-unstyled">
+                        <li>
+                            <strong>Coordonnées :</strong>
+                        </li>
+                        <li>70, av. Allal BenAbdellah</li>
+                        <li>10000</li>
+                        <li>Rabat</li>
+                        <li>Agence immobilière</li>
+                        <li>Tel.: +212 5 37 70 82 75</li>
+                        <li>Fax: +212 5 37 70 82 62</li>
+                    </ul>
+                </address>
+                <address>
+                    <strong>first.last@email.com</strong>
+
+                </address>
+            </div>
+        </div>
+        <div class="col-xs-8 invoice-block">
+            <ul class="list-unstyled amounts">
+                <li>
+                    <strong>Signature</strong>
+                </li>
+            </ul>
+            <a class="btn btn-lg blue hidden-print margin-bottom-5" onclick="javascript:window.print();">
+                Imprimer <i class="fa fa-print"></i>
+            </a>
+            <a href="@Url.Action("/")" class="btn green">
+                Retour
+            </a>
+           
+        </div>
+    </div>
+
+    </div>

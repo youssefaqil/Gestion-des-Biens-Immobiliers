@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title MADACASCAR</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Plugins/css")
+
+    @RenderSection("Styles", false)
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+
+    <link href="~/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" />
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+</head>
+
+<body class="page-header-fixed page-quick-sidebar-over-content ">
+    <!-- BEGIN HEADER -->
+    <div class="page-header navbar navbar-fixed-top">
+        <!-- BEGIN HEADER INNER -->
+        <div class="page-header-inner">
+            <!-- BEGIN LOGO -->
+            <div class="page-logo">
+                @*<a href="index.html">
+                    <img src="img/LogoAppli.png" alt="logo" class="logo-default">
+                </a>*@
+                <div class="menu-toggler sidebar-toggler hide">
+
+                </div>
+            </div>
+
+            <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+            </a>
+
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+
+                    <li class="dropdown dropdown-user">
+                        @Html.Partial("_LoginPartial")
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="clearfix">
+    </div>
+
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar-wrapper">
+
+            <div class="page-sidebar navbar-collapse collapse">
+                <!-- BEGIN SIDEBAR MENU -->
+                @*Html.Action("Index", "CreateMenu")*@
+                @* TODO: Replace with dynamic Menu after bug correction  *@
+                <ul class="page-sidebar-menu " data-auto-scroll="true" data-slide-speed="200">
+                    <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+                    <li class="sidebar-toggler-wrapper">
+                        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                        <div class="sidebar-toggler">
+                        </div>
+                        <!-- END SIDEBAR TOGGLER BUTTON -->
+                    </li>
+                    <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+                    <li class="@ViewBag.DB">
+                        <a href="@Url.Action("Index", "Home")">
+                            <i class="fa fa-dashboard"></i>
+                            <span class="title">Mon Tableau de bord</span>
+                            <span class="@ViewBag.DBS"></span>
+                        </a>
+                    </li>
+                    <li class="@ViewBag.PD">
+                        <a href="javascript:;">
+                            <i class="fa fa-money"></i>
+                            <span class="title">Gestion locative</span>
+                            <span class="@ViewBag.PDCS"></span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="@Url.Action("Create", "PaiementLoyers")">
+                                    <i class="icon-bar-chart"></i>
+                                    Paiement Loyer
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "PaiementProp")">
+                                    <i class="icon-bulb"></i>
+                                    Paiement Propriétaire
+                                </a>
+                            </li>
+                            <li class="@ViewBag.PDP">
+                                <a>
+                                    <i class="icon-graph"></i>
+                                    Dépense
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="@ViewBag.PDPL">
+                                        <a href="@Url.Action("Index", "DepensesLocal")">
+                                            <i class="icon-home"></i>
+                                            Local
+                                        </a>
+                                    </li>
+                                    <li class="@ViewBag.PDPI">
+                                        <a href="@Url.Action("Index", "DepensesImmeuble")">
+                                            <i class="fa fa-building"></i>
+                                            Immeuble
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="@ViewBag.PDC">
+                                <a href="@Url.Action("Index", "Concierges")">
+                                    <i class="icon-user"></i>
+                                    Concierge
+                                </a>
+                            </li>
+                            @*<li class="@ViewBag.PDS">
+                                    <a href="@Url.Action("Index", "Syndics")">
+                                        <i class="icon-user"></i>
+                                        Syndic
+                                    </a>
+                                </li>*@
+                        </ul>
+                    </li>
+                    <li class="@ViewBag.PL1">
+                        <a href="javascript:;">
+                            <i class="icon-list"></i>
+                            <span class="title">Gestion des biens</span>
+                            <span class="@ViewBag.PL3"></span>
+                            <span class="arrow "></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="@ViewBag.PL2">
+                                <a href="@Url.Action("Index", "Proprietaires")">
+                                    <i class="icon-user"></i>
+                                    Propriétaires
+                                </a>
+                            </li>
+                            <li class="@ViewBag.PLL">
+                                <a href="@Url.Action("Index", "Locals")">
+                                    <i class="icon-home"></i>
+                                    Local
+                                </a>
+                            </li>
+                            <li class="@ViewBag.PLI">
+                                <a href="@Url.Action("Index", "Immeubles")">
+                                    <i class="fa fa-building"></i>
+                                    Immeuble
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="@ViewBag.C">
+                        <a href="javascript:;">
+                            <i class="fa fa-key"></i>
+                            <span class="title">Gestion des contrats</span>
+                            <span class="@ViewBag.CC"></span>
+                            <span class="arrow "></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="@ViewBag.CC1">
+                                <a href="@Url.Action("CContrat", "Contrat")">
+                                    <i class="fa fa-paperclip"></i>
+                                    Création Contrat
+                                </a>
+                            </li>
+                            <li class="@ViewBag.CC2">
+
+                                <a href="@Url.Action("Index", "Contrat")">
+                                    <i class="fa fa-paper-plane"></i>
+                                    Gestion Contrat
+                                </a>
+                            </li>
+
+
+                            <li class="@ViewBag.CGL">
+                                <a href="@Url.Action("Index", "Locataires")">
+                                    <i class="icon-user"></i>
+                                    Gestion Locataire
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    @*<li class="@ViewBag.RU">
+                            <a href="@Url.Action("ManageUserRoles", "Roles")">
+                                <i class="fa fa-cogs"></i>
+                                <span class="title">Administration</span>
+                                <span class="@ViewBag.RU"></span>
+                            </a>
+                        </li>*@
+                    <li class="heading">
+                        @*<h3 class="uppercase">Features</h3>*@
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                @RenderBody()
+            </div>
+            <a href="javascript:;" class="page-quick-sidebar-toggler"><i class="icon-close"></i></a>
+            <div class="page-quick-sidebar-wrapper">
+                <div class="page-quick-sidebar">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-footer">
+        <div class="page-footer-inner">
+            @DateTime.Now.Year &copy; Madagascar.
+        </div>
+        <div class="scroll-to-top">
+            <i class="icon-arrow-up"></i>
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+    <script>
+        jQuery(document).ready(function () {
+            Metronic.init(); // init metronic core components
+            Layout.init(); // init current layout
+            QuickSidebar.init(); // init quick sidebar
+        });
+    </script>
+</body>
+</html>

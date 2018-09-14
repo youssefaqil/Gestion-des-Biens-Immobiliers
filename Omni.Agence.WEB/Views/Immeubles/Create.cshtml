@@ -1,0 +1,174 @@
+﻿@model Omni.Agence.DAL.Immeuble
+
+@{
+    ViewBag.Title = "Create";
+    ViewBag.PL1 = "start active open";
+    ViewBag.PLI = "active";
+    ViewBag.PL3 = "selected";
+}
+
+<h2>Création immeuble</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="tab-content">
+        <div class="tab-pane active">
+            <div class="portlet box purple-intense">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-user"></i>Immeubles
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="horizontal-form">
+                        <div class="form-body">
+                            <h3 class="form-section">Informations</h3>
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Code Immeuble </label>                                        
+                                        <div>
+                                            @Html.EditorFor(model => model.RefCodeImm, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Code Immeuble</label>
+                                        <div>
+                                            @Html.EditorFor(model => model.RefCodeImm, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Nom immeuble </label>
+                                        @*@Html.LabelFor(model => model.NomImmeuble, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <div>
+                                            @Html.EditorFor(model => model.NomImmeuble, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.NomImmeuble, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Service </label>
+                                        @*@Html.LabelFor(model => model.ServiceImmeuble, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <div>
+                                            @Html.EditorFor(model => model.ServiceImmeuble, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ServiceImmeuble, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Nbr d'étages </label>
+                                        @*@Html.LabelFor(model => model.NbrEtage, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <div>
+                                            @Html.EditorFor(model => model.NbrEtage, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.NbrEtage, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Propriétaire </label>
+                                        @*@Html.LabelFor(model => model.CodePers, "CodePers", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <div>
+                                            @Html.DropDownList("CodePers", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.CodePers, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="form-section">Adresse</h3>
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Pays </label>
+                                        @*@Html.LabelFor(model => model.Adresse.Pays, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <div>
+                                            @Html.EditorFor(model => model.Adresse.Pays, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Adresse.Pays, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Ville </label>
+                                        @*@Html.LabelFor(model => model.Adresse.Ville, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <div>
+                                            @Html.EditorFor(model => model.Adresse.Ville, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Adresse.Ville, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Quartier </label>
+                                        @*@Html.LabelFor(model => model.Adresse.quartier, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <div>
+                                            @Html.EditorFor(model => model.Adresse.quartier, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Adresse.quartier, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Adresse </label>
+                                        @*@Html.LabelFor(model => model.Adresse.descAdresse, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <div>
+                                            @Html.EditorFor(model => model.Adresse.descAdresse, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Adresse.descAdresse, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+
+                        </div>
+                        <div class="form-actions right">                            
+                            <input type="submit" value="Enregistrer" class="btn purple-intense" />
+                            <button type="reset" class="btn red-flamingo">Annuler</button>
+                            <a href="@Url.Action("Index")" class="btn green">
+                                Retour
+                            </a>
+                        </div>
+                    </form>
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
